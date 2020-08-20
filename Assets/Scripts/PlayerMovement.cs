@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     private CharacterController controller;
 
+    //1.
+    [Header("Physics")]
     [SerializeField]
     private float gravity = -9.81f;
 
@@ -18,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float jumpHeight = 3f;
 
+    //2.
+    [Header("Ground Checking")]
     [SerializeField]
     private Transform groundCheck;
 
@@ -25,6 +29,11 @@ public class PlayerMovement : MonoBehaviour
     private LayerMask groundMask;
     private float groundDistance = 0.4f;
     private bool isGrounded;
+
+    //3.
+    [Header("Input Controls")]
+    [SerializeField]
+    private KeyCode jump = KeyCode.Space;
 
     void Start()
     {
@@ -44,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
         move = transform.right * x + transform.forward * z;
 
-        if(Input.GetButtonDown("Jump") && isGrounded) {
+        if(Input.GetKey(jump) && isGrounded) {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
         velocity.y += gravity * Time.deltaTime;
