@@ -13,7 +13,7 @@ public class phaseController : MonoBehaviour
     private void PhaseChangeHandler(int phase){
         if(phase == this.phase){
             print("hello");
-            LeanTween.moveLocalY(gameObject, 10.6f, 1f).setEaseOutQuad();
+            LeanTween.moveLocalY(gameObject, 10f, 1f).setEaseOutQuad();
         }
     }
 
