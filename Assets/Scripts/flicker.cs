@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class flicker : MonoBehaviour
 {
-    bool on = true;
-    // Update is called once per frame
+    private Light light; 
     void Start()
     {
+        light = GetComponent<Light>();
         StartCoroutine(flickerTimer());
     }
 
@@ -15,12 +15,11 @@ public class flicker : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(Random.Range(0.5f, 3));
 
-        GetComponent<Light>().enabled = false;
-
+        light.enabled = false;
 
         yield return new WaitForSecondsRealtime(Random.Range(0.05f, 1));
 
-        GetComponent<Light>().enabled = true;
+        light.enabled = true;
         StartCoroutine(flickerTimer());
     }
 }
