@@ -7,12 +7,10 @@ public class PickUpItem : MonoBehaviour
     [SerializeField] private  LayerMask IgnoreMe;
     [SerializeField] private string SelectableTag = "pickUp";
 
-      private bool pickedUp = false;
+    private bool pickedUp = false;
     private Transform selection;
     private Transform selected;
 
-    
-   
     void Update()
     {
         RaycastHit hit;
@@ -21,25 +19,33 @@ public class PickUpItem : MonoBehaviour
         {
             selection = hit.transform;
             if(selection.CompareTag(SelectableTag)) {
+                
                 if(Input.GetButtonDown("Fire2") && !pickedUp) {
                     selected = selection;
                     pickedUp = true;
-                    selected.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     selected.parent = gameObject.transform;
                     selected.localPosition = new Vector3(0, -1, 2);
-                    selected.rotation = Quaternion.identity;
+                    selected.localRotation = Quaternion.identity;
+                    
+                    if(selected.gameObject.GetComponent<Rigidbody>() != null) {
+                       selected.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                    }
                 }
             }
         }
     
-        if(Input.GetButtonDown("Fire1")){
-            print("hello");
+        if(Input.GetButtonDown("Fire1") && pickedUp){
             selected.parent = null;
             pickedUp = false;
-            selected.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
+            if(selected.gameObject.GetComponent<Rigidbody>() != null) {
+                selected.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
+            }
+            else {
+                selected.gameObject.AddComponent<Rigidbody>();
+            }
         }
-
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-
     }
 }
