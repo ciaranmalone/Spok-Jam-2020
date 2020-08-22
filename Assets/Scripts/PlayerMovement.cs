@@ -32,8 +32,9 @@ public class PlayerMovement : MonoBehaviour
 
     //3.
     [Header("Input Controls")]
-    [SerializeField]
-    private KeyCode jump = KeyCode.Space;
+    [SerializeField] private KeyCode jump = KeyCode.Space;
+    [SerializeField] private KeyCode crouch = KeyCode.LeftControl;
+
 
     void Start()
     {
@@ -60,5 +61,11 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * speed * Time.deltaTime);
         controller.Move(velocity * Time.deltaTime);
+
+        if(Input.GetKey(crouch)){
+            controller.height = 1.9f;
+        } else {
+            controller.height = 3.8f;
+        }
     }
 }
