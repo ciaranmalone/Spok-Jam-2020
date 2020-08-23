@@ -11,11 +11,13 @@ public class PlayerMovement : MonoBehaviour
 
     //1.
     [Header("Physics")]
-    [SerializeField]
-    private float gravity = -9.81f;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float normalSpeed = 8f;
+    [SerializeField] private float crouchSpeed = 4f;
+    [SerializeField] private float sprintSpeed = 15f;
+    private float speed;
 
-    [SerializeField]
-    private float speed = 12f;
+    private float stamina = 5f;
 
     [SerializeField]
     private float jumpHeight = 3f;
@@ -30,15 +32,18 @@ public class PlayerMovement : MonoBehaviour
     private float groundDistance = 0.4f;
     private bool isGrounded;
 
+    private bool noSprintAllowed = false;
+
     //3.
     [Header("Input Controls")]
     [SerializeField] private KeyCode jump = KeyCode.Space;
     [SerializeField] private KeyCode crouch = KeyCode.LeftControl;
-
+    [SerializeField] private KeyCode sprint = KeyCode.LeftShift;
 
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        speed = normalSpeed;
     }
 
     void Update()
@@ -62,10 +67,26 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);
         controller.Move(velocity * Time.deltaTime);
 
-        if(Input.GetKey(crouch)){
+        if(Input.GetKey(crouch)) { 
             controller.height = 1.9f;
-        } else {
+            speed = crouchSpeed;
+        } 
+        else if(Input.GetKey(sprint) && stamina > 0 && !noSprintAllowed) {
+            speed = sprintSpeed;
+
+            stamina -= Time.deltaTime * 2;
+        } 
+        else {
             controller.height = 3.8f;
+            speed = normalSpeed;
+            noSprintAllowed = true;
         }
+
+        if(stamina < 5f) {
+            stamina += Time.deltaTime/2;
+        } else {
+            noSprintAllowed = false;
+        }
+        print(stamina);
     }
 }

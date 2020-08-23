@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PickUpItem : MonoBehaviour
 {
-    [SerializeField] private  LayerMask IgnoreMe;
+    [SerializeField] private LayerMask IgnoreMe;
     [SerializeField] private string SelectableTag = "pickUp";
+    [SerializeField] private GameObject lightPoint;
 
     private bool pickedUp = false;
     private Transform selection;
@@ -14,26 +15,30 @@ public class PickUpItem : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
+        lightPoint.SetActive(false);
 
-        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, ~IgnoreMe))
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5f, ~IgnoreMe))
         {
             selection = hit.transform;
-            if(selection.CompareTag(SelectableTag)) {
-                
-                if(Input.GetButtonDown("Fire2") && !pickedUp) {
+            if(selection.CompareTag(SelectableTag) && !pickedUp) {
+                lightPoint.SetActive(true);
+                lightPoint.transform.position = hit.point;
+
+                if(Input.GetButtonDown("Fire2")) {
                     selected = selection;
                     pickedUp = true;
+
                     selected.parent = gameObject.transform;
                     selected.localPosition = new Vector3(0, -1, 2);
                     selected.localRotation = Quaternion.identity;
-                    
+
                     if(selected.gameObject.GetComponent<Rigidbody>() != null) {
                        selected.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     }
                 }
-            }
+            } 
         }
-    
+
         if(Input.GetButtonDown("Fire1") && pickedUp){
             selected.parent = null;
             pickedUp = false;
@@ -46,6 +51,7 @@ public class PickUpItem : MonoBehaviour
                 selected.gameObject.AddComponent<Rigidbody>();
             }
         }
+
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
     }
 }
