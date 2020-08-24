@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class LightController : MonoBehaviour
 {
-    [SerializeField]
-    private int phase;   
+    [SerializeField] private int phase;   
 
-    [SerializeField]
-    private bool on = true;
+    [SerializeField] private bool on = true;
 
-    private Light pointLight;
+    Material m_Material;
     private Light spotLight;
 
 
      void Start()
     {
-        pointLight = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Light>();
-        spotLight = this.gameObject.transform.GetChild(1).gameObject.GetComponent<Light>();
+        m_Material = GetComponent<Renderer>().material;
+        spotLight = this.gameObject.transform.GetChild(0).gameObject.GetComponent<Light>();
         GameEvents.current.onPhaseChange += toggleLights;
         StartCoroutine(flickerTimer());
     }
@@ -33,7 +31,7 @@ public class LightController : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(Random.Range(0.5f, 3));
 
-        pointLight.enabled = false;
+        m_Material.DisableKeyword("_EMISSION");
         spotLight.enabled = false;
 
         if (!on){
@@ -42,7 +40,7 @@ public class LightController : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(Random.Range(0.05f, 1));
         if(on) { 
-            pointLight.enabled = true;
+            m_Material.EnableKeyword("_EMISSION");
             spotLight.enabled = true;
 
             StartCoroutine(flickerTimer());
