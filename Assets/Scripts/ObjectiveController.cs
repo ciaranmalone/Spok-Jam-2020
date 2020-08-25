@@ -8,9 +8,12 @@ public class ObjectiveController : MonoBehaviour
 {
     [SerializeField] private int objective;
     [SerializeField] private string objectiveText;
+    [SerializeField] private AudioClip clip;
+    private AudioSource audioSource;
     private TextMeshProUGUI m_Text;
     void Start()
     {
+        audioSource = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
         m_Text = GetComponent<TextMeshProUGUI>();
         m_Text.text = objectiveText;
 
@@ -20,7 +23,8 @@ public class ObjectiveController : MonoBehaviour
     private void ObjectiveCompleteHandler(int objective) 
     {
         if(objective == this.objective) {
-            m_Text.text = "complete";
+            audioSource.PlayOneShot(clip, .1f);
+            m_Text.fontStyle = FontStyles.Strikethrough;
         }
     }
 }
