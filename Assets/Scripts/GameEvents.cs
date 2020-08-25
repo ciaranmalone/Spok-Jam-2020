@@ -18,5 +18,11 @@ public class GameEvents : MonoBehaviour
         }
     }
 
-   
+    public event Action<int> onObjectiveComplete;
+    public void ObjectiveComplete(int objective){
+
+        if (onObjectiveComplete != null){
+            onObjectiveComplete(objective);
+        }
+    }
 }
