@@ -6,6 +6,8 @@ public class PickUpItem : MonoBehaviour
 {
     [SerializeField] private LayerMask IgnoreMe;
     [SerializeField] private string SelectableTag = "pickUp";
+    [SerializeField] private string InteractableTag = "interactable";
+
     [SerializeField] private GameObject lightPoint;
 
     private bool pickedUp = false;
@@ -36,7 +38,16 @@ public class PickUpItem : MonoBehaviour
                        selected.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     }
                 }
-            } 
+                
+            } else if (selection.CompareTag(InteractableTag)) {
+
+                lightPoint.SetActive(true);
+                lightPoint.transform.position = hit.point;
+
+                if(selected.gameObject.GetComponent<interactable>() != null) {
+                    selected.gameObject.GetComponent<interactable>().playAnimation();
+                }
+            }
         }
 
         if(Input.GetButtonDown("Fire1") && pickedUp){
