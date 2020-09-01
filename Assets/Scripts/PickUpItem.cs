@@ -31,23 +31,23 @@ public class PickUpItem : MonoBehaviour
                     selected = selection;
                     pickedUp = true;
 
+                    //make object the child of the player
                     selected.parent = gameObject.transform;
                     selected.localPosition = new Vector3(0, -1, 2);
                     selected.localRotation = Quaternion.identity;
 
+                    //stop its phyiscs so it will stop giggling around
                     if(selected.gameObject.GetComponent<Rigidbody>() != null) {
                        selected.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     }
                 }
             
             //if the item is a interactable item
-            } else if (selection.CompareTag(InteractableTag)) {
-
+            } else if (selection.CompareTag(InteractableTag)  && !pickedUp) {
                 lightPoint.SetActive(true);
                 lightPoint.transform.position = hit.point;
 
                 if(Input.GetButtonDown("Fire2")) {
-
                     selected = selection;
                     
                     if(selected.gameObject.GetComponent<interactable>() != null) {
@@ -57,8 +57,7 @@ public class PickUpItem : MonoBehaviour
             }
         }
 
-        //drop object that is picked up                       selected.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-
+        //drop object that is picked up                       
         if(Input.GetButtonDown("Fire1") && pickedUp){
             selected.parent = null;
             pickedUp = false;
@@ -66,10 +65,7 @@ public class PickUpItem : MonoBehaviour
             if(selected.gameObject.GetComponent<Rigidbody>() != null) {
                 selected.gameObject.GetComponent<Rigidbody>().isKinematic = false;
 
-            }
-            else {
-                selected.gameObject.AddComponent<Rigidbody>();
-            }
+            }  else { selected.gameObject.AddComponent<Rigidbody>(); }
         }
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
