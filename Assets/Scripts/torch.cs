@@ -15,7 +15,7 @@ public class torch : MonoBehaviour
 
             if (on == true)
             {
-                StartCoroutine(flickerTimer());
+                //StartCoroutine(flickerTimer());
             }
         }
     }
