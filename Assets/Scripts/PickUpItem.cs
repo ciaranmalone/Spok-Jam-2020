@@ -5,9 +5,8 @@ using UnityEngine;
 public class PickUpItem : MonoBehaviour
 {
     [SerializeField] private LayerMask IgnoreMe;
-    [SerializeField] private string SelectableTag = "pickUp";
+    [SerializeField] private string PickUpTag = "pickUp";
     [SerializeField] private string InteractableTag = "interactable";
-
     [SerializeField] private GameObject lightPoint;
 
     private bool pickedUp = false;
@@ -22,7 +21,9 @@ public class PickUpItem : MonoBehaviour
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5f, ~IgnoreMe))
         {
             selection = hit.transform;
-            if(selection.CompareTag(SelectableTag) && !pickedUp) {
+
+            //if the item is a pick up item
+            if(selection.CompareTag(PickUpTag) && !pickedUp) {
                 lightPoint.SetActive(true);
                 lightPoint.transform.position = hit.point;
 
@@ -38,17 +39,25 @@ public class PickUpItem : MonoBehaviour
                        selected.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     }
                 }
-                
+            
+            //if the item is a interactable item
             } else if (selection.CompareTag(InteractableTag)) {
 
                 lightPoint.SetActive(true);
                 lightPoint.transform.position = hit.point;
 
-                if(selected.gameObject.GetComponent<interactable>() != null) {
-                    selected.gameObject.GetComponent<interactable>().playAnimation();
+                if(Input.GetButtonDown("Fire2")) {
+
+                    selected = selection;
+                    
+                    if(selected.gameObject.GetComponent<interactable>() != null) {
+                        selected.gameObject.GetComponent<interactable>().handleInteraction();
+                    }
                 }
             }
         }
+
+        //drop object that is picked up                       selected.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
         if(Input.GetButtonDown("Fire1") && pickedUp){
             selected.parent = null;

@@ -9,17 +9,30 @@ public class interactable : MonoBehaviour
     [SerializeField] private string animationTwo = "BigDoorClosed";
 
     private Animator anim;
+    private AudioSource audioData;
+
     private void Start() {
         anim = GetComponent<Animator>();
-        anim.Play(animationOne);
+
+        if(GetComponent<AudioSource>() != null){
+            audioData = GetComponent<AudioSource>();
+        }
     }
-    public void playAnimation(){
-        if(played){
+    
+    public void handleInteraction(){
+        print("interacting");
+
+        if(GetComponent<AudioSource>() != null){
+            audioData.Play();
+        }
+
+         if(played){
             anim.Play(animationOne);
         }
         else{
             anim.Play(animationTwo);
         }
         played = !played;
+
     }
 }
