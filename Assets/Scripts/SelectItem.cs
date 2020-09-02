@@ -13,7 +13,7 @@ public class SelectItem : MonoBehaviour
     private Transform selection;
     private Transform selected;
 
-    void Update()
+    void FixedUpdate()
     {
         RaycastHit hit;
         lightPoint.SetActive(false);
@@ -26,6 +26,10 @@ public class SelectItem : MonoBehaviour
             if(selection.CompareTag(PickUpTag) && !pickedUp) {
                 lightPoint.SetActive(true);
                 lightPoint.transform.position = hit.point;
+
+                if(selection.gameObject.GetComponent<DetectBeingHit>() != null) {
+                    selection.gameObject.GetComponent<DetectBeingHit>().imBeingLookedAt();
+                }
 
                 if(Input.GetButtonDown("Fire2")) {
                     selected = selection;

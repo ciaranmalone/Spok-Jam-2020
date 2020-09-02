@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 6280630403680015161}
   - component: {fileID: 6280630403680015160}
   m_Layer: 0
-  m_Name: Fridge 2
+  m_Name: Fridge 2 broken door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
