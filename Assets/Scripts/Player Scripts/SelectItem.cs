@@ -7,6 +7,7 @@ public class SelectItem : MonoBehaviour
     [SerializeField] private LayerMask IgnoreMe;
     [SerializeField] private string PickUpTag = "pickUp";
     [SerializeField] private string InteractableTag = "interactable";
+    [SerializeField] private string SeeTriggerTag = "lookAtMe";
     [SerializeField] private GameObject lightPoint;
 
     public static bool pickedUp = false;
@@ -18,12 +19,12 @@ public class SelectItem : MonoBehaviour
         RaycastHit hit;
         lightPoint.SetActive(false);
 
-        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5f, ~IgnoreMe))
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 50f, ~IgnoreMe))
         {
             selection = hit.transform;
 
             //if the item is a pick up item
-            if(selection.CompareTag(PickUpTag) && !pickedUp) {
+            if(selection.CompareTag(PickUpTag) && !pickedUp && hit.distance < 3f) {
                 lightPoint.SetActive(true);
                 lightPoint.transform.position = hit.point;
 
@@ -47,7 +48,7 @@ public class SelectItem : MonoBehaviour
                 }
             
             //if the item is a interactable item
-            } else if (selection.CompareTag(InteractableTag)  && !pickedUp) {
+            } else if (selection.CompareTag(InteractableTag) && !pickedUp && hit.distance < 3f) {
                 lightPoint.SetActive(true);
                 lightPoint.transform.position = hit.point;
 
@@ -57,6 +58,12 @@ public class SelectItem : MonoBehaviour
                     if(selected.gameObject.GetComponent<interactable>() != null) {
                         selected.gameObject.GetComponent<interactable>().handleInteraction();
                     }
+                }
+            } else if (selection.CompareTag(SeeTriggerTag)) {
+                selected = selection;
+
+                if(selected.gameObject.GetComponent<TriggerPhaseOneLook>() != null) {
+                    selected.gameObject.GetComponent<TriggerPhaseOneLook>().triggerPhase();
                 }
             }
         }

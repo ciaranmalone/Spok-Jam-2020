@@ -11,9 +11,7 @@ public class appearController : MonoBehaviour
     {
         hiddenObjects.SetActive(false);
         GameEvents.current.onPhaseChange += handleAppear;
-
     }
-
     void handleAppear(int phase)
     {
         if(phase == this.phase) {
