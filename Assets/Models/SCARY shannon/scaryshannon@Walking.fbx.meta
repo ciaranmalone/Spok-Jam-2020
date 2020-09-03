@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 53fbda5209a530649a609e1f7c83ee70
+guid: 1aa96d826b636594c98ca419d5551529
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
-      74: 1827226128182048838
-    second: Take 001
+      74: -203655887218126122
+    second: Walking
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
-      takeName: Take 001
+      name: Walking
+      takeName: mixamo.com
       internalID: 0
-      firstFrame: 1
-      lastFrame: 120
+      firstFrame: 0
+      lastFrame: 258
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -62,7 +62,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 1
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -100,12 +100,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - a1b18e8ba1539774f968e127dd978b95
-  - 1675a037729b933488e9abc041838fda
-  - 1aa96d826b636594c98ca419d5551529
-  - 8946d9d5386366741a97d0205d6fcb08
-  - 26d1f4868e1df0a4294636547170b9a5
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
