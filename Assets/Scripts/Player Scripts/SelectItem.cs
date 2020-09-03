@@ -8,7 +8,8 @@ public class SelectItem : MonoBehaviour
     [SerializeField] private string PickUpTag = "pickUp";
     [SerializeField] private string InteractableTag = "interactable";
     [SerializeField] private string SeeTriggerTag = "lookAtMe";
-    [SerializeField] private GameObject lightPoint;
+    [SerializeField] private GameObject lightPointPickUp;
+    [SerializeField] private GameObject lightPointInteract;
 
     public static bool pickedUp = false;
     private Transform selection;
@@ -17,7 +18,8 @@ public class SelectItem : MonoBehaviour
     void FixedUpdate()
     {
         RaycastHit hit;
-        lightPoint.SetActive(false);
+        lightPointPickUp.SetActive(false);
+        lightPointInteract.SetActive(false);
 
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 50f, ~IgnoreMe))
         {
@@ -25,8 +27,8 @@ public class SelectItem : MonoBehaviour
 
             //if the item is a pick up item
             if(selection.CompareTag(PickUpTag) && !pickedUp && hit.distance < 5f) {
-                lightPoint.SetActive(true);
-                lightPoint.transform.position = hit.point;
+                lightPointPickUp.SetActive(true);
+                lightPointPickUp.transform.position = hit.point;
 
                 if(selection.gameObject.GetComponent<DetectBeingHit>() != null) {
                     selection.gameObject.GetComponent<DetectBeingHit>().imBeingLookedAt();
@@ -37,6 +39,7 @@ public class SelectItem : MonoBehaviour
                     pickedUp = true;
 
                     //make object the child of the player
+
                     selected.parent = gameObject.transform;
                     selected.localPosition = new Vector3(0, -1, 2);
                     selected.localRotation = Quaternion.identity;
@@ -49,8 +52,8 @@ public class SelectItem : MonoBehaviour
             
             //if the item is a interactable item
             } else if (selection.CompareTag(InteractableTag) && !pickedUp && hit.distance < 5f) {
-                lightPoint.SetActive(true);
-                lightPoint.transform.position = hit.point;
+                lightPointInteract.SetActive(true);
+                lightPointInteract.transform.position = hit.point;
 
                 if(Input.GetButtonDown("Fire2")) {
                     selected = selection;
@@ -60,10 +63,9 @@ public class SelectItem : MonoBehaviour
                     }
                 }
             } else if (selection.CompareTag(SeeTriggerTag)) {
-                selected = selection;
 
-                if(selected.gameObject.GetComponent<TriggerPhaseOneLook>() != null) {
-                    selected.gameObject.GetComponent<TriggerPhaseOneLook>().triggerPhase();
+                if(selection.gameObject.GetComponent<TriggerPhaseOneLook>() != null) {
+                    selection.gameObject.GetComponent<TriggerPhaseOneLook>().triggerPhase();
                 }
             }
         }
@@ -76,7 +78,9 @@ public class SelectItem : MonoBehaviour
             if(selected.gameObject.GetComponent<Rigidbody>() != null) {
                 selected.gameObject.GetComponent<Rigidbody>().isKinematic = false;
 
-            }  else { selected.gameObject.AddComponent<Rigidbody>(); }
+            }  else { 
+                selected.gameObject.AddComponent<Rigidbody>(); 
+            }
         }
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
