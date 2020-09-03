@@ -24,7 +24,7 @@ public class SelectItem : MonoBehaviour
             selection = hit.transform;
 
             //if the item is a pick up item
-            if(selection.CompareTag(PickUpTag) && !pickedUp && hit.distance < 3f) {
+            if(selection.CompareTag(PickUpTag) && !pickedUp && hit.distance < 5f) {
                 lightPoint.SetActive(true);
                 lightPoint.transform.position = hit.point;
 
@@ -48,7 +48,7 @@ public class SelectItem : MonoBehaviour
                 }
             
             //if the item is a interactable item
-            } else if (selection.CompareTag(InteractableTag) && !pickedUp && hit.distance < 3f) {
+            } else if (selection.CompareTag(InteractableTag) && !pickedUp && hit.distance < 5f) {
                 lightPoint.SetActive(true);
                 lightPoint.transform.position = hit.point;
 
@@ -81,4 +81,6 @@ public class SelectItem : MonoBehaviour
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
     }
-}
+}IE
+9+
+
