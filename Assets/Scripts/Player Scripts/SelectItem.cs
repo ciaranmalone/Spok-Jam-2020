@@ -81,6 +81,4 @@ public class SelectItem : MonoBehaviour
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
     }
-}IE
-9+
-
+}
