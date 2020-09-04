@@ -5,13 +5,13 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour
 {
     [SerializeField]
-    private int phase;
+    private string phase;
 
    private void Start() {
         GameEvents.current.onPhaseChange += AnimationHandler;
     }
 
-    private void AnimationHandler(int phase){
+    private void AnimationHandler(string phase){
         if(phase == this.phase){
             LeanTween.scaleZ(gameObject, -1000f, 100f).setEaseOutQuad();
             GameEvents.current.onPhaseChange -= AnimationHandler;

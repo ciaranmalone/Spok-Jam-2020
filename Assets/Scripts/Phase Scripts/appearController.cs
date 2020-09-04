@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class appearController : MonoBehaviour
 {
-    [SerializeField] private int phase;
+    [SerializeField] private string phase;
 
     [SerializeField] private GameObject hiddenObjects;
     void Start()
@@ -12,7 +12,7 @@ public class appearController : MonoBehaviour
         hiddenObjects.SetActive(false);
         GameEvents.current.onPhaseChange += handleAppear;
     }
-    void handleAppear(int phase)
+    void handleAppear(string phase)
     {
         if(phase == this.phase) {
             hiddenObjects.SetActive(true);
