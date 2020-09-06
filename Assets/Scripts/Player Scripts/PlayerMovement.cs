@@ -89,6 +89,6 @@ public class PlayerMovement : MonoBehaviour
         } else {
             noSprintAllowed = false;
         }
-        print(stamina);
+       // print(stamina);
     }
 }
