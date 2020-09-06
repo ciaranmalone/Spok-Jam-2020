@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class phaseTrigger : MonoBehaviour
 {
-    [SerializeField] private int phase = 1;
+    [SerializeField] private string phase;
     
     private void OnTriggerEnter(Collider other) {
         GameEvents.current.PhaseChange(phase);

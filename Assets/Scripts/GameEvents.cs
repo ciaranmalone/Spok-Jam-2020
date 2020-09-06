@@ -10,8 +10,8 @@ public class GameEvents : MonoBehaviour
     private void Awake() {
         current = this;
     }
-    public event Action<int> onPhaseChange;
-    public void PhaseChange(int phase){
+    public event Action<string> onPhaseChange;
+    public void PhaseChange(string phase){
 
         if (onPhaseChange != null){
             onPhaseChange(phase);

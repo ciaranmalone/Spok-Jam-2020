@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightController : MonoBehaviour
 {
-    [SerializeField] private int phase;   
+    [SerializeField] private string phase;   
 
     [SerializeField] private bool on = true;
 
@@ -20,7 +20,7 @@ public class LightController : MonoBehaviour
         StartCoroutine(flickerTimer());
     }
 
-    private void toggleLights(int phase) 
+    private void toggleLights(string phase) 
     {
         if(phase == this.phase) {
             on = false;

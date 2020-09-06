@@ -5,12 +5,12 @@ using UnityEngine;
 public class phaseController : MonoBehaviour
 {
     [SerializeField]
-    private int phase;
+    private string phase;
     void Start()
     {
         GameEvents.current.onPhaseChange += PhaseChangeHandler;
     }
-    private void PhaseChangeHandler(int phase){
+    private void PhaseChangeHandler(string phase){
         if(phase == this.phase){
             LeanTween.moveLocalY(gameObject, 10f, 1f).setEaseOutQuad();
         }

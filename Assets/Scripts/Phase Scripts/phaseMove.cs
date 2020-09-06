@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class phaseMove : MonoBehaviour
 {
-    [SerializeField] private int phase;
+    [SerializeField] private string phase;
     [SerializeField] private new Vector3 newLocation;
 
     void Start()
@@ -12,7 +12,7 @@ public class phaseMove : MonoBehaviour
         GameEvents.current.onPhaseChange += moveObject;
     }
 
-    void moveObject(int phase)
+    void moveObject(string phase)
     {
         if(phase == this.phase) 
         {
