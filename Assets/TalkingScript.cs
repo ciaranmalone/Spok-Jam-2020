@@ -20,11 +20,10 @@ public class TalkingScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
    {
-       if(!playedAudio){
+       if(other.tag == "Player" && !playedAudio){
             StartCoroutine(dialBegin());
+            StartCoroutine(enterStore());
             playedAudio = true;
-
-            LeanTween.moveSpline(gameObject, new Vector3[]{new Vector3(0f,0f,0f),new Vector3(1f,0f,0f),new Vector3(1f,0f,0f),new Vector3(1f,0f,1f)}, 1.5f).setEase(LeanTweenType.easeOutQuad).setOrientToPath(true);
        }
    }
 
@@ -37,6 +36,19 @@ public class TalkingScript : MonoBehaviour
             yield return new WaitForSeconds(AudioSource.clip.length);   
         }
         mtext.text = "";
-        Destroy(gameObject);     
+        StartCoroutine(leaveStore());    
+    }
+
+    IEnumerator enterStore() {
+        yield return new WaitForSeconds(1f); 
+        LeanTween.moveLocal(gameObject, new Vector3(-58f, 2f, -26f), 5f).setEaseInSine();
+        yield return new WaitForSeconds(5f);   
+        LeanTween.moveLocal(gameObject, new Vector3(-58f, 2f, -15f), 5f).setEaseOutCirc();
+
+    }
+    IEnumerator leaveStore() {
+        LeanTween.moveLocal(gameObject, new Vector3(-58f, 2f, -139f), 10f).setEaseInCirc();
+        yield return new WaitForSeconds(10f);   
+        Destroy(gameObject);    
     }
 }
