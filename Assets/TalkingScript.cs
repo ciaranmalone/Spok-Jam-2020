@@ -20,11 +20,10 @@ public class TalkingScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
    {
-       if(!playedAudio){
+       if(other.tag == "Player" && !playedAudio){
             StartCoroutine(dialBegin());
             StartCoroutine(enterStore());
             playedAudio = true;
-
        }
    }
 

@@ -8,13 +8,14 @@ public class autoDoorsOpen : MonoBehaviour
     [SerializeField] private GameObject doorRight;
    private void OnTriggerEnter(Collider other) 
    {
-        LeanTween.moveX(doorLeft, -6, 1f);
-        LeanTween.moveX(doorRight, 6, 1f);
+     LeanTween.moveLocal(doorLeft, new Vector3(-3, 0, 0), .5f).setEaseOutCubic();
+     LeanTween.moveLocal(doorRight, new Vector3(6, 0, 0), .5f).setEaseOutCubic();
    }
 
    private void OnTriggerExit(Collider other)
    {
-        LeanTween.moveX(doorLeft, 0, 1f);
-        LeanTween.moveX(doorRight, 3, 1f);
+     LeanTween.moveLocal(doorLeft, new Vector3(0, 0, 0), .5f).setEaseOutCubic();
+     LeanTween.moveLocal(doorRight, new Vector3(3, 0, 0), .5f).setEaseOutCubic();
+
    }
 }
