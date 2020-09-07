@@ -15,7 +15,7 @@ public class SelectItem : MonoBehaviour
     private Transform selection;
     private Transform selected;
 
-    void FixedUpdate()
+    void Update()
     {
         RaycastHit hit;
         lightPointPickUp.SetActive(false);
