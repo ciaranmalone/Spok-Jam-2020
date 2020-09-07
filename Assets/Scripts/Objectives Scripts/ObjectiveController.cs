@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
 
 public class ObjectiveController : MonoBehaviour
 {
-    [SerializeField] private int objective;
-    [SerializeField] private string objectiveText;
+    private int objective;
+    //[SerializeField] private string objectiveText;
     [SerializeField] private AudioClip clip;
     private AudioSource audioSource;
     private TextMeshProUGUI m_Text;
@@ -15,7 +14,7 @@ public class ObjectiveController : MonoBehaviour
     {
         audioSource = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
         m_Text = GetComponent<TextMeshProUGUI>();
-        m_Text.text = objectiveText;
+        //m_Text.text = objectiveText;
 
         GameEvents.current.onObjectiveComplete += ObjectiveCompleteHandler;
     }
@@ -26,5 +25,15 @@ public class ObjectiveController : MonoBehaviour
             audioSource.PlayOneShot(clip, .1f);
             m_Text.fontStyle = FontStyles.Strikethrough;
         }
+    }
+
+    public void setObjectiveOffset(int offset)
+    {
+        objective = offset;
+    }
+
+    public void setAudioclip(AudioClip clip)
+    {
+        this.clip = clip;
     }
 }

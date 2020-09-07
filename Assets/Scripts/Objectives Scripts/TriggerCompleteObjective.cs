@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class TriggerCompleteObjective : MonoBehaviour
 {
-    [SerializeField] private int objective = 0;
+    private int objective;
     [SerializeField] private GameObject objectiveItem;
     private void OnTriggerEnter(Collider other) {
-        print(other.gameObject.name);
         if (other.gameObject == objectiveItem)
         {
             GameEvents.current.ObjectiveComplete(objective);
             Destroy(gameObject);
         }
+    }
+
+    public void setObjectiveOffset(int offset)
+    {
+        objective = offset;
     }
 }
