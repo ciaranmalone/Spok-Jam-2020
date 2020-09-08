@@ -41,13 +41,13 @@ public class TalkingScript : MonoBehaviour
 
     IEnumerator enterStore() {
         yield return new WaitForSeconds(1f); 
-        LeanTween.moveLocal(gameObject, new Vector3(-58f, 2f, -26f), 5f).setEaseInSine();
+        LeanTween.moveLocal(gameObject, new Vector3(-55f, 2f, -31f), 5f).setEaseInSine();
         yield return new WaitForSeconds(5f);   
-        LeanTween.moveLocal(gameObject, new Vector3(-58f, 2f, -15f), 5f).setEaseOutCirc();
+        LeanTween.moveLocal(gameObject, new Vector3(-55f, 2f, -15f), 5f).setEaseOutCirc();
 
     }
     IEnumerator leaveStore() {
-        LeanTween.moveLocal(gameObject, new Vector3(-58f, 2f, -139f), 10f).setEaseInCirc();
+        LeanTween.moveLocal(gameObject, new Vector3(-55f, 2f, -139f), 10f).setEaseInCirc();
         yield return new WaitForSeconds(10f);   
         Destroy(gameObject);    
     }
