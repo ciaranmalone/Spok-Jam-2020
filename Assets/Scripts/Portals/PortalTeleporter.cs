@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PortalTeleporter : MonoBehaviour
 {
-    public Transform player;
+    public CharacterController player;
     public Transform reciever;
 
     bool playerIsOverlapping = false;
@@ -14,19 +14,30 @@ public class PortalTeleporter : MonoBehaviour
     {
         if (playerIsOverlapping)
         {
-            Vector3 portalToPlayer = player.position - transform.position;
+            Vector3 portalToPlayer = player.transform.position - transform.position;
             float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
+            print("it's gaming time my guy");
 
-            if(dotProduct < 0f)
+            print("it's dot product time");
+            float rotationDifference = Quaternion.Angle(transform.rotation, reciever.rotation);
+            rotationDifference += 180;
+            player.transform.Rotate(Vector3.up, rotationDifference);
+
+            Vector3 positionOffset = Quaternion.Euler(0f, rotationDifference, 0f) * portalToPlayer;
+            player.transform.position = reciever.position + positionOffset;
+            playerIsOverlapping = false;
+
+            /*if (dotProduct < 0f)
             {
+                print("it's dot product time");
                 float rotationDifference = Quaternion.Angle(transform.rotation, reciever.rotation);
                 rotationDifference += 180;
-                player.Rotate(Vector3.up, rotationDifference);
+                player.transform.Rotate(Vector3.up, rotationDifference);
 
                 Vector3 positionOffset = Quaternion.Euler(0f, rotationDifference, 0f) * portalToPlayer;
-                player.position = reciever.position + positionOffset;
+                player.transform.position = reciever.position + positionOffset;
                 playerIsOverlapping = false;
-            }
+            }*/
         }
     }
     
@@ -34,7 +45,8 @@ public class PortalTeleporter : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            playerIsOverlapping = true;
+            //playerIsOverlapping = true;
+            teleport();
             print("it's gaming time");
         }
     }
@@ -45,5 +57,20 @@ public class PortalTeleporter : MonoBehaviour
         {
             playerIsOverlapping = false;
         }
+    }
+
+    void teleport()
+    {
+        Vector3 portalToPlayer = player.transform.position - transform.position;
+        float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
+        print("it's gaming time my guy");
+
+        print("it's dot product time");
+        float rotationDifference = Quaternion.Angle(transform.rotation, reciever.rotation);
+        rotationDifference += 180;
+        player.transform.Rotate(Vector3.up, rotationDifference);
+
+        Vector3 positionOffset = Quaternion.Euler(0f, rotationDifference, 0f) * portalToPlayer;
+        player.transform.position = reciever.position + positionOffset;
     }
 }
