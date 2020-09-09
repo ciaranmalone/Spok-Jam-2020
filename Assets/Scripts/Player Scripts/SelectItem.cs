@@ -34,7 +34,7 @@ public class SelectItem : MonoBehaviour
                     selection.gameObject.GetComponent<DetectBeingHit>().imBeingLookedAt();
                 }
 
-                if(Input.GetButtonDown("Fire2")) {
+                if(Input.GetButtonDown("Select")) {
                     selected = selection;
                     pickedUp = true;
 
@@ -55,7 +55,7 @@ public class SelectItem : MonoBehaviour
                 lightPointInteract.SetActive(true);
                 lightPointInteract.transform.position = hit.point;
 
-                if(Input.GetButtonDown("Fire2")) {
+                if(Input.GetButtonDown("Select")) {
                     selected = selection;
                     
                     if(selected.gameObject.GetComponent<interactable>() != null) {
@@ -71,7 +71,7 @@ public class SelectItem : MonoBehaviour
         }
 
         //drop object that is picked up                       
-        if(Input.GetButtonDown("Fire1") && pickedUp){
+        if(Input.GetButtonDown("Drop") && pickedUp){
             pickedUp = false;
             selected.parent = null;
 
@@ -80,6 +80,19 @@ public class SelectItem : MonoBehaviour
 
             }  else { 
                 selected.gameObject.AddComponent<Rigidbody>(); 
+            }
+        } 
+        else if(Input.GetButtonDown("Throw") && pickedUp) {
+            pickedUp = false;
+            selected.parent = null;
+
+            if(selected.gameObject.GetComponent<Rigidbody>() != null) {
+                selected.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                selected.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 502);
+
+            }  else { 
+                selected.gameObject.AddComponent<Rigidbody>(); 
+                selected.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 502);
             }
         }
 
