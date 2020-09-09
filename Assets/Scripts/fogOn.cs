@@ -7,6 +7,8 @@ public class fogOn : MonoBehaviour
 
     private float fogAmount = 0f;
     [SerializeField] private Material skybox;
+    [SerializeField] private Material blankSkybox;
+
     // Update is called once per frame
     void Update()
     {
@@ -17,7 +19,7 @@ public class fogOn : MonoBehaviour
     {
         if(coll.name == "FogOn")
         {
-            RenderSettings.skybox = null;
+            RenderSettings.skybox = blankSkybox;
             StartCoroutine( ChangeFog( 0, .25f, 2f ) );
             RenderSettings.fog = true;
         }
