@@ -25,4 +25,12 @@ public class GameEvents : MonoBehaviour
             onObjectiveComplete(objective);
         }
     }
+
+    public event Action<Vector3> onSoundMade;
+    public void SoundMade(Vector3 location){
+
+        if (onSoundMade != null){
+            onSoundMade(location);
+        }
+    }
 }
