@@ -8,10 +8,10 @@ public class listening : MonoBehaviour
     void Start()
     {
         GameEvents.current.onSoundMade += itsOverThere;
-
     }
 
-    private void itsOverThere(Vector3 location){
+    private void itsOverThere(Vector3 location)
+    {
         print("its over there" + location);
         transform.LookAt(location);
     }
