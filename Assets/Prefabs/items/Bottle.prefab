@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3916047180381568954}
   m_Layer: 0
   m_Name: Bottle
-  m_TagString: Untagged
+  m_TagString: pickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1991,6 +1991,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
