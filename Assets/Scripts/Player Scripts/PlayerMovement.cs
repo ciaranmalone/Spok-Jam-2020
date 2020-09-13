@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool isWalking = false;
     float x, z;
     Vector3 move;
     Vector3 velocity;
@@ -64,7 +65,17 @@ public class PlayerMovement : MonoBehaviour
         }
         velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(move * speed * Time.deltaTime);
+        if (x != 0 || z != 0)
+        {
+            controller.Move(move * speed * Time.deltaTime);
+            isWalking = true;
+        }
+        else
+        {
+            isWalking = false;
+        }
+
+
         controller.Move(velocity * Time.deltaTime);
 
         //crouching

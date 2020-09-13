@@ -8,6 +8,9 @@ TagManager:
   - enemy
   - interactable
   - lookAtMe
+  - tile
+  - path
+  - grass
   layers:
   - Default
   - TransparentFX
