@@ -10,29 +10,15 @@ public class ambientAudioManager : MonoBehaviour
     AudioSource src;
     string areaName;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        switch (areaName)
-        {
-            case ("inside"):
-                src.clip = clips[0];
-                if(src.isPlaying == false) { src.Play(); }
-                break;
-            case ("outside"):
-                src.clip = clips[1];
-                if (src.isPlaying == false) { src.Play(); }
-                break;
-        }    
-    }
-
     void OnTriggerEnter(Collider area)
     {
-        if (area.gameObject.name == "inside") { areaName = "inside"; }
-        if (area.gameObject.name == "outside") { areaName = "outside"; }
+        if (area.gameObject.name == "inside") {
+            src.clip = clips[0];
+            src.Play();
+        }
+        if (area.gameObject.name == "outside") {
+            src.clip = clips[1];
+            src.Play();
+        }
     }
 }
