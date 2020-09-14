@@ -5,6 +5,7 @@ using UnityEngine;
 public class interactable : MonoBehaviour
 {
     private bool played = false;
+    [SerializeField] int taskSheet = 0;
     [SerializeField] private string animationOne = "BigDoorOpen";
     [SerializeField] private string animationTwo = "BigDoorClosed";
 
@@ -25,14 +26,18 @@ public class interactable : MonoBehaviour
         if(GetComponent<AudioSource>() != null){
             audioData.Play();
         }
-
-         if(played){
+        if (taskSheet != 0)
+        {
+            GameEvents.current.nextTaskSheet(taskSheet);
+            Destroy(gameObject);
+        }
+        if (played){
             anim.Play(animationOne);
         }
         else{
             anim.Play(animationTwo);
         }
         played = !played;
-
+        
     }
 }
