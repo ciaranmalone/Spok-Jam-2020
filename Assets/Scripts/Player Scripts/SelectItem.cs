@@ -8,8 +8,12 @@ public class SelectItem : MonoBehaviour
     [SerializeField] private string PickUpTag = "pickUp";
     [SerializeField] private string InteractableTag = "interactable";
     [SerializeField] private string SeeTriggerTag = "lookAtMe";
+    
+    [Header("Objects to display")]
     [SerializeField] private GameObject lightPointPickUp;
+    [SerializeField] private GameObject PickUpIndicator;
     [SerializeField] private GameObject lightPointInteract;
+    [SerializeField] private GameObject InteractIndicator;
 
     public static bool pickedUp = false;
     private Transform selection;
@@ -19,7 +23,9 @@ public class SelectItem : MonoBehaviour
     {
         RaycastHit hit;
         lightPointPickUp.SetActive(false);
+        PickUpIndicator.SetActive(false);
         lightPointInteract.SetActive(false);
+        InteractIndicator.SetActive(false);
 
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 50f, ~IgnoreMe))
         {
@@ -28,6 +34,7 @@ public class SelectItem : MonoBehaviour
             //if the item is a pick up item
             if(selection.CompareTag(PickUpTag) && !pickedUp && hit.distance < 5f) {
                 lightPointPickUp.SetActive(true);
+                PickUpIndicator.SetActive(true);
                 lightPointPickUp.transform.position = hit.point;
 
                 if(selection.gameObject.GetComponent<DetectBeingHit>() != null) {
@@ -53,6 +60,8 @@ public class SelectItem : MonoBehaviour
             //if the item is a interactable item
             } else if (selection.CompareTag(InteractableTag) && !pickedUp && hit.distance < 5f) {
                 lightPointInteract.SetActive(true);
+                InteractIndicator.SetActive(true);
+
                 lightPointInteract.transform.position = hit.point;
 
                 if(Input.GetButtonDown("Select")) {
