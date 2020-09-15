@@ -16,11 +16,10 @@ public class MissionScript : MonoBehaviour
     GameObject objectivePrefab, objectivePivot;
     [SerializeField][Tooltip("The distance between each objective in the UI")]
     int objectiveTextOffset = 140;
-    private int completed = 0;
 
     GameObject[] uiobjs;
 
-    public void MakeObjectives()
+    public int MakeObjectives()
     {
         uiobjs = new GameObject[objectives.Length];
         int missionOffset = 0;
@@ -36,7 +35,7 @@ public class MissionScript : MonoBehaviour
 
             //getting proper visuals in the ui
             UIRepresentation.GetComponent<RectTransform>().localPosition = new Vector3(pivot.x, pivot.y - (objectiveTextOffset * (missionOffset)));
-            UIRepresentation.GetComponent<TextMeshProUGUI>().text = tempObjective.ObjectiveText;
+            UIRepresentation.GetComponent<TextMeshProUGUI>().text = (tempObjective.ObjectiveText + " (0/"+objective.GetComponent<TriggerCompleteObjective>().getMissionsTotal() + ")");
 
             //setting the mission counter to both TriggerCompleteObjective and ObjectiveController scripts
             objective.GetComponent<TriggerCompleteObjective>().setObjectiveOffset(missionOffset);
@@ -45,15 +44,20 @@ public class MissionScript : MonoBehaviour
             
             missionOffset++;
         }
+        return objectives.Length;
     }
 
     public void ClearObjectives()
     {
         foreach (GameObject objective in uiobjs)
         {
-            print("amount done"+ completed);
             Destroy(objective);
         }
+    }
+
+    public void renameMission(int index, string text)
+    {
+        uiobjs[index].GetComponent<TextMeshProUGUI>().text = text;
     }
 
 }
