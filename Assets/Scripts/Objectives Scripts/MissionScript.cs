@@ -19,7 +19,7 @@ public class MissionScript : MonoBehaviour
 
     GameObject[] uiobjs;
 
-    public void MakeObjectives()
+    public int MakeObjectives()
     {
         uiobjs = new GameObject[objectives.Length];
         int missionOffset = 0;
@@ -44,6 +44,7 @@ public class MissionScript : MonoBehaviour
             
             missionOffset++;
         }
+        return objectives.Length;
     }
 
     public void ClearObjectives()

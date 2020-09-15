@@ -21,7 +21,7 @@ public class phoneCallScript : MonoBehaviour
     // Update is called once per frame
     void PhasePhoneCall(string phase)
     {
-        if(phase == phase) {
+        if(this.phase == phase) {
             StartCoroutine(dialBegin());
         }
     }

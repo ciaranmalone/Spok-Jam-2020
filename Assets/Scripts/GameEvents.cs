@@ -21,9 +21,15 @@ public class GameEvents : MonoBehaviour
 
     public event Action<int> onObjectiveComplete;
     public void ObjectiveComplete(int objective){
-
-        if (onObjectiveComplete != null){
+        if (onObjectiveComplete != null)
+        {
             onObjectiveComplete(objective);
+            missionHandler.completeMission();
+            print(missionHandler.getRemainingMissionCount());
+            if(missionHandler.getRemainingMissionCount() <= 0)
+            {
+                PhaseChange("phoneCall"+missionHandler.getCurrentPhase());
+            }
         }
     }
 
