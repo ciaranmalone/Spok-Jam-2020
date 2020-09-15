@@ -5,7 +5,7 @@ using TMPro;
 
 public class phoneCallScript : MonoBehaviour
 {
-    [SerializeField] private string phase;
+    [SerializeField] private string phase = "phone call";
     [SerializeField] private AudioClip[] AudioClips;
     [SerializeField] private string[] subtitles;
     [SerializeField] private TextMeshProUGUI mtext;
