@@ -36,4 +36,9 @@ public class MissionHandler : MonoBehaviour
     {
         return currentPhase;
     }
+
+    public GameObject getCurrentPhaseObject()
+    {
+        return phases[currentPhase];
+    }
 }
