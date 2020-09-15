@@ -16,6 +16,7 @@ public class MissionScript : MonoBehaviour
     GameObject objectivePrefab, objectivePivot;
     [SerializeField][Tooltip("The distance between each objective in the UI")]
     int objectiveTextOffset = 140;
+    private int completed = 0;
 
     GameObject[] uiobjs;
 
@@ -50,6 +51,7 @@ public class MissionScript : MonoBehaviour
     {
         foreach (GameObject objective in uiobjs)
         {
+            print("amount done"+ completed);
             Destroy(objective);
         }
     }
