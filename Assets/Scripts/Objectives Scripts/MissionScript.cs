@@ -15,17 +15,20 @@ public class MissionScript : MonoBehaviour
     [SerializeField]
     GameObject objectivePrefab, objectivePivot;
     [SerializeField][Tooltip("The distance between each objective in the UI")]
-    int objectiveTextOffset = 140; 
+    int objectiveTextOffset = 140;
 
-    void Start()
+    GameObject[] uiobjs;
+
+    public void MakeObjectives()
     {
+        uiobjs = new GameObject[objectives.Length];
         int missionOffset = 0;
         foreach (GameObject objective in objectives)
         {
             //creating the UI object
             Vector3 pivot = objectivePivot.transform.localPosition;
             GameObject UIRepresentation = GameObject.Instantiate(objectivePrefab, pivot, objectivePivot.transform.rotation, canvas.transform);
-
+            uiobjs[missionOffset] = UIRepresentation;
             //getting the objective and it's controller
             Objective tempObjective = objective.GetComponent<Objective>();
             ObjectiveController controller = UIRepresentation.GetComponent<ObjectiveController>();
@@ -42,4 +45,13 @@ public class MissionScript : MonoBehaviour
             missionOffset++;
         }
     }
+
+    public void ClearObjectives()
+    {
+        foreach (GameObject objective in uiobjs)
+        {
+            Destroy(objective);
+        }
+    }
+
 }

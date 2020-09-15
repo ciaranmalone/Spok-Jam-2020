@@ -6,9 +6,10 @@ using UnityEngine;
 public class GameEvents : MonoBehaviour
 {
     public static GameEvents current;
-
+    [SerializeField] MissionHandler missionHandler;
     private void Awake() {
         current = this;
+        nextTaskSheet(0);
     }
     public event Action<string> onPhaseChange;
     public void PhaseChange(string phase){
@@ -32,5 +33,11 @@ public class GameEvents : MonoBehaviour
         if (onSoundMade != null){
             onSoundMade(location);
         }
+    }
+
+    public void nextTaskSheet(int sheet)
+    {
+        missionHandler.clearPhase(sheet - 1);
+        missionHandler.startPhase(sheet);
     }
 }
