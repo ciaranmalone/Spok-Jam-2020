@@ -46,4 +46,9 @@ public class GameEvents : MonoBehaviour
         missionHandler.clearPhase(sheet - 1);
         missionHandler.startPhase(sheet);
     }
+
+    public MissionHandler getMissionHandler()
+    {
+        return missionHandler;
+    }
 }
