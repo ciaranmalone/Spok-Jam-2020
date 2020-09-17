@@ -28,7 +28,7 @@ public class AIStates : MonoBehaviour
         agent = gameObject.GetComponent<NavMeshAgent>();
         target = frontPatrolPoints[Random.Range(0, frontPatrolPoints.Length - 1)];
         targetGroup = target.transform.parent.name;
-        anim.setState(AIAnimation.state.walking);
+        anim.setState(AIAnimation.state.run);
     }
 
     // Update is called once per frame
@@ -53,12 +53,12 @@ public class AIStates : MonoBehaviour
     {
         print("points: " + centrePatrolPoints.Length);
         atTarget = true;
-        anim.setState(AIAnimation.state.looking);
+        anim.setState(AIAnimation.state.idle);
         agent.SetDestination(transform.position);
         print("waiting to walk");
         yield return new WaitForSecondsRealtime(5.5f);
         print("resume walking");
-        anim.setState(AIAnimation.state.walking);
+        anim.setState(AIAnimation.state.run);
         setRandomTarget();
         atTarget = false;
     }

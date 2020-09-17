@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AIAnimation : MonoBehaviour
 {
-    public enum state { idle, walking, looking, alert, chase};
+    public enum state { idle, run, stand, roar, chase};
     [SerializeField]
     state currentState;
     [SerializeField]
@@ -15,50 +15,39 @@ public class AIAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        resetBools();
         switch (currentState)
         {
             case state.idle:
-                anim.SetBool("Idle", true);
-                anim.SetBool("Walking", false);
-                anim.SetBool("Looking", false);
-                anim.SetBool("Alert", false);
-                anim.SetBool("Chase", false);
+                anim.SetBool("idle", true);
                 break;
 
-            case state.walking:
-                anim.SetBool("Idle", false);
-                anim.SetBool("Walking", true);
-                anim.SetBool("Looking", false);
-                anim.SetBool("Alert", false);
-                anim.SetBool("Chase", false);
+            case state.run:
+                anim.SetBool("run", true);
                 break;
 
-            case state.looking:
-                anim.SetBool("Idle", false);
-                anim.SetBool("Walking", false);
-                anim.SetBool("Looking", true);
-                anim.SetBool("Alert", false);
-                anim.SetBool("Chase", false);
+            case state.stand:
+                anim.SetBool("stand", true);
                 break;
 
-            case state.alert:
-                anim.SetBool("Idle", false);
-                anim.SetBool("Walking", false);
-                anim.SetBool("Looking", false);
-                anim.SetBool("Alert", true);
-                anim.SetBool("Chase", false);
+            case state.roar:
+                anim.SetBool("roar", true);
                 break;
 
             case state.chase:
-                anim.SetBool("Idle", false);
-                anim.SetBool("Walking", false);
-                anim.SetBool("Looking", false);
-                anim.SetBool("Alert", false);
-                anim.SetBool("Chase", true);
+                anim.SetBool("chase", true);
                 break;
         }
     }
 
+    void resetBools()
+    {
+        anim.SetBool("idle", false);
+        anim.SetBool("run", false);
+        anim.SetBool("stand", false);
+        anim.SetBool("roar", false);
+        anim.SetBool("chase", false);
+    }
     public void setState(state newState)
     {
         currentState = newState;
