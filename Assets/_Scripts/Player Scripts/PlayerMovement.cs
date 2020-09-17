@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public bool isWalking = false;
-    float x, z;
-    Vector3 move;
-    Vector3 velocity;
+    private float x, z;
+    private Vector3 move;
+    private Vector3 velocity;
     private CharacterController controller;
 
     //1.
@@ -17,22 +17,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float crouchSpeed = 4f;
     [SerializeField] private float sprintSpeed = 15f;
     private float speed;
-
     private float stamina = 5f;
-
-    [SerializeField]
-    private float jumpHeight = 3f;
+    [SerializeField] private float jumpHeight = 3f;
 
     //2.
     [Header("Ground Checking")]
-    [SerializeField]
-    private Transform groundCheck;
-
-    [SerializeField]
-    private LayerMask groundMask;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundMask;
     private float groundDistance = 0.4f;
-    private bool isGrounded;
-
+    public bool isGrounded;
+    public bool crouched = false;
     private bool noSprintAllowed = false;
 
     //3.speed
@@ -75,16 +69,16 @@ public class PlayerMovement : MonoBehaviour
             isWalking = false;
         }
 
-
         controller.Move(velocity * Time.deltaTime);
 
         //crouching
         if(Input.GetKey(crouch)) { 
+            crouched = true;
             controller.height = 1.9f;
             speed = crouchSpeed;
         } 
         //running
-        else if(Input.GetKey(sprint) && stamina > 0 && !noSprintAllowed) {
+        else if(Input.GetKey(sprint) && stamina > 0 && !noSprintAllowed && isGrounded) {
             speed = sprintSpeed;
 
             stamina -= Time.deltaTime * 2;
@@ -92,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         else {
             controller.height = 3.8f;
             speed = normalSpeed;
+            crouched = false;
             noSprintAllowed = true;
         }
 

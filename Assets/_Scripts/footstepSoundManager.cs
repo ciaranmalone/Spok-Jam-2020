@@ -4,39 +4,37 @@ using UnityEngine;
 
 public class footstepSoundManager : MonoBehaviour
 {
-    [SerializeField]
-    PlayerMovement movementScript;
-    [SerializeField]
-    AudioSource[] sources;
-    [SerializeField]
-    float volume;
-    [SerializeField]
-    float floorCheckLength;
+    [SerializeField] PlayerMovement movementScript;
+    [SerializeField] AudioSource[] sources;
+    [SerializeField] float volume = .15f;
+    [SerializeField] float floorCheckLength;
     public int soundType;
-    [SerializeField]
-    string floorType;
+
+    [SerializeField] string floorType;
     RaycastHit floorCheckHit;
-    [SerializeField]
-    LayerMask floorCheckMask;
+    [SerializeField] LayerMask floorCheckMask;
     // Update is called once per frame
     void Update()
     {
-        Physics.Raycast(transform.position, -transform.up, out floorCheckHit, floorCheckLength, floorCheckMask);
-        floorType = floorCheckHit.collider.gameObject.tag;
-        switch(floorType)
-        {
-            case ("grass"):
-                soundType = 0;
-                break;
-            case ("tile"):
-                soundType = 1;
-                break;
-            case ("path"):
-                soundType = 2;
-                break;
+        if(Physics.Raycast(transform.position, -transform.up, out floorCheckHit, floorCheckLength, floorCheckMask)) {
+
+            floorType = floorCheckHit.collider.gameObject.tag;
+
+            switch(floorType)
+            {
+                case ("grass"):
+                    soundType = 0;
+                    break;
+                case ("tile"):
+                    soundType = 1;
+                    break;
+                case ("path"):
+                    soundType = 2;
+                    break;
+            }
         }
-        if(movementScript.isWalking == true)
-        {
+        
+        if(movementScript.isWalking == true && movementScript.isGrounded == true) {
             switch (soundType)
             {
                 case (0):
@@ -62,6 +60,12 @@ public class footstepSoundManager : MonoBehaviour
             sources[0].volume = 0;
             sources[1].volume = 0;
             sources[2].volume = 0;
+        }
+
+        if(movementScript.crouched) {
+            volume = .025f;
+        } else {
+            volume = .15f;
         }
     }
 
