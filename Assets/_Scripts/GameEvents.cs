@@ -41,6 +41,11 @@ public class GameEvents : MonoBehaviour
         }
     }
 
+    public void spawnNextNote()
+    {
+        missionHandler.getCurrentPhaseScript().spawnNextNote();
+    }
+
     public void nextTaskSheet(int sheet)
     {
         missionHandler.clearPhase(sheet - 1);

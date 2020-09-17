@@ -8,11 +8,13 @@ public class MissionHandler : MonoBehaviour
     GameObject[] phases;
     int missionsRemaining;
     int currentPhase;
+    MissionScript cachedCurrentMissionScript;
 
     public void startPhase(int phase)
     {
         currentPhase = phase;
-        missionsRemaining = phases[phase].GetComponent<MissionScript>().MakeObjectives();
+        cachedCurrentMissionScript = phases[phase].GetComponent<MissionScript>();
+        missionsRemaining = cachedCurrentMissionScript.MakeObjectives();
     }
 
     public void clearPhase(int phase)
@@ -20,6 +22,7 @@ public class MissionHandler : MonoBehaviour
         if (phase < 0) return;
         missionsRemaining = 0;
         phases[phase].GetComponent<MissionScript>().ClearObjectives();
+        cachedCurrentMissionScript = null;
     }
 
     public void completeMission()
@@ -37,8 +40,8 @@ public class MissionHandler : MonoBehaviour
         return currentPhase;
     }
 
-    public GameObject getCurrentPhaseObject()
+    public MissionScript getCurrentPhaseScript()
     {
-        return phases[currentPhase];
+        return cachedCurrentMissionScript;
     }
 }

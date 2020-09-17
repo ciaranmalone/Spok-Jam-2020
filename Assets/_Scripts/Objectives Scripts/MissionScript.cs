@@ -7,6 +7,8 @@ public class MissionScript : MonoBehaviour
 {
     //1.
     [SerializeField]
+    GameObject nextNote;
+    [SerializeField]
     GameObject[] objectives;
     //2.
     [Header("Canvas Components")]
@@ -53,6 +55,11 @@ public class MissionScript : MonoBehaviour
         {
             Destroy(objective);
         }
+    }
+
+    public void spawnNextNote()
+    {
+        nextNote.SetActive(true);
     }
 
     public void renameMission(int index, string text)
