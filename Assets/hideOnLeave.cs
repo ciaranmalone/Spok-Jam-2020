@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class hideOnLeave : MonoBehaviour
 {
+    [SerializeField] private string animation = "DimensionDoorClose";
+    [SerializeField] private Animator anim;
     void OnTriggerExit(Collider other)
     {
-        print("disappear");
-        this.transform.parent.gameObject.SetActive(false);
+        if(other.tag == "Player"){
+            this.transform.parent.gameObject.SetActive(false);
+            anim.Play(animation);
+
+        }
     }
 }
