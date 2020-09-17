@@ -10,11 +10,20 @@ public class MissionHandler : MonoBehaviour
     int currentPhase;
     MissionScript cachedCurrentMissionScript;
 
+    [Header("Canvas Components")]
+    [SerializeField]
+    Canvas canvas;
+    [SerializeField]
+    GameObject objectivePrefab, objectivePivot;
+    [SerializeField]
+    [Tooltip("The distance between each objective in the UI")]
+    int objectiveTextOffset = 140;
+
     public void startPhase(int phase)
     {
         currentPhase = phase;
         cachedCurrentMissionScript = phases[phase].GetComponent<MissionScript>();
-        missionsRemaining = cachedCurrentMissionScript.MakeObjectives();
+        missionsRemaining = cachedCurrentMissionScript.MakeObjectives(canvas, objectivePrefab, objectivePivot, objectiveTextOffset);
     }
 
     public void clearPhase(int phase)

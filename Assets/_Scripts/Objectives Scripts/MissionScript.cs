@@ -10,18 +10,10 @@ public class MissionScript : MonoBehaviour
     GameObject nextNote;
     [SerializeField]
     GameObject[] objectives;
-    //2.
-    [Header("Canvas Components")]
-    [SerializeField]
-    Canvas canvas;
-    [SerializeField]
-    GameObject objectivePrefab, objectivePivot;
-    [SerializeField][Tooltip("The distance between each objective in the UI")]
-    int objectiveTextOffset = 140;
-
+    
     GameObject[] uiobjs;
 
-    public int MakeObjectives()
+    public int MakeObjectives(Canvas canvas, GameObject objectivePrefab, GameObject objectivePivot, int objectiveTextOffset)
     {
         uiobjs = new GameObject[objectives.Length];
         int missionOffset = 0;
