@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AIAnimation : MonoBehaviour
 {
-    public enum state { idle, run, stand, roar, chase};
+    public enum state { idle, walk, stand, roar, run, look};
     [SerializeField]
     state currentState;
     [SerializeField]
@@ -22,8 +22,8 @@ public class AIAnimation : MonoBehaviour
                 anim.SetBool("idle", true);
                 break;
 
-            case state.run:
-                anim.SetBool("run", true);
+            case state.walk:
+                anim.SetBool("walk", true);
                 break;
 
             case state.stand:
@@ -34,8 +34,8 @@ public class AIAnimation : MonoBehaviour
                 anim.SetBool("roar", true);
                 break;
 
-            case state.chase:
-                anim.SetBool("chase", true);
+            case state.run:
+                anim.SetBool("run", true);
                 break;
         }
     }
