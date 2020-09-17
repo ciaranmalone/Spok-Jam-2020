@@ -5,16 +5,19 @@ using TMPro;
 
 public class phoneCallScript : MonoBehaviour
 {
-    [SerializeField] private string phase = "phone call";
     [SerializeField] private AudioClip[] AudioClips;
     [SerializeField] private string[] subtitles;
-    [SerializeField] private TextMeshProUGUI mtext;
-    AudioSource AudioSource;
+    [SerializeField] private TextMeshProUGUI subTitleText;
+    private AudioSource AudioSource;
+
+    public string phase = "phoneCall1";
+    public bool phoneAnswered = false;
+    public bool Ringing = false;
 
     void Start()
     {
         AudioSource = GetComponent<AudioSource>();
-        mtext.text = "";
+        subTitleText.text = "";
         GameEvents.current.onPhaseChange += PhasePhoneCall;
     }
 
@@ -22,17 +25,39 @@ public class phoneCallScript : MonoBehaviour
     void PhasePhoneCall(string phase)
     {
         if(this.phase == phase) {
-            StartCoroutine(dialBegin());
+            StartCoroutine(StartRinging());
         }
     }
     IEnumerator dialBegin() {
-        for(int i = 0; i < AudioClips.Length; i++)
+        GameEvents.current.spawnNextNote();
+        for(int i = 1; i < AudioClips.Length; i++)
         {
             AudioSource.clip = AudioClips[i];
-            mtext.text = subtitles[i];
+            subTitleText.text = subtitles[i];
             AudioSource.Play();
             yield return new WaitForSeconds(AudioSource.clip.length);   
         }
-        mtext.text = "";
+        subTitleText.text = "";
+        Destroy(this);
+    }
+
+    IEnumerator StartRinging() {
+        Ringing = true; 
+
+        AudioSource.clip = AudioClips[0];
+        subTitleText.text = subtitles[0];
+        AudioSource.loop = true;
+        AudioSource.Play();
+
+        while(!phoneAnswered)
+        {
+            yield return null;
+        }
+
+        phoneAnswered = false;
+        AudioSource.loop = false;
+        Ringing = false; 
+
+        StartCoroutine(dialBegin());
     }
 }

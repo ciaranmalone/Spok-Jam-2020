@@ -13,22 +13,26 @@ public class TriggerCompleteObjective : MonoBehaviour
         /* 
          * TODO on trigger enter update text to x/y 
          */
-        if (other.GetComponent<ObjectiveItem>().ItemName == objectiveItem)
-        {
-            itemsCompleted++;
-            if (itemsTotal > 1)
+        ObjectiveItem otherItem = other.GetComponent<ObjectiveItem>();
+        
+        if(otherItem != null) {
+            if (otherItem.ItemName == objectiveItem)
             {
-                GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText + " (" + itemsCompleted + "/" + itemsTotal + ")"));
-            }
-            else
-            {
-                GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText));
-            }
+                itemsCompleted++;
+                if (itemsTotal > 1)
+                {
+                    GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText + " (" + itemsCompleted + "/" + itemsTotal + ")"));
+                }
+                else
+                {
+                    GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText));
+                }
 
-            if (itemsCompleted >= itemsTotal)
-            {
-                GameEvents.current.ObjectiveComplete(objective);
-                Destroy(gameObject);
+                if (itemsCompleted >= itemsTotal)
+                {
+                    GameEvents.current.ObjectiveComplete(objective);
+                    Destroy(gameObject);
+                }
             }
         }
     }

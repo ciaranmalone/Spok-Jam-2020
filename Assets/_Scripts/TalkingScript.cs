@@ -6,16 +6,16 @@ using TMPro;
 public class TalkingScript : MonoBehaviour
 {
     [SerializeField] private AudioClip[] AudioClips;
-    AudioSource AudioSource;
     [SerializeField] private string[] subtitles;
-    [SerializeField] private TextMeshProUGUI mtext;
+    [SerializeField] private TextMeshProUGUI subTitletext;
 
+    private AudioSource AudioSource;
     private bool playedAudio = false;
 
     void Start()
     {
         AudioSource = GetComponent<AudioSource>();
-        mtext.text = "";
+        subTitletext.text = "";
     }
 
     private void OnTriggerEnter(Collider other) 
@@ -24,6 +24,7 @@ public class TalkingScript : MonoBehaviour
             StartCoroutine(dialBegin());
             StartCoroutine(enterStore());
             playedAudio = true;
+            GameEvents.current.spawnNextNote();
        }
    }
 
@@ -31,11 +32,11 @@ public class TalkingScript : MonoBehaviour
         for(int i = 0; i < AudioClips.Length; i++)
         {
             AudioSource.clip = AudioClips[i];
-            mtext.text = subtitles[i];
+            subTitletext.text = subtitles[i];
             AudioSource.Play();
             yield return new WaitForSeconds(AudioSource.clip.length);   
         }
-        mtext.text = "";
+        subTitletext.text = "";
         StartCoroutine(leaveStore());    
     }
 
