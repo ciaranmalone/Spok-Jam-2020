@@ -29,7 +29,8 @@ public class MissionScript : MonoBehaviour
 
             //getting proper visuals in the ui
             UIRepresentation.GetComponent<RectTransform>().localPosition = new Vector3(pivot.x, pivot.y - (objectiveTextOffset * (missionOffset)));
-            UIRepresentation.GetComponent<TextMeshProUGUI>().text = (tempObjective.ObjectiveText + " (0/"+objective.GetComponent<TriggerCompleteObjective>().getMissionsTotal() + ")");
+            int totalItems = objective.GetComponent<TriggerCompleteObjective>().getMissionsTotal();
+            UIRepresentation.GetComponent<TextMeshProUGUI>().text = totalItems > 1 ? (tempObjective.ObjectiveText + " (0/"+totalItems + ")") : tempObjective.ObjectiveText;
 
             //setting the mission counter to both TriggerCompleteObjective and ObjectiveController scripts
             objective.GetComponent<TriggerCompleteObjective>().setObjectiveOffset(missionOffset);

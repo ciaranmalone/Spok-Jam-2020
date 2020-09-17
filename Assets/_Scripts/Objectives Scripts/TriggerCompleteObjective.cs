@@ -16,7 +16,15 @@ public class TriggerCompleteObjective : MonoBehaviour
         if (other.GetComponent<ObjectiveItem>().ItemName == objectiveItem)
         {
             itemsCompleted++;
-            GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText + " (" + itemsCompleted + "/" + itemsTotal + ")"));
+            if (itemsTotal > 1)
+            {
+                GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText + " (" + itemsCompleted + "/" + itemsTotal + ")"));
+            }
+            else
+            {
+                GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText));
+            }
+
             if (itemsCompleted >= itemsTotal)
             {
                 GameEvents.current.ObjectiveComplete(objective);
@@ -30,7 +38,14 @@ public class TriggerCompleteObjective : MonoBehaviour
         if (other.GetComponent<ObjectiveItem>().ItemName == objectiveItem)
         {
             itemsCompleted--;
-            GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText + " (" + itemsCompleted + "/" + itemsTotal + ")"));
+            if (itemsTotal > 1)
+            {
+                GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText + " (" + itemsCompleted + "/" + itemsTotal + ")"));
+            }
+            else
+            {
+                GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText));
+            }
         }
     }
 
