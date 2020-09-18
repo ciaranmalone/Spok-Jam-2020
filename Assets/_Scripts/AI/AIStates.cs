@@ -4,30 +4,44 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class AIStates : MonoBehaviour {
-    enum aiState {patrol, search, chase, attack};
-    aiState currentState;
-    NavMeshAgent agent;
-    Transform target;
+    [Header ("States")]
+    public aiState currentState;
+    public enum aiState {patrol, search, chase, attack};
+    
 
-    //patrol variables
+    [Header ("Components")]
+    [SerializeField] NavMeshAgent agent;
+    [SerializeField] AIAnimation anim;
+    float distanceFromTarget;
+
+
+    [Header ("Patrol")]
     [SerializeField] float patrolMoveSpeed;
-    [SerializeField] string patrolPointTargetGroup = "back";
     [SerializeField] Transform[] frontPatrolPoints;
     [SerializeField] Transform[] centrePatrolPoints;
     [SerializeField] Transform[] backPatrolPoints;
-    [SerializeField] bool searchForPlayer = false;
+    Transform patrolTarget;
+    string patrolPointTargetGroup = "back";
     bool atTarget = false;
+
+    [Header ("Search")]
+    [SerializeField] bool searchForPlayer = false;
+    [SerializeField] searchCone coneOfVision;
+    Transform searchTarget;
+    bool searchingForPlayer = false;
+
+    [Header ("Chase")]
+    [SerializeField] Transform player;
+    [SerializeField] float chaseSpeed;
+
     
-    float distanceFromTarget;
-    AIAnimation anim;
 
     void Start()
     {
-        //assign components
-        anim = gameObject.GetComponent<AIAnimation>();
-        agent = gameObject.GetComponent<NavMeshAgent>();
+        /*anim = gameObject.GetComponent<AIAnimation>();
+        agent = gameObject.GetComponent<NavMeshAgent>();*/
         
-        target = frontPatrolPoints[Random.Range(0, frontPatrolPoints.Length - 1)];
+        patrolTarget = frontPatrolPoints[Random.Range(0, frontPatrolPoints.Length - 1)];
         anim.setState(AIAnimation.state.run);
     }
 
@@ -36,27 +50,36 @@ public class AIStates : MonoBehaviour {
         switch (currentState)
         {
             case (aiState.patrol):
-                checkIfAtTarget();
-                moveToTarget();
+                if (searchForPlayer) { castSearchCone(); }
+                checkIfAtTarget(patrolTarget);
+                moveToTarget(patrolMoveSpeed, patrolTarget);
                 break;
 
             case (aiState.attack):
-
+                attack();
                 break;
 
             case (aiState.search):
-
+                if (searchForPlayer) { castSearchCone(); }
+                checkIfAtTarget(searchTarget);
+                moveToTarget(patrolMoveSpeed, patrolTarget);
                 break;
         }
     }
 
-    void checkIfAtTarget()
+    void checkIfAtTarget(Transform target)
     {
+        if(target == null)
+        {
+            currentState = aiState.patrol;
+            setNextPatrolPoint();
+        }
+
         //distance between transform and target transform
         distanceFromTarget = Vector3.Distance(gameObject.transform.position, target.position);
     }
 
-    void moveToTarget()
+    void moveToTarget(float moveSpeed, Transform moveTarget)
     {
         //atTarget bool prevents looping once at target.
         if (distanceFromTarget < 0.5 && atTarget == false)
@@ -67,8 +90,14 @@ public class AIStates : MonoBehaviour {
         else
         {
             //move towards target
-            agent.SetDestination(target.position);
+            agent.SetDestination(moveTarget.position);
+            agent.speed = moveSpeed;
         }
+    }
+
+    void attack()
+    {
+
     }
 
     void castSearchCone()
@@ -82,21 +111,21 @@ public class AIStates : MonoBehaviour {
         switch (patrolPointTargetGroup)
         {
             case ("back"):
-                target = centrePatrolPoints[Random.Range(0, centrePatrolPoints.Length - 1)];
+                patrolTarget = centrePatrolPoints[Random.Range(0, centrePatrolPoints.Length - 1)];
                 patrolPointTargetGroup = "back -> centre";
                 break;
 
             case ("back -> centre"):
-                target = frontPatrolPoints[Random.Range(0, frontPatrolPoints.Length - 1)];
+                patrolTarget = frontPatrolPoints[Random.Range(0, frontPatrolPoints.Length - 1)];
                 break;
 
             case ("front"):
-                target = centrePatrolPoints[Random.Range(0, centrePatrolPoints.Length - 1)];
+                patrolTarget = centrePatrolPoints[Random.Range(0, centrePatrolPoints.Length - 1)];
                 patrolPointTargetGroup = "front -> centre";
                 break;
 
             case ("front -> centre"):
-                target = backPatrolPoints[Random.Range(0, backPatrolPoints.Length - 1)];
+                patrolTarget = backPatrolPoints[Random.Range(0, backPatrolPoints.Length - 1)];
                 break;
         }
     }
