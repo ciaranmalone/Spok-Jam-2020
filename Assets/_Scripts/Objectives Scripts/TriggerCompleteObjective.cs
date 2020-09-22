@@ -21,7 +21,7 @@ public class TriggerCompleteObjective : MonoBehaviour
                 itemsCompleted++;
                 if (itemsTotal > 1)
                 {
-                    GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText + " (" + itemsCompleted + "/" + itemsTotal + ")"));
+                    GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, $"{GetComponent<Objective>().ObjectiveText} ({itemsCompleted}/{itemsTotal})");
                 }
                 else
                 {
@@ -44,7 +44,7 @@ public class TriggerCompleteObjective : MonoBehaviour
             itemsCompleted--;
             if (itemsTotal > 1)
             {
-                GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText + " (" + itemsCompleted + "/" + itemsTotal + ")"));
+                GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, $"{GetComponent<Objective>().ObjectiveText} ({itemsCompleted}/{itemsTotal})");
             }
             else
             {

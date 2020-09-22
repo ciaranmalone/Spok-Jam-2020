@@ -41,17 +41,27 @@ public class GameEvents : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawn the next task sheet in the world
+    /// </summary>
     public void spawnNextNote()
     {
         missionHandler.getCurrentPhaseScript().spawnNextNote();
     }
 
+    /// <summary>
+    /// Creates new set of tasks in the UI
+    /// </summary>
+    /// <param name="sheet">The phase the game is entering into</param>
     public void nextTaskSheet(int sheet)
     {
         missionHandler.clearPhase(sheet - 1);
         missionHandler.startPhase(sheet);
     }
 
+    /// <summary>
+    /// Get everything mission related
+    /// </summary>
     public MissionHandler getMissionHandler()
     {
         return missionHandler;
