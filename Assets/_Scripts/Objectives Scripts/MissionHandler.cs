@@ -43,12 +43,17 @@ public class MissionHandler : MonoBehaviour
     {
         return missionsRemaining;
     }
-
+    /// <summary>
+    /// Get current mission phase
+    /// </summary>
+    /// <returns></returns>
     public int getCurrentPhase()
     {
         return currentPhase;
     }
-
+    /// <summary>
+    /// Get the script that handles the missions
+    /// </summary>
     public MissionScript getCurrentPhaseScript()
     {
         return cachedCurrentMissionScript;
