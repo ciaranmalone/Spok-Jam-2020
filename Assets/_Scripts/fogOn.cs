@@ -20,7 +20,7 @@ public class fogOn : MonoBehaviour
         if(coll.name == "FogOn")
         {
             RenderSettings.skybox = blankSkybox;
-            StartCoroutine( ChangeFog( 0, .25f, 2f ) );
+            StartCoroutine( ChangeFog( 0, .1f, 2f ) );
             RenderSettings.fog = true;
         }
     }
@@ -30,12 +30,12 @@ public class fogOn : MonoBehaviour
         if (coll.name == "FogOn")
         {
             RenderSettings.skybox = skybox;
-            StartCoroutine( ChangeFog( .25f, 0f, 2f ) );
+            StartCoroutine( ChangeFog( .1f, 0f, 2f ) );
            // RenderSettings.fog = false;
         }
     }
 
-     IEnumerator ChangeFog(float start, float end, float duration){
+    IEnumerator ChangeFog(float start, float end, float duration){
         float elapsed = 0.0f;
 
         while (elapsed < duration ) {
