@@ -21,7 +21,6 @@ public class ManagerInteraction : MonoBehaviour
     private NavMeshAgent agent;
     private int destPoint = 0;
     private GameObject Player;
-
     private bool left = false;
 
     //Animations
@@ -64,21 +63,23 @@ public class ManagerInteraction : MonoBehaviour
 
     void Update () {
         if (destPoint != 0 && destPoint < points.Length && !agent.pathPending && agent.remainingDistance < 0.5f)
+        {
             GotoNextPoint();
+        }
 
-        if(agent.velocity == new Vector3(0,0,0)) {
+        if (agent.velocity == new Vector3(0,0,0)) 
+        {
             transform.LookAt( new Vector3(Player.transform.position.x, 0, Player.transform.position.z));
-           //wheelAnim.setState(ManagerWheelAnimation.state.idle);
+
         }
 
-        if(destPoint ==  points.Length && !left) {
+        if (destPoint == points.Length && !left) {
             wheelAnim.setState(ManagerWheelAnimation.state.idle);
+            agent.isStopped = true;
+
         }
     }
 
-    private void FixedUpdate() {
-        
-    }
     void GotoNextPoint() {
         if (points.Length == 0)
             return;
@@ -88,6 +89,8 @@ public class ManagerInteraction : MonoBehaviour
     }
 
     IEnumerator leaveStore() {
+        agent.isStopped = false;
+
         left = true;
         managerAnim.setState(managerAnimation.state.idle);
         wheelAnim.setState(ManagerWheelAnimation.state.wheelSpin);

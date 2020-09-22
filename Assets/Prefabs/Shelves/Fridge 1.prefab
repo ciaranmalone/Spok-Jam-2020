@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &180241846086289183
 Transform:
@@ -1494,5 +1494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706fdc791710427409c4faa64ec50e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskSheet: 0
   animationOne: Fridge1DoorClose
   animationTwo: Fridge1DoorOpen
+  isPhone: 0

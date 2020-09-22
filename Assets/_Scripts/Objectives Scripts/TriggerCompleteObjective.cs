@@ -7,6 +7,7 @@ public class TriggerCompleteObjective : MonoBehaviour
     private int objective;
     [SerializeField] private string objectiveItem;
     [SerializeField] int itemsTotal = 1;
+
     int itemsCompleted = 0;
     private void OnTriggerEnter(Collider other) {
 

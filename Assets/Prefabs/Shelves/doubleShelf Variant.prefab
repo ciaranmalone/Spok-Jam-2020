@@ -287,6 +287,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: doubleShelf Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6157100090513245801, guid: a39eeab95fca9a35dbacfa8083334738,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6157100090513245804, guid: a39eeab95fca9a35dbacfa8083334738,
         type: 3}
       propertyPath: m_LocalPosition.x
