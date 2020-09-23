@@ -26,6 +26,14 @@ public class ShopGrowPhase : MonoBehaviour
         if(phase == this.phase)
         {
             anim.Play(animationOne);
+            StartCoroutine(shrink());
+
         }
+    }
+
+    IEnumerator shrink()
+    {
+        yield return new WaitForSeconds(24f);
+        anim.Play(animationTwo);
     }
 }

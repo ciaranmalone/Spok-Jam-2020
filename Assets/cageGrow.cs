@@ -20,6 +20,12 @@ public class cageGrow : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         anim.Play(animationOne);
+        StartCoroutine(shrink());
     }
 
+    IEnumerator shrink()
+    {
+        yield return new WaitForSeconds(10f);
+        anim.Play(animationTwo);
+    }
 }

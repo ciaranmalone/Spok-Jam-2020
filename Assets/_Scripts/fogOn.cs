@@ -19,7 +19,7 @@ public class fogOn : MonoBehaviour
     {
         if(coll.name == "FogOn")
         {
-            RenderSettings.fogColor = new Color(149, 149, 149);
+            RenderSettings.fogColor = Color.gray;
             RenderSettings.skybox = blankSkybox;
             StartCoroutine( ChangeFog( 0, .1f, 2f ) );
             RenderSettings.fog = true;
