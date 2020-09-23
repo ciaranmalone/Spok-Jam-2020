@@ -27,5 +27,6 @@ public class cageGrow : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         anim.Play(animationTwo);
+        Destroy(this);
     }
 }

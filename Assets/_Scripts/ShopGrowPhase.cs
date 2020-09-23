@@ -27,7 +27,6 @@ public class ShopGrowPhase : MonoBehaviour
         {
             anim.Play(animationOne);
             StartCoroutine(shrink());
-
         }
     }
 
