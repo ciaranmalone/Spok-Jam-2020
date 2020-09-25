@@ -16,20 +16,20 @@ public class autoDoorsOpen : MonoBehaviour
 
    private void OnTriggerEnter(Collider other) 
    {
-     LeanTween.moveLocal(doorLeft, new Vector3(-3, 0, 0), .5f).setEaseOutCubic();
-     LeanTween.moveLocal(doorRight, new Vector3(6, 0, 0), .5f).setEaseOutCubic();
+     LeanTween.moveLocal(doorLeft, new Vector3(-3, 0, 0), 2f).setEaseOutCubic();
+     LeanTween.moveLocal(doorRight, new Vector3(6, 0, 0), 2f).setEaseOutCubic();
         src.PlayOneShot(sounds[0]);
    }
 
    private void OnTriggerStay(Collider other) {
-      LeanTween.moveLocal(doorLeft, new Vector3(-3, 0, 0), .5f).setEaseOutCubic();
-      LeanTween.moveLocal(doorRight, new Vector3(6, 0, 0), .5f).setEaseOutCubic();
+      LeanTween.moveLocal(doorLeft, new Vector3(-3, 0, 0), 2f).setEaseOutCubic();
+      LeanTween.moveLocal(doorRight, new Vector3(6, 0, 0), 2f).setEaseOutCubic();
    }
 
    private void OnTriggerExit(Collider other)
    {
-     LeanTween.moveLocal(doorLeft, new Vector3(0, 0, 0), .5f).setEaseOutCubic();
-     LeanTween.moveLocal(doorRight, new Vector3(3, 0, 0), .5f).setEaseOutCubic();
+     LeanTween.moveLocal(doorLeft, new Vector3(0, 0, 0), 2f).setEaseOutCubic();
+     LeanTween.moveLocal(doorRight, new Vector3(3, 0, 0), 2f).setEaseOutCubic();
         src.PlayOneShot(sounds[1]);
 
     }
