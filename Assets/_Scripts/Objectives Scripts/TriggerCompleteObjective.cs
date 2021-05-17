@@ -40,7 +40,7 @@ public class TriggerCompleteObjective : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<ObjectiveItem>().ItemName == objectiveItem)
+        if (other.GetComponent<ObjectiveItem>() != null && other.GetComponent<ObjectiveItem>().ItemName == objectiveItem)
         {
             itemsCompleted--;
             if (itemsTotal > 1)
