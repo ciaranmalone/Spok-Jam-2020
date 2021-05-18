@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SelectItem : MonoBehaviour
 {
@@ -21,12 +22,16 @@ public class SelectItem : MonoBehaviour
     [SerializeField] private KeyCode dropObject = KeyCode.Mouse1;
     [SerializeField] private KeyCode throwObject = KeyCode.Mouse0;
 
+
     [SerializeField] private Vector3 objectPosition = new Vector3(0, -1, 2);
 
     public static bool pickedUp = false;
+
     private Transform selection;
     private Transform selected;
     private bool imBeingLookedAtExists = true;
+    private bool ObjectLookAtEventRan = false;
+
 
     void Update()
     {
@@ -63,6 +68,7 @@ public class SelectItem : MonoBehaviour
                 {
                     try
                     {
+                        selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectLookAtEvent.Invoke();
                         selection.gameObject.GetComponent<DetectBeingHit>().imBeingLookedAt();
                     }
                     catch
@@ -71,9 +77,22 @@ public class SelectItem : MonoBehaviour
                         //Debug.Log("DetectBeingHit not found", selection);
                     }
                 }
-                    
 
-                if(Input.GetKey(selectObject)) {
+                if (!ObjectLookAtEventRan)
+                {
+                    try
+                    {
+                        selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectLookAtEvent.Invoke();
+                        ObjectLookAtEventRan = true;
+                    }
+                    catch
+                    {
+                        ObjectLookAtEventRan = true;
+                        //Debug.Log("DetectBeingHit not found", selection);
+                    }
+                }
+
+                if (Input.GetKey(selectObject)) {
                     selected = selection;
                     pickedUp = true;
 
@@ -81,9 +100,10 @@ public class SelectItem : MonoBehaviour
                     selected.parent = gameObject.transform;
                     selected.localPosition = objectPosition;
                     selected.localRotation = Quaternion.identity;
-
+                    print("do I run once?");
                     //stop its phyiscs so it will stop giggling around
                     try {  selected.gameObject.GetComponent<Rigidbody>().isKinematic = true; } catch { }
+                    try { selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectPickUpEvent.Invoke(); } catch { }
                 }
             }
             /**
