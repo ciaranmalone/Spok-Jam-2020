@@ -6,12 +6,10 @@ using UnityEngine.Events;
 public class ObjectPickUpEvents : MonoBehaviour
 {
     public UnityEvent ObjectPickUpEvent;
-    public UnityEvent ObjectLookAtEvent;
 
     public void scaleObject()
     {
         transform.localScale =  new Vector3(2, 2, 2);
-        print("sdfds");
     }
 
     public void skinnyObject()

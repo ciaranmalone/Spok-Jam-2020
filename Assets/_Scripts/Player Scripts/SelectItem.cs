@@ -68,7 +68,6 @@ public class SelectItem : MonoBehaviour
                 {
                     try
                     {
-                        selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectLookAtEvent.Invoke();
                         selection.gameObject.GetComponent<DetectBeingHit>().imBeingLookedAt();
                     }
                     catch
@@ -82,7 +81,7 @@ public class SelectItem : MonoBehaviour
                 {
                     try
                     {
-                        selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectLookAtEvent.Invoke();
+                        selection.gameObject.GetComponent<ObjectLookAtEvents>().ObjectLookAtEvent.Invoke();
                         ObjectLookAtEventRan = true;
                     }
                     catch
@@ -100,7 +99,6 @@ public class SelectItem : MonoBehaviour
                     selected.parent = gameObject.transform;
                     selected.localPosition = objectPosition;
                     selected.localRotation = Quaternion.identity;
-                    print("do I run once?");
                     //stop its phyiscs so it will stop giggling around
                     try {  selected.gameObject.GetComponent<Rigidbody>().isKinematic = true; } catch { }
                     try { selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectPickUpEvent.Invoke(); } catch { }
@@ -138,6 +136,8 @@ public class SelectItem : MonoBehaviour
 
         //drop object that is picked up                       
         if(Input.GetKey(dropObject) && pickedUp){
+            try { selected.gameObject.GetComponent<ObjectThrowEvents>().ObjectThrowEvent.Invoke(); } catch { }
+
             pickedUp = false;
             selected.parent = null;
             
@@ -154,8 +154,11 @@ public class SelectItem : MonoBehaviour
             {
                 selected.gameObject.AddComponent<Rigidbody>();
             }
+
         } 
         else if(Input.GetKey(throwObject) && pickedUp) {
+            try { selected.gameObject.GetComponent<ObjectThrowEvents>().ObjectThrowEvent.Invoke(); } catch { }
+
             pickedUp = false;
             selected.parent = null;
             /*
