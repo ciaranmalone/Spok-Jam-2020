@@ -201,7 +201,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18198
+  m_Name: pb_Mesh18220
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2446,31 +2446,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8512775933048998257, guid: 2a50e73755d184468b8640970c414558,
         type: 3}
-      propertyPath: sprintOn.a
-      value: 0.6509804
-      objectReference: {fileID: 0}
-    - target: {fileID: 8512775933048998257, guid: 2a50e73755d184468b8640970c414558,
-        type: 3}
-      propertyPath: sprintOn.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8512775933048998257, guid: 2a50e73755d184468b8640970c414558,
-        type: 3}
-      propertyPath: sprintOn.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8512775933048998257, guid: 2a50e73755d184468b8640970c414558,
-        type: 3}
-      propertyPath: sprintOn.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8512775933048998257, guid: 2a50e73755d184468b8640970c414558,
-        type: 3}
-      propertyPath: sprintOff.a
-      value: 0.50980395
-      objectReference: {fileID: 0}
-    - target: {fileID: 8512775933048998257, guid: 2a50e73755d184468b8640970c414558,
-        type: 3}
       propertyPath: crouchIndicator
       value: 
       objectReference: {fileID: 505222817}
@@ -2533,6 +2508,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512775934016746317, guid: 2a50e73755d184468b8640970c414558,
+        type: 3}
+      propertyPath: dropObject
+      value: 324
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512775934016746317, guid: 2a50e73755d184468b8640970c414558,
+        type: 3}
+      propertyPath: throwForce
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512775934016746317, guid: 2a50e73755d184468b8640970c414558,
+        type: 3}
+      propertyPath: throwObject
+      value: 323
+      objectReference: {fileID: 0}
+    - target: {fileID: 8512775934016746317, guid: 2a50e73755d184468b8640970c414558,
+        type: 3}
+      propertyPath: selectObject
+      value: 101
       objectReference: {fileID: 0}
     - target: {fileID: 8512775934016746317, guid: 2a50e73755d184468b8640970c414558,
         type: 3}
@@ -2764,7 +2759,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18296
+  m_Name: pb_Mesh18282
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3292,7 +3287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 30, y: 30.00003}
+  m_AnchoredPosition: {x: 30, y: 30}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!1001 &1513480487

@@ -911,6 +911,10 @@ MonoBehaviour:
   jump: 32
   crouch: 306
   sprint: 304
+  crouchIndicator: {fileID: 0}
+  sprintIndicator: {fileID: 0}
+  sprintOn: {r: 1, g: 0, b: 0, a: 0.6509804}
+  sprintOff: {r: 0, g: 0, b: 0, a: 0.50980395}
 --- !u!114 &1096313520
 MonoBehaviour:
   m_ObjectHideFlags: 0
