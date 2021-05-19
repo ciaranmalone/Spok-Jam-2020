@@ -1266,10 +1266,15 @@ MonoBehaviour:
   PickUpTag: pickUp
   InteractableTag: interactable
   SeeTriggerTag: lookAtMe
+  throwForce: 7
   lightPointPickUp: {fileID: 8512775933073939274}
   PickUpIndicator: {fileID: 0}
   lightPointInteract: {fileID: 441850552}
   InteractIndicator: {fileID: 0}
+  selectObject: 101
+  dropObject: 324
+  throwObject: 323
+  objectPosition: {x: 0, y: -1, z: 2}
 --- !u!114 &1096313521
 MonoBehaviour:
   m_ObjectHideFlags: 0

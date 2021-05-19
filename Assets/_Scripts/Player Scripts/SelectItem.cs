@@ -113,9 +113,9 @@ public class SelectItem : MonoBehaviour
 
                 lightPointInteract.transform.position = hit.point;
 
-                if(Input.GetKey(selectObject)) {
+                if(Input.GetKeyDown(selectObject)) {
                     selected = selection;
-
+                    Debug.Log("how many");
                     /**
                      * seeing if the the hit object has interactable else do nothing
                      * handle Interaction will play an animation on the selected item (ie. open door)

@@ -15,7 +15,6 @@ public class DetectBeingHit : MonoBehaviour
     public void imBeingLookedAt() {
         watched = true;
         timer += Time.deltaTime;
-        print("timer " + timer);
     }
 
     void FixedUpdate()
