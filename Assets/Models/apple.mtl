@@ -1,0 +1,5 @@
+newmtl Apples
+map_Kd Apples.png
+Kd 1 1 1
+d 1
+

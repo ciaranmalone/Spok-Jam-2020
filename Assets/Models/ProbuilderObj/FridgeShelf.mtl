@@ -1,0 +1,5 @@
+newmtl steelGreen
+map_Kd steel.jpg
+Kd 0 1 0.01680946
+d 1
+

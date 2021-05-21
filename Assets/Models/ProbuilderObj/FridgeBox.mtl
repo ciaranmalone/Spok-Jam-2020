@@ -1,0 +1,5 @@
+newmtl steelRed
+map_Kd steel.jpg
+Kd 1 0 0
+d 1
+

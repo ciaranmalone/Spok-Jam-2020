@@ -1,0 +1,5 @@
+newmtl window
+map_Kd window.png
+Kd 0.1886792 0.1886792 0.1886792
+d 0.772549
+

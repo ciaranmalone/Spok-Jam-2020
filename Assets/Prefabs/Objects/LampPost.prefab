@@ -170,7 +170,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 8.66e-43, y: NaN, z: 0, w: 1.1011524e+13}
+  m_BoundingSphereOverride: {x: 7.8e-44, y: NaN, z: 0, w: 1.1838e-41}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 8932951201376437741}
   - component: {fileID: 5090802043335288414}
   - component: {fileID: 405726875978704200}
+  - component: {fileID: 7112132008325005157}
   m_Layer: 0
   m_Name: LampPost
   m_TagString: Untagged
@@ -314,3 +315,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7112132008325005157
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6962508375665612352}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1981681102287493673, guid: 5e137033db5615649a48d0dcc317c5a5, type: 3}
