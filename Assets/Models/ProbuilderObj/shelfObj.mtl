@@ -1,0 +1,5 @@
+newmtl wood
+map_Kd wood.jpg
+Kd 1 1 1
+d 1
+

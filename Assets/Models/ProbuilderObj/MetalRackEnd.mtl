@@ -1,0 +1,10 @@
+newmtl jimmy_kimmel_live
+map_Kd jimmy kimmel live.png
+Kd 1 1 1
+d 1
+
+newmtl tiles
+map_Kd tiles.jpg
+Kd 1 1 1
+d 1
+
