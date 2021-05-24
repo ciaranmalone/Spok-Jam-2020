@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bc84a8f-53cb-4cdd-881a-8628569a8383" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/derez.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/derez.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Monster/Zombie Idle.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Monster/Zombie Idle.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scenes/Lidl.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/Lidl.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +15,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <changedPaths>
+      <option value="$PROJECT_DIR$/Assets/_Scripts/FogSprite.cs" />
+    </changedPaths>
   </component>
   <component name="ProjectId" id="1sJAwcRROhsQtBfcLniViDNFwMd" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -56,6 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1620580595778</updated>
       <workItem from="1620580596028" duration="1217000" />
+      <workItem from="1621858340873" duration="3215000" />
     </task>
     <servers />
   </component>
