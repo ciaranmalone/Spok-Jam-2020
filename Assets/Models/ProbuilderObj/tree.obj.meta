@@ -7,13 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: grass
-    second: {fileID: 2100000, guid: 8a5aba7f2bd190d489337e5c66988b56, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: wood
-    second: {fileID: 2100000, guid: cc182ac1bd20de74dadf37265b7c54cd, type: 2}
+      name: treeMat
+    second: {fileID: 2100000, guid: a8ff1d7a9d04ea74287fc9d3c36db89c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

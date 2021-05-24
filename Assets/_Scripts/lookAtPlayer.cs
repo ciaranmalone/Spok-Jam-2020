@@ -12,7 +12,9 @@ public class lookAtPlayer : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(Player.transform);
-
+        Vector3 lookVector = Player.transform.position - transform.position;
+        lookVector.y = transform.position.y;
+        Quaternion rot = Quaternion.LookRotation(lookVector);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
     }
 }
