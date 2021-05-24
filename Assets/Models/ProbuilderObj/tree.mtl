@@ -1,0 +1,10 @@
+newmtl grass
+map_Kd grass.png
+Kd 1 1 1
+d 1
+
+newmtl wood
+map_Kd wood.jpg
+Kd 1 1 1
+d 1
+

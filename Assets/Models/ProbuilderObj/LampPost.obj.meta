@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: LampPostMat
+    second: {fileID: 2100000, guid: beb1f2ab57390734e82f692759bf8072, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: light
     second: {fileID: 2100000, guid: 42800d42770a9c4dc892ccf6ca4b31f1, type: 2}
   - first:
