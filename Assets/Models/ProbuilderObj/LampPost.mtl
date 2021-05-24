@@ -1,0 +1,9 @@
+newmtl steel
+map_Kd steel.jpg
+Kd 1.0 1.0 1.0
+d 1.0
+
+newmtl light
+Kd 1 1 0.6462264
+d 1
+
