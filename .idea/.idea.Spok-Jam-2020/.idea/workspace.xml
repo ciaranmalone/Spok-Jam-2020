@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bc84a8f-53cb-4cdd-881a-8628569a8383" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scenes/Lidl.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/Lidl.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/FogSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/FogSprite.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +62,8 @@
       <option name="presentableId" value="Default" />
       <updated>1620580595778</updated>
       <workItem from="1620580596028" duration="1217000" />
-      <workItem from="1621858340873" duration="4205000" />
+      <workItem from="1621858340873" duration="4914000" />
+      <workItem from="1621895042155" duration="1198000" />
     </task>
     <servers />
   </component>
