@@ -24,6 +24,7 @@ public class ObjectiveController : MonoBehaviour
         if(objective == this.objective) {
             audioSource.PlayOneShot(clip, .1f);
             m_Text.fontStyle = FontStyles.Strikethrough;
+            GameEvents.current.onObjectiveComplete -= ObjectiveCompleteHandler;
         }
     }
 

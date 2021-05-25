@@ -22,6 +22,7 @@ public class MissionHandler : MonoBehaviour
     public void startPhase(int phase)
     {
         currentPhase = phase;
+        phases[phase].gameObject.SetActive(true);
         cachedCurrentMissionScript = phases[phase].GetComponent<MissionScript>();
         missionsRemaining = cachedCurrentMissionScript.MakeObjectives(canvas, objectivePrefab, objectivePivot, objectiveTextOffset);
     }
@@ -31,6 +32,7 @@ public class MissionHandler : MonoBehaviour
         if (phase < 0) return;
         missionsRemaining = 0;
         phases[phase].GetComponent<MissionScript>().ClearObjectives();
+        phases[phase].gameObject.SetActive(false);
         cachedCurrentMissionScript = null;
     }
 
