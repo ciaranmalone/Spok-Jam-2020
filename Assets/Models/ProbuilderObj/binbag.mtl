@@ -1,0 +1,9 @@
+newmtl asphalt
+map_Kd asphalt.png
+Kd 0.3207547 0.3207547 0.3207547
+d 0
+
+newmtl New_Material_2
+Kd 1 0 0
+d 1
+
