@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: fitness_cover
-    second: {fileID: 2100000, guid: 1c5690c2424054d42bcded4fca34de6f, type: 2}
+    second: {fileID: 2100000, guid: 9624834e10f63064484bc53e6997f287, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
