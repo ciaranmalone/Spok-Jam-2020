@@ -48,7 +48,7 @@ public class ObjectivePersistence : MonoBehaviour
                     //complete the task
                     if (Objectives[i - 1].Objectives[o])
                     {
-                        objectivesInCurrentList[o].completeObjective();
+                        objectivesInCurrentList[o].completeObjective(true);
                     }
                     
                     /*

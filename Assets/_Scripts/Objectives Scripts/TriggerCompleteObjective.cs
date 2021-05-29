@@ -53,8 +53,16 @@ public class TriggerCompleteObjective : MonoBehaviour
         }
     }
 
-    public void completeObjective(){
+    public void completeObjective(bool start=false){
         GameEvents.current.ObjectiveComplete(objective);
+        if(start)
+        {
+            FakeToFromAnimation ftfa = GetComponent<FakeToFromAnimation>();
+            if(ftfa)
+            {
+                ftfa.disableSound();
+            }
+        }
         Destroy(gameObject);
     }
 

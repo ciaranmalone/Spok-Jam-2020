@@ -37,4 +37,9 @@ public class FakeToFromAnimation : MonoBehaviour
             auso.PlayOneShot(clip);
         }
     }
+
+    public void disableSound()
+    {
+        playSound = false;
+    }
 }
