@@ -20,7 +20,8 @@ public class ObjectivePersistence : MonoBehaviour
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
 
-        StartCoroutine(markCompletedTasks());
+        if(scene.name.Contains("Lidl"))
+            StartCoroutine(markCompletedTasks());
     }
 
     IEnumerator markCompletedTasks()
@@ -31,10 +32,14 @@ public class ObjectivePersistence : MonoBehaviour
         //cycle through each array of objective bools
         for (int i = 1; i <= Objectives.Length; i++)
         {
+            GameObject currentMissionPhaseObject = GameObject.Find("MissionPhase" + i.ToString());
+            
             //find all TriggerCompleteObjective scripts under the MissionPhase Object corresponding with the current array.
-            TriggerCompleteObjective[] objectivesInCurrentList = GameObject.Find("MissionPhase" + i.ToString())
-                .GetComponentsInChildren<TriggerCompleteObjective>();
+            TriggerCompleteObjective[] objectivesInCurrentList = currentMissionPhaseObject.GetComponentsInChildren<TriggerCompleteObjective>();
             //cycle through these scripts
+
+            bool incompleteObjectiveEncountered = false;
+            
             for (int o = 0; o <= objectivesInCurrentList.Length-1; o++)
             {
                 try
@@ -48,7 +53,13 @@ public class ObjectivePersistence : MonoBehaviour
                     //complete the task
                     if (Objectives[i - 1].Objectives[o])
                     {
+                        print("i:"+i+" completeObjective");
                         objectivesInCurrentList[o].completeObjective(true);
+                    }
+                    else
+                    {
+                        print("i:"+i+" Objective incomplete");
+                        incompleteObjectiveEncountered = true;
                     }
                     
                     /*
@@ -61,8 +72,14 @@ public class ObjectivePersistence : MonoBehaviour
                     Debug.Log("Error in objective persistence loop.\n o:" + o + " i:" +i);
                 }
 
-                yield return waitOneFrame;
             }
+                if (!incompleteObjectiveEncountered)
+                {
+                    print("");
+                    currentMissionPhaseObject.GetComponent<MissionScript>().nextNote.GetComponent<interactable>().handleInteraction(true);
+                }
+                
+                yield return waitOneFrame;
         }
     }
     

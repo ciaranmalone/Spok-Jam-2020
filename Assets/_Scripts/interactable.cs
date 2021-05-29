@@ -5,6 +5,8 @@ using UnityEngine;
 public class interactable : MonoBehaviour
 {
     [SerializeField] int taskSheet = 0;
+    //Objects to be destroyed from previous phase by persistence script
+    [SerializeField] private GameObject[] previousPhasePurges;
     [SerializeField] private string animationOne;
     [SerializeField] private string animationTwo;
     [SerializeField] private bool isPhone = false;
@@ -24,7 +26,7 @@ public class interactable : MonoBehaviour
         }
     }
 
-    public void handleInteraction(){
+    public void handleInteraction(bool destroy = false){
         Debug.Log("hello "+ played);
 
         if(GetComponent<AudioSource>() != null & !isPhone) {
@@ -43,7 +45,15 @@ public class interactable : MonoBehaviour
 
         if (taskSheet != 0) {
             GameEvents.current.nextTaskSheet(taskSheet);
-            Destroy(gameObject);     
+            Destroy(gameObject);
+
+            if (destroy)
+            {
+                foreach (GameObject obj in previousPhasePurges)
+                {
+                    Destroy(obj);
+                }
+            }
         }
 
         if(isPhone){

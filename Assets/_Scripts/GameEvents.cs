@@ -8,7 +8,9 @@ public class GameEvents : MonoBehaviour
     public static GameEvents current;
     [SerializeField] MissionHandler missionHandler;
     private void Awake() {
-        current = this;
+        //singleton for persistence - Evan
+        if(!current)
+            current = this;
         nextTaskSheet(0);
     }
     public event Action<string> onPhaseChange;

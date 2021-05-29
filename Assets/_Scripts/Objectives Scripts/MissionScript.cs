@@ -6,8 +6,8 @@ using TMPro;
 public class MissionScript : MonoBehaviour
 {
     //1.
-    [SerializeField]
-    GameObject nextNote;
+    //Public so ObjectivePersistence script can see it
+    public GameObject nextNote;
     [SerializeField]
     GameObject[] objectives;
     
