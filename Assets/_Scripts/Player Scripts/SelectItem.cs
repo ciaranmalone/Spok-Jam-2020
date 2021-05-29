@@ -120,7 +120,9 @@ public class SelectItem : MonoBehaviour
                      * seeing if the the hit object has interactable else do nothing
                      * handle Interaction will play an animation on the selected item (ie. open door)
                      */
-                    try {selected.gameObject.GetComponent<interactable>().handleInteraction(); } catch { }
+                    try { selected.gameObject.GetComponent<interactable>().handleInteraction(); } catch { }
+                    try { selection.gameObject.GetComponent<objectInteractEvents>().ObjectPickUpEvent.Invoke(); } catch { }
+
                 }
 
             } 
