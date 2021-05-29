@@ -31,8 +31,7 @@ public class TriggerCompleteObjective : MonoBehaviour
 
                 if (itemsCompleted >= itemsTotal)
                 {
-                    GameEvents.current.ObjectiveComplete(objective);
-                    Destroy(gameObject);
+                    completeObjective();
                 }
             }
         }
@@ -52,6 +51,11 @@ public class TriggerCompleteObjective : MonoBehaviour
                 GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText));
             }
         }
+    }
+
+    public void completeObjective(){
+        GameEvents.current.ObjectiveComplete(objective);
+        Destroy(gameObject);
     }
 
     public void setObjectiveOffset(int offset)

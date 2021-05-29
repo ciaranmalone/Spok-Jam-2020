@@ -23,6 +23,7 @@ public class GameEvents : MonoBehaviour
     public void ObjectiveComplete(int objective){
         if (onObjectiveComplete != null)
         {
+            print("epic big chungus");
             onObjectiveComplete(objective);
             missionHandler.completeMission();
             print(missionHandler.getRemainingMissionCount());

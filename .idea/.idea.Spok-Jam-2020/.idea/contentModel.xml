@@ -26,11 +26,13 @@
           <e p="CollisionSound.cs" t="Include" />
           <e p="demonPuddle.cs" t="Include" />
           <e p="disappearContoller.cs" t="Include" />
+          <e p="FakeToFromAnimation.cs" t="Include" />
           <e p="flicker.cs" t="Include" />
           <e p="fogOn.cs" t="Include" />
           <e p="FogSprite.cs" t="Include" />
           <e p="footstepSoundManager.cs" t="Include" />
           <e p="GameEvents.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
           <e p="hideOnLeave.cs" t="Include" />
           <e p="InfiniteRoom.cs" t="Include" />
           <e p="interactable.cs" t="Include" />
@@ -41,12 +43,16 @@
           <e p="ManagerInteraction.cs" t="Include" />
           <e p="moveManager.cs" t="Include" />
           <e p="Objectives Scripts" t="Include">
+            <e p="Editor" t="Include">
+              <e p="ObjectiveEventEditor.cs" t="Include" />
+            </e>
             <e p="MissionHandler.cs" t="Include" />
             <e p="MissionScript.cs" t="Include" />
             <e p="Objective.cs" t="Include" />
             <e p="ObjectiveController.cs" t="Include" />
             <e p="ObjectiveCounter.cs" t="Include" />
             <e p="ObjectiveItem.cs" t="Include" />
+            <e p="ObjectivePersistence.cs" t="Include" />
             <e p="TriggerCompleteObjective.cs" t="Include" />
           </e>
           <e p="ObjectLookAtEvents.cs" t="Include" />
@@ -64,6 +70,7 @@
             <e p="DetectBeingHit.cs" t="Include" />
             <e p="IveBeenPickedUp.cs" t="Include" />
           </e>
+          <e p="playDVD.cs" t="Include" />
           <e p="Player Scripts" t="Include">
             <e p="EnemyLook.cs" t="Include" />
             <e p="MouseLook.cs" t="Include" />
@@ -78,11 +85,14 @@
             <e p="PortalTeleporter.cs" t="Include" />
             <e p="ScreenCutoutShader.shader" t="Include" />
           </e>
+          <e p="PostObjectiveEnabler.cs" t="Include" />
           <e p="ShopGrowPhase.cs" t="Include" />
           <e p="showHiddenGoku.cs" t="Include" />
           <e p="showHiddenObjects.cs" t="Include" />
+          <e p="StopScript.cs" t="Include" />
           <e p="TriggerPhaseOneLook.cs" t="Include" />
         </e>
+        <e p="DontDestroyOnLoad.cs" t="Include" />
         <e p="DoublesidedCutout" t="Include">
           <e p="AlphaTest-DiffuseBack.shader" t="Include" />
           <e p="AlphaTest-DiffuseDoublesided.shader" t="Include" />
@@ -139,10 +149,12 @@
           <e p="License.txt" t="Include" />
           <e p="ReadMe.txt" t="Include" />
         </e>
+        <e p="LoadScene.cs" t="Include" />
         <e p="Materials" t="Include">
           <e p="derez.shader" t="Include" />
+          <e p="SpriteDiffuse.shader" t="Include" />
         </e>
-        <e p="SpriteDiffuse.shader" t="Include" />
+        <e p="ObjectiveFitness.cs" t="Include" />
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
             <e p="LiberationSans - OFL.txt" t="Include" />

@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bc84a8f-53cb-4cdd-881a-8628569a8383" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scenes/Lidl.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/Lidl.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/GameEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/GameEvents.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Objectives Scripts/TriggerCompleteObjective.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Objectives Scripts/TriggerCompleteObjective.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +21,8 @@
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/_Scripts/FogSprite.cs" />
+      <option value="$PROJECT_DIR$/Assets/_Scripts/GameEvents.cs" />
+      <option value="$PROJECT_DIR$/Assets/_Scripts/Objectives Scripts/ObjectivePersistence.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1sJAwcRROhsQtBfcLniViDNFwMd" />
@@ -64,6 +69,7 @@
       <workItem from="1620580596028" duration="1217000" />
       <workItem from="1621858340873" duration="4914000" />
       <workItem from="1621895042155" duration="1198000" />
+      <workItem from="1622252292850" duration="3375000" />
     </task>
     <servers />
   </component>
