@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/FridgeDimension.unity
     guid: 13c36839ce81db149a2f64fe9ea2ca09
+  - enabled: 1
+    path: Assets/_Scenes/FridgeDimension 1.unity
+    guid: 182722da1c9f5124fadddb29b15ed065
   m_configObjects: {}
