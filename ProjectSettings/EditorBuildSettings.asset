@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/FridgeDimension 1.unity
     guid: 182722da1c9f5124fadddb29b15ed065
+  - enabled: 1
+    path: Assets/_Scenes/kuba.unity
+    guid: c3cc8beae88a9514486809b06fef4acd
   m_configObjects: {}
