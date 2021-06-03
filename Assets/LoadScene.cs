@@ -5,9 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
+    [SerializeField] Animator animator;
     [SerializeField] private string sceneName = "Lidl";
-    public void LoadSpecifiedScene()
+    public void StartTransition()
     {
-        SceneManager.LoadSceneAsync(sceneName);
+        StartCoroutine("loadTheScene");
     }
+
+    private IEnumerator loadTheScene()
+    {
+        animator.SetTrigger("FadeOut");
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadSceneAsync(sceneName);
+
+    }
+
 }

@@ -9,12 +9,15 @@ EditorBuildSettings:
     path: Assets/_Scenes/Lidl.unity
     guid: c5351344ae87b92a3988eb8858245d86
   - enabled: 1
-    path: Assets/_Scenes/FridgeDimension.unity
+    path: Assets/_Scenes/OtherDimensions/FridgeDimension.unity
     guid: 13c36839ce81db149a2f64fe9ea2ca09
   - enabled: 1
-    path: Assets/_Scenes/FridgeDimension 1.unity
+    path: Assets/_Scenes/OtherDimensions/FridgeDimension 1.unity
     guid: 182722da1c9f5124fadddb29b15ed065
   - enabled: 1
     path: Assets/_Scenes/kuba.unity
     guid: c3cc8beae88a9514486809b06fef4acd
+  - enabled: 1
+    path: Assets/_Scenes/OtherDimensions/Area1LongHallways.unity
+    guid: dadfbf5712040b144b713b1de492ad5a
   m_configObjects: {}
