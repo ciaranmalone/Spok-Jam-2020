@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,8 @@ public class MissionHandler : MonoBehaviour
     int currentPhase;
     MissionScript cachedCurrentMissionScript;
 
-    [Header("Canvas Components")]
+    [Header("Canvas Components")] [SerializeField]
+    private string canvasObjectName;
     [SerializeField]
     Canvas canvas;
     [SerializeField]
@@ -18,6 +20,12 @@ public class MissionHandler : MonoBehaviour
     [SerializeField]
     [Tooltip("The distance between each objective in the UI")]
     int objectiveTextOffset = 140;
+
+    private void Awake()
+    {
+        if(!canvas)
+            canvas = GameObject.Find(canvasObjectName + "_Saved").GetComponent<Canvas>();
+    }
 
     public void startPhase(int phase)
     {
@@ -29,6 +37,7 @@ public class MissionHandler : MonoBehaviour
 
     public void clearPhase(int phase)
     {
+        print("Clearing phase: "+phase+" "+phases[phase].name);
         if (phase < 0) return;
         missionsRemaining = 0;
         phases[phase].GetComponent<MissionScript>().ClearObjectives();

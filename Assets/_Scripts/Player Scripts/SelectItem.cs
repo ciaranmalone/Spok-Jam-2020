@@ -35,6 +35,9 @@ public class SelectItem : MonoBehaviour
 
     void Update()
     {
+        PickUpIndicator = IndicatorSingletons.pickupIndicatorSingleton;
+        InteractIndicator = IndicatorSingletons.interactIndicatorSingleton;
+        
         RaycastHit hit;
         lightPointPickUp.SetActive(false);
         PickUpIndicator.SetActive(false);
