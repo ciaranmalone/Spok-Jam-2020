@@ -76,7 +76,9 @@ public class ObjectivePersistence : MonoBehaviour
                 if (!incompleteObjectiveEncountered)
                 {
                     print("");
-                    currentMissionPhaseObject.GetComponent<MissionScript>().nextNote.GetComponent<interactable>().handleInteraction(true);
+                    currentMissionPhaseObject.GetComponent<MissionScript>()
+                        .nextNote.GetComponent<interactable>()
+                        .handleInteraction(true);
                 }
                 
                 yield return waitOneFrame;

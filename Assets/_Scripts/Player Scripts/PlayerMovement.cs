@@ -65,6 +65,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+        crouchIndicator = IndicatorSingletons.crouchIndicatorSingleton;
+        sprintIndicator = IndicatorSingletons.sprintIndicatorSingleton;
+        
+        sprintIndicatorGraphic = sprintIndicator.GetComponent<Graphic>();
+        
         x = Input.GetAxis("Horizontal");
         z = Input.GetAxis("Vertical");
 

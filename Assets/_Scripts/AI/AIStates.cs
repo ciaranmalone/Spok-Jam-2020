@@ -17,9 +17,7 @@ public class AIStates : MonoBehaviour {
 
     [Header ("Patrol")]
     [SerializeField] float patrolMoveSpeed;
-    [SerializeField] Transform[] frontPatrolPoints;
-    [SerializeField] Transform[] centrePatrolPoints;
-    [SerializeField] Transform[] backPatrolPoints;
+    [SerializeField] AIWaypointGroup[] aiWaypointGroups;
     Transform patrolTarget;
     string patrolPointTargetGroup = "back";
     bool atTarget = false;
@@ -41,7 +39,6 @@ public class AIStates : MonoBehaviour {
         /*anim = gameObject.GetComponent<AIAnimation>();
         agent = gameObject.GetComponent<NavMeshAgent>();*/
         
-        patrolTarget = frontPatrolPoints[Random.Range(0, frontPatrolPoints.Length - 1)];
         anim.setState(AIAnimation.state.run);
     }
 
@@ -108,26 +105,7 @@ public class AIStates : MonoBehaviour {
 
     public void setNextPatrolPoint(){ 
         //choose next patrol point based on current path taken
-        switch (patrolPointTargetGroup)
-        {
-            case ("back"):
-                patrolTarget = centrePatrolPoints[Random.Range(0, centrePatrolPoints.Length - 1)];
-                patrolPointTargetGroup = "back -> centre";
-                break;
-
-            case ("back -> centre"):
-                patrolTarget = frontPatrolPoints[Random.Range(0, frontPatrolPoints.Length - 1)];
-                break;
-
-            case ("front"):
-                patrolTarget = centrePatrolPoints[Random.Range(0, centrePatrolPoints.Length - 1)];
-                patrolPointTargetGroup = "front -> centre";
-                break;
-
-            case ("front -> centre"):
-                patrolTarget = backPatrolPoints[Random.Range(0, backPatrolPoints.Length - 1)];
-                break;
-        }
+        
     }
 
     IEnumerator chooseNextPatrolPoint()
@@ -147,4 +125,10 @@ public class AIStates : MonoBehaviour {
         //enemy no longer at target
         atTarget = false;
     }
+}
+
+[System.Serializable]
+class AIWaypointGroup
+{
+    [SerializeField] private Transform[] Waypoints;
 }

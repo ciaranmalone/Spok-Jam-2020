@@ -8,6 +8,11 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="_Scripts" t="Include">
+          <e p="2021" t="Include">
+            <e p="GameManager.cs" t="Include" />
+            <e p="Quest.cs" t="Include" />
+            <e p="QuestSystem.cs" t="Include" />
+          </e>
           <e p="AI" t="Include">
             <e p="AIAnimation.cs" t="Include" />
             <e p="AIStates.cs" t="Include" />
@@ -32,7 +37,6 @@
           <e p="FogSprite.cs" t="Include" />
           <e p="footstepSoundManager.cs" t="Include" />
           <e p="GameEvents.cs" t="Include" />
-          <e p="GameManager.cs" t="Include" />
           <e p="hideOnLeave.cs" t="Include" />
           <e p="InfiniteRoom.cs" t="Include" />
           <e p="interactable.cs" t="Include" />
@@ -68,6 +72,7 @@
           <e p="phoneCallScript.cs" t="Include" />
           <e p="Pick Up Objects Scripts" t="Include">
             <e p="DetectBeingHit.cs" t="Include" />
+            <e p="IndicatorSingletons.cs" t="Include" />
             <e p="IveBeenPickedUp.cs" t="Include" />
           </e>
           <e p="playDVD.cs" t="Include" />
