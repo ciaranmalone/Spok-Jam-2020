@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     //Quest System
     internal QuestSystem qs;
     /// <summary>
-    /// Collection of World Phases
+    /// Collection of Phases in the Unity Hierarchy
     /// </summary>
     internal WorldQuests.Phase[] phases;
 
@@ -27,9 +27,10 @@ public class GameManager : MonoBehaviour
     GameCanvas canvas;
 
     //Game
-    PhaseID phase = PhaseID.Phase1;
+    internal PhaseID phase = PhaseID.Phase1;
     int missionsRemaining;//TODO can be refactored to just use array below
-    Dictionary<QuestID,bool> completedQuests;
+    Dictionary<QuestID, bool> completedQuests;
+    bool loading; //to check if game is loading
     
     void Awake()
     {
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -51,17 +53,20 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        loading = true;
+
         //Import current scene objects 
         player = GameObject.FindGameObjectWithTag("Player");
         qs = FindObjectOfType<QuestSystem>();
         phases = FindObjectsOfType<WorldQuests.Phase>();
-
+        canvas = FindObjectOfType<GameCanvas>();
 
         //If teleporting, do it now!!!
         if (playerTP && player)
         {
             player.transform.position = playerPos;
-            player.GetComponentInChildren<MouseLook>().Rotate(playerCameraRot.eulerAngles.x, playerRot.eulerAngles.y);
+            float xRot = playerCameraRot.eulerAngles.x;
+            player.GetComponentInChildren<MouseLook>().Rotate(xRot > 90 ? xRot-360 : xRot, playerRot.eulerAngles.y);
         }
 
         //complete every quest before current phase
@@ -72,25 +77,16 @@ public class GameManager : MonoBehaviour
 
             foreach (WorldQuests.Quest quest in iterPhase.transform.GetComponentsInChildren<WorldQuests.Quest>())
             {
-                quest.completeQuest();
+                quest.QuestCompleteWQ();
             }
         }
 
-        //assign current phase if it doesn't exist
-        if(completedQuests == null)
-        {
-            completedQuests = new Dictionary<QuestID, bool>();
-            GameObject iterPhase = GetCurrentPhase(phase);
-            
-
-            foreach(WorldQuests.Quest quest in iterPhase.GetComponentsInChildren<WorldQuests.Quest>())
-            {
-                completedQuests.Add(quest.quest_id, false);
-            }
-        }
         //complete specified quests in current phase
-        else
+        if(completedQuests!=null)
         {
+            //draw current phase quests
+            DrawQuests();
+
             WorldQuests.Quest[] questlist = GetCurrentPhase(phase).GetComponentsInChildren<WorldQuests.Quest>();
 
             foreach(WorldQuests.Quest qst in questlist)
@@ -100,16 +96,50 @@ public class GameManager : MonoBehaviour
                 {
                     if(pass)
                     {
-                        qst.completeQuest();
+                        qst.QuestCompleteWQ();
                     }
                 }
             }
         }
+        //assign current phase if it doesn't exist
+        else
+        {
+            completedQuests = new Dictionary<QuestID, bool>();
+            GameObject iterPhase = GetCurrentPhase(phase);
+            
+
+            foreach(WorldQuests.Quest quest in iterPhase.GetComponentsInChildren<WorldQuests.Quest>())
+            {
+                completedQuests.Add(quest.quest_id, false);
+            }
+            missionsRemaining = completedQuests.Count;
+            
+            //draw current phase quests
+            DrawQuests();
+        }
+        loading = false;
     }
 
-    internal void QuestComplete(QuestID quest_id)
+    internal void QuestCompleteGM(QuestID quest_id)
     {
         completedQuests[quest_id] = true;
+        int whereAmI = 0;
+        foreach(KeyValuePair<QuestID, bool> q in completedQuests)
+        {
+            if (q.Key == quest_id) break;
+            whereAmI++;
+        }
+        canvas.QuestCompleteC(whereAmI);
+        
+        //if it is not loading then u can do some stuff here
+        if (!loading)
+        {
+            missionsRemaining--;
+            if(missionsRemaining==0)
+            {
+                //TODO phone or wtv, essentially when missions are done
+            }
+        }
     }
 
     GameObject GetCurrentPhase(PhaseID phase)
@@ -159,14 +189,9 @@ public class GameManager : MonoBehaviour
     }
 
 
-
-
-
-
     void DrawQuests()
     {
-        var parames = "";
-        canvas.doTheThing(parames);
+        canvas.MakeObjectives(completedQuests.Keys);
     }
 }
 

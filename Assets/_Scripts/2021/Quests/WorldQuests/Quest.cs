@@ -46,7 +46,7 @@ namespace WorldQuests
 
                     if (timesCompleted >= totalToComplete)
                     {
-                        completeQuest();
+                        QuestCompleteWQ();
                     }
                 }
             }
@@ -68,9 +68,9 @@ namespace WorldQuests
             }
         }
 
-        public void completeQuest()
+        public void QuestCompleteWQ()
         {
-            GameManager.gameManager.QuestComplete(quest_id);
+            GameManager.gameManager.QuestCompleteGM(quest_id);
             //TODO run post-event activity here
             Destroy(gameObject);
         }
