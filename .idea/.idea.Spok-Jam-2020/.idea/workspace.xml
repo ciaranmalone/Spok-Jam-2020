@@ -4,21 +4,15 @@
     <list default="true" id="6bc84a8f-53cb-4cdd-881a-8628569a8383" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Spok-Jam-2020/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DontDestroyOnLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DontDestroyOnLoad.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/SpriteDiffuse.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/SpriteDiffuse.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Monster/Falling.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Monster/Falling.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Monster/Look Around.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Monster/Look Around.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Monster/Zombie Idle.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Monster/Zombie Idle.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Entrance Sign.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Entrance Sign.xcf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/ExteriorMaterials 1/Billboards/Been far.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/ExteriorMaterials 1/Billboards/Been far.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/ExteriorMaterials/Tarmac.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/ExteriorMaterials/Tarmac.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scenes/Evan.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/Evan.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scenes/Lidl Objective Jank.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scenes/Lidl Objective Jank.unity.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scenes/Lidl.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/Lidl.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scenes/Lidl.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/Lidl.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scripts/AI/AIStates.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/AI/AIStates.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Objectives Scripts/MissionHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Objectives Scripts/MissionHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Objectives Scripts/ObjectivePersistence.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Objectives Scripts/ObjectivePersistence.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player Scripts/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player Scripts/SelectItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player Scripts/SelectItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/interactable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/interactable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -95,6 +89,8 @@
       <workItem from="1622402308853" duration="4033000" />
       <workItem from="1622481251683" duration="618000" />
       <workItem from="1622753769290" duration="2380000" />
+      <workItem from="1622854204909" duration="1179000" />
+      <workItem from="1622912072635" duration="598000" />
     </task>
     <servers />
   </component>

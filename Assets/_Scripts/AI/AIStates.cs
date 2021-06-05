@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AIStates : MonoBehaviour {
-    [Header ("States")]
-    public aiState currentState;
-    public enum aiState {patrol, search, chase, attack};
+public class AIStates : MonoBehaviour
+{
+    [Header("States")] [SerializeField] private aiState startingState;
+    aiState currentState;
+    enum aiState {patrol, search, chase, attack};
     
 
     [Header ("Components")]
@@ -34,13 +35,7 @@ public class AIStates : MonoBehaviour {
 
     
 
-    void Start()
-    {
-        /*anim = gameObject.GetComponent<AIAnimation>();
-        agent = gameObject.GetComponent<NavMeshAgent>();*/
-        
-        anim.setState(AIAnimation.state.run);
-    }
+    void Start() => currentState = startingState;
 
     void Update()
     {

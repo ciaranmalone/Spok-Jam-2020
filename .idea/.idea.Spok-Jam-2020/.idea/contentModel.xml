@@ -10,8 +10,17 @@
         <e p="_Scripts" t="Include">
           <e p="2021" t="Include">
             <e p="GameManager.cs" t="Include" />
-            <e p="Quest.cs" t="Include" />
-            <e p="QuestSystem.cs" t="Include" />
+            <e p="Quests" t="Include">
+              <e p="GameCanvas.cs" t="Include" />
+              <e p="Programmatic" t="Include">
+                <e p="QuestSystem.cs" t="Include" />
+              </e>
+              <e p="WorldQuests" t="Include">
+                <e p="Phase.cs" t="Include" />
+                <e p="Quest.cs" t="Include" />
+                <e p="QuestItem.cs" t="Include" />
+              </e>
+            </e>
           </e>
           <e p="AI" t="Include">
             <e p="AIAnimation.cs" t="Include" />
