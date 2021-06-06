@@ -1,67 +1,126 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class AIStates : MonoBehaviour
 {
-    [Header("States")] [SerializeField] private aiState startingState;
-    aiState currentState;
-    enum aiState {patrol, search, chase, attack};
+    [SerializeField] private Transform target;
     
-
-    [Header ("Components")]
-    [SerializeField] NavMeshAgent agent;
-    [SerializeField] AIAnimation anim;
-    float distanceFromTarget;
-
-
+    [Header("States")] 
+    [SerializeField] private aiState startingState;
+    [SerializeField] private aiState currentState;
+    private enum aiState {patrol, chase, attack, idle, waitingBetweenPatrolPoints};
+    
+    
+    
     [Header ("Patrol")]
-    [SerializeField] float patrolMoveSpeed;
-    [SerializeField] AIWaypointGroup[] aiWaypointGroups;
-    Transform patrolTarget;
-    string patrolPointTargetGroup = "back";
-    bool atTarget = false;
-
-    [Header ("Search")]
-    [SerializeField] bool searchForPlayer = false;
-    [SerializeField] searchCone coneOfVision;
-    Transform searchTarget;
-    bool searchingForPlayer = false;
-
-    [Header ("Chase")]
-    [SerializeField] Transform player;
-    [SerializeField] float chaseSpeed;
-
+    [SerializeField] private float patrolMoveSpeed;
+    [SerializeField] private int waypointGroupIndex = 0;
+    [SerializeField] private AIWaypointGroup[] aiWaypointGroups;
+    private List<Transform> patrolWaypoints;
+    private int currentPatrolPointIndex;
     
+    [Header ("Search")]
+    [SerializeField] private bool searchForPlayer = false;
+    [SerializeField] private searchCone coneOfVision;
+    
+    [Header ("Chase")]
+    [SerializeField] private Transform player;
+    [SerializeField] private float chaseSpeed;
+    [SerializeField] private float catchDistance;
 
-    void Start() => currentState = startingState;
-
+    //Components
+    private NavMeshAgent agent;
+    private AIAnimation anim;
+    float distanceFromTarget;
+    
+    void Start()
+    {
+        setPatrolPointsIfNull();
+        agent = GetComponent<NavMeshAgent>();
+        print(GameObject.FindWithTag("Player").name);
+        player = GameObject.FindWithTag("Player").transform;
+        
+        switch (startingState)
+        {
+            case (aiState.chase):
+                chasePlayer();
+                break;
+        }
+    }
+    
     void Update()
     {
+        distanceFromTarget = 
+            Vector3.Distance(
+                gameObject.transform.position, 
+                target.position
+                );
+        
+        print(distanceFromTarget);
+        
         switch (currentState)
         {
+            case (aiState.idle): break;
+            case (aiState.waitingBetweenPatrolPoints): break;
+
             case (aiState.patrol):
-                if (searchForPlayer) { castSearchCone(); }
-                checkIfAtTarget(patrolTarget);
-                moveToTarget(patrolMoveSpeed, patrolTarget);
+                //if (searchForPlayer) { castSearchCone(); }
+                
+                agent.speed = patrolMoveSpeed;
+
+                target = aiWaypointGroups[waypointGroupIndex]
+                    .Waypoints[currentPatrolPointIndex];
+                
+                if(atTarget())
+                
+                moveToPatrolPoint(patrolMoveSpeed);
+                
                 break;
 
             case (aiState.attack):
-                attack();
+                //attack();
                 break;
 
-            case (aiState.search):
-                if (searchForPlayer) { castSearchCone(); }
-                checkIfAtTarget(searchTarget);
-                moveToTarget(patrolMoveSpeed, patrolTarget);
+            case (aiState.chase):
+                
+                target = player;
+                
+                agent.speed = chaseSpeed;
+                agent.destination = target.position;
+                
+                if(atTarget()) attackPlayer();
+                
                 break;
         }
     }
 
-    void checkIfAtTarget(Transform target)
+    public void chasePlayer() => currentState = aiState.chase;
+
+    public void attackPlayer() => currentState = aiState.attack;
+    
+    bool atTarget() => distanceFromTarget < catchDistance;
+
+    void setPatrolPointsIfNull()
     {
-        if(target == null)
+        if (patrolWaypoints == null)
+        {
+            try
+            {
+                patrolWaypoints = aiWaypointGroups[0].Waypoints.ToList();
+            }
+            catch (UnityException e)
+            {
+                Debug.Log(e, gameObject);
+            }
+        }
+    }
+    
+    void checkIfAtTarget()
+    {
+        if(!target)
         {
             currentState = aiState.patrol;
             setNextPatrolPoint();
@@ -71,10 +130,9 @@ public class AIStates : MonoBehaviour
         distanceFromTarget = Vector3.Distance(gameObject.transform.position, target.position);
     }
 
-    void moveToTarget(float moveSpeed, Transform moveTarget)
+    void moveToPatrolPoint(float moveSpeed)
     {
-        //atTarget bool prevents looping once at target.
-        if (distanceFromTarget < 0.5 && atTarget == false)
+        if (atTarget())
         {
             //stop before proceeding to next target
             StartCoroutine(chooseNextPatrolPoint());
@@ -82,7 +140,7 @@ public class AIStates : MonoBehaviour
         else
         {
             //move towards target
-            agent.SetDestination(moveTarget.position);
+            agent.SetDestination(target.position);
             agent.speed = moveSpeed;
         }
     }
@@ -105,25 +163,26 @@ public class AIStates : MonoBehaviour
 
     IEnumerator chooseNextPatrolPoint()
     {
-        //prevent looping
-        atTarget = true;
-
-        anim.setState(AIAnimation.state.look);
+    //     //prevent looping
+    //     atTarget = true;
+        currentState = aiState.waitingBetweenPatrolPoints; 
+    
+        //anim.setState(AIAnimation.state.look);
 
         //wait until end of look animation
-        yield return new WaitForSecondsRealtime(5.5f);
+        yield return new WaitForSecondsRealtime(1);
         
-        anim.setState(AIAnimation.state.walk);
+        //anim.setState(AIAnimation.state.walk);
         
         setNextPatrolPoint();
 
         //enemy no longer at target
-        atTarget = false;
+        //atTarget = false;
     }
 }
 
 [System.Serializable]
 class AIWaypointGroup
 {
-    [SerializeField] private Transform[] Waypoints;
+    public Transform[] Waypoints;
 }
