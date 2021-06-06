@@ -120,16 +120,25 @@ public class GameManager : MonoBehaviour
         loading = false;
     }
 
-    internal void QuestCompleteGM(QuestID quest_id)
+    /// <summary>
+    /// Finds the position of the quest in the current phase
+    /// </summary>
+    internal int getQuestPosition(QuestID quest_id)
     {
-        completedQuests[quest_id] = true;
         int whereAmI = 0;
-        foreach(KeyValuePair<QuestID, bool> q in completedQuests)
+        foreach (KeyValuePair<QuestID, bool> q in completedQuests)
         {
             if (q.Key == quest_id) break;
             whereAmI++;
         }
-        canvas.QuestCompleteC(whereAmI);
+        return whereAmI;
+    }
+
+    internal void QuestCompleteGM(QuestID quest_id)
+    {
+        completedQuests[quest_id] = true;
+        
+        canvas.QuestCompleteC(getQuestPosition(quest_id));
         
         //if it is not loading then u can do some stuff here
         if (!loading)
@@ -141,6 +150,17 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Update the counter or the name of a quest, GameManager side
+    /// </summary>
+    /// <param name="quest_id">The id of the quest</param>
+    /// <param name="howManyCompleted">How much is completed</param>
+    internal void QuestUpdateGM(QuestID quest_id, int howManyCompleted)
+    {
+        canvas.QuestUpdateC(qs.getQuest(quest_id), getQuestPosition(quest_id), howManyCompleted);
+    }
+
 
     GameObject GetCurrentPhase(PhaseID phase)
     {

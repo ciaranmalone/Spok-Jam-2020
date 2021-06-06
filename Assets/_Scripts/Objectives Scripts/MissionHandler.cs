@@ -37,7 +37,7 @@ public class MissionHandler : MonoBehaviour
 
     public void clearPhase(int phase)
     {
-        print("Clearing phase: "+phase+" "+phases[phase].name);
+        //print("Clearing phase: "+phase+" "+phases[phase].name);
         if (phase < 0) return;
         missionsRemaining = 0;
         phases[phase].GetComponent<MissionScript>().ClearObjectives();

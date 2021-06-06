@@ -34,14 +34,11 @@ namespace WorldQuests
             {
                 if (otherItem.Quest_Object_Name == object_name)
                 {
+                    otherItem.tag = "Untagged";
                     timesCompleted++;
                     if (totalToComplete > 1)
                     {
-                        //GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, $"{GetComponent<Objective>().ObjectiveText} ({timesCompleted}/{itemsTotal})");
-                    }
-                    else
-                    {
-                        //GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText));
+                        GameManager.gameManager.QuestUpdateGM(quest_id, timesCompleted);
                     }
 
                     if (timesCompleted >= totalToComplete)
@@ -56,18 +53,20 @@ namespace WorldQuests
         {
             if (other.GetComponent<QuestItem>() != null && other.GetComponent<QuestItem>().Quest_Object_Name == object_name)
             {
+                other.tag = "pickUp";
                 timesCompleted--;
                 if (totalToComplete > 1)
                 {
-                    //GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, $"{GetComponent<Objective>().ObjectiveText} ({timesCompleted}/{itemsTotal})");
-                }
-                else
-                {
-                    //GameEvents.current.getMissionHandler().getCurrentPhaseScript().renameMission(objective, (GetComponent<Objective>().ObjectiveText));
+                    GameManager.gameManager.QuestUpdateGM(quest_id, timesCompleted);
                 }
             }
         }
 
+        /// <summary>
+        /// Function to call to complete a quest, separate from the trigger 
+        /// because if a quest ever needs to be done programmatically then 
+        /// this function is nice :)
+        /// </summary>
         public void QuestCompleteWQ()
         {
             GameManager.gameManager.QuestCompleteGM(quest_id);

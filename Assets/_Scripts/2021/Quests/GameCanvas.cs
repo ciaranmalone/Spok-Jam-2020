@@ -62,4 +62,20 @@ public class GameCanvas : MonoBehaviour
     {
         uiQuests[where].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
     }
+
+    /// <summary>
+    /// Update the counter in the quest, Canvas Side
+    /// </summary>
+    internal void QuestUpdateC(Quest quest, int where, int count, string desc = null)
+    {
+        if (quest.count == 1)
+        {
+            if (desc == null) return;
+            uiQuests[where].GetComponent<TextMeshProUGUI>().text = desc;
+        }
+        else
+        {
+            uiQuests[where].GetComponent<TextMeshProUGUI>().text = $"{(desc == null ? quest.description : desc)} ({count}/{quest.count})";
+        }
+    }
 }
