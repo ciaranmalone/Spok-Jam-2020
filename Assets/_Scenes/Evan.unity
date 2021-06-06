@@ -2875,7 +2875,8 @@ MonoBehaviour:
   target: {fileID: 0}
   startingState: 1
   currentState: 0
-  patrolMoveSpeed: 0
+  patrolMoveSpeed: 3.5
+  patrolStoppingDistance: 1
   waypointGroupIndex: 0
   aiWaypointGroups:
   - Waypoints:
@@ -2889,7 +2890,7 @@ MonoBehaviour:
   searchForPlayer: 0
   coneOfVision: {fileID: 0}
   player: {fileID: 0}
-  chaseSpeed: 0
+  chaseSpeed: 3.5
   catchDistance: 0
 --- !u!95 &1321751958
 Animator:
