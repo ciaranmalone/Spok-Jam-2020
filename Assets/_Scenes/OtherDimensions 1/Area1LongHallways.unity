@@ -15,7 +15,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 2
   m_FogDensity: 0.2
@@ -11176,6 +11176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1490876591}
   - component: {fileID: 1490876592}
+  - component: {fileID: 1490876593}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -11209,6 +11210,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bbdd1043a188f142b53c558299ae685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1490876593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490876590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5430f0286208eeb41ab3eb22d0714b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogColor: {r: 0, g: 0, b: 0, a: 1}
+  skyBox: {fileID: 2100000, guid: fbd9cf149f1bddc78900aafb71c43ea7, type: 2}
 --- !u!1 &1502478243
 GameObject:
   m_ObjectHideFlags: 0
