@@ -13,15 +13,15 @@ public class SelectItem : MonoBehaviour
     
     [Header("Objects to display")]
     [SerializeField] private GameObject lightPointPickUp;
-    [SerializeField] private GameObject PickUpIndicator;
     [SerializeField] private GameObject lightPointInteract;
-    [SerializeField] private GameObject InteractIndicator;
+
+    private GameObject PickUpIndicator;
+    private GameObject InteractIndicator;
 
     [Header("Input Controls")]
     [SerializeField] private KeyCode selectObject = KeyCode.E;
     [SerializeField] private KeyCode dropObject = KeyCode.Mouse1;
     [SerializeField] private KeyCode throwObject = KeyCode.Mouse0;
-
 
     [SerializeField] private Vector3 objectPosition = new Vector3(0, -1, 2);
 
@@ -32,12 +32,14 @@ public class SelectItem : MonoBehaviour
     private bool imBeingLookedAtExists = true;
     private bool ObjectLookAtEventRan = false;
 
-
-    void Update()
+    private void Awake()
     {
         PickUpIndicator = IndicatorSingletons.pickupIndicatorSingleton;
         InteractIndicator = IndicatorSingletons.interactIndicatorSingleton;
-        
+    }
+
+    void Update()
+    {
         RaycastHit hit;
         lightPointPickUp.SetActive(false);
         PickUpIndicator.SetActive(false);

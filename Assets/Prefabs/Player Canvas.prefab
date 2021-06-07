@@ -731,8 +731,7 @@ GameObject:
   - component: {fileID: 4786066146266706322}
   - component: {fileID: 4786066146266706321}
   - component: {fileID: 4786066146266706320}
-  - component: {fileID: 4786066146266706324}
-  - component: {fileID: 4786066146266706325}
+  - component: {fileID: 4786066146437459891}
   m_Layer: 5
   m_Name: Player Canvas
   m_TagString: Untagged
@@ -825,7 +824,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4786066146266706324
+--- !u!114 &4786066146437459891
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -834,22 +833,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4786066146266706351}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffab0b6ed9a60ae7abbed1ba2e3a568b, type: 3}
+  m_Script: {fileID: 11500000, guid: d0f6d66e522da9c469f4e5c09bb78d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4786066146266706325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4786066146266706351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80e99eb3c2db13d4d80317f1a9c90ecc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PrioritiseStartingInstance: 0
+  questPrefab: {fileID: 6934767528523021525, guid: 1dd8ca7e89ae91b44ac85599e90f4d07,
+    type: 3}
+  questPivot: {fileID: 4786066145218772120}
+  questTextOffset: 150
 --- !u!1 &4786066146401740230
 GameObject:
   m_ObjectHideFlags: 0

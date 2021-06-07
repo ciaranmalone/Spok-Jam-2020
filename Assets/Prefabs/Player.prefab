@@ -828,8 +828,8 @@ GameObject:
   - component: {fileID: 8512775933048998262}
   - component: {fileID: 8512775933048998257}
   - component: {fileID: 1096313520}
-  - component: {fileID: 1096313523}
   - component: {fileID: 1096313524}
+  - component: {fileID: 267464582}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -911,8 +911,6 @@ MonoBehaviour:
   jump: 32
   crouch: 306
   sprint: 304
-  crouchIndicator: {fileID: 0}
-  sprintIndicator: {fileID: 0}
   sprintOn: {r: 1, g: 0, b: 0, a: 0.6509804}
   sprintOff: {r: 0, g: 0, b: 0, a: 0.50980395}
 --- !u!114 &1096313520
@@ -931,19 +929,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a0703de403144d94295c2896474e36df, type: 3}
   - {fileID: 8300000, guid: d2958123373103043b608351a4d5ab82, type: 3}
   src: {fileID: 631252415}
---- !u!114 &1096313523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8512775933048998256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a542ae33da14cc24dad5756a1349f05b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: Player
 --- !u!114 &1096313524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -951,13 +936,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8512775933048998256}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ff46573ab7ecaa43baf3fa8da8229c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skybox: {fileID: 2100000, guid: 84eac0f0d33aad74f87dfade4c2208b5, type: 2}
   blankSkybox: {fileID: 2100000, guid: d55a1c069be556445b7499b26e4d543a, type: 2}
+--- !u!114 &267464582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8512775933048998256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb61a7977d68d8d459a543d01e9c4da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _quest_object_name: 0
 --- !u!1 &8512775933073939274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,9 +1266,7 @@ MonoBehaviour:
   SeeTriggerTag: lookAtMe
   throwForce: 7
   lightPointPickUp: {fileID: 8512775933073939274}
-  PickUpIndicator: {fileID: 0}
   lightPointInteract: {fileID: 441850552}
-  InteractIndicator: {fileID: 0}
   selectObject: 101
   dropObject: 324
   throwObject: 323

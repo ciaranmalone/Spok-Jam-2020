@@ -45,8 +45,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private KeyCode sprint = KeyCode.LeftShift;
 
     [Header("PlayerIndicator")]
-    [SerializeField] private GameObject crouchIndicator;
-    [SerializeField] private GameObject sprintIndicator;
+    private GameObject crouchIndicator;
+    private GameObject sprintIndicator;
     private Graphic sprintIndicatorGraphic;
     [SerializeField] private Color sprintOn;
     [SerializeField] private Color sprintOff;
@@ -57,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        crouchIndicator = IndicatorSingletons.crouchIndicatorSingleton;
+        sprintIndicator = IndicatorSingletons.sprintIndicatorSingleton;
+
         crouchIndicator.SetActive(false);
         controller = gameObject.GetComponent<CharacterController>();
         speed = normalSpeed;
