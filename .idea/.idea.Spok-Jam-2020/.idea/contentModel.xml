@@ -50,6 +50,7 @@
           <e p="InfiniteRoom.cs" t="Include" />
           <e p="interactable.cs" t="Include" />
           <e p="LightController.cs" t="Include" />
+          <e p="LightningController.cs" t="Include" />
           <e p="listening.cs" t="Include" />
           <e p="lookAtPlayer.cs" t="Include" />
           <e p="lowRezRender.cs" t="Include" />
@@ -197,6 +198,7 @@
             <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
+        <e p="ToggleRain.cs" t="Include" />
       </e>
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />

@@ -17,6 +17,7 @@ public class AIStates : MonoBehaviour
     
     [Header ("Patrol")]
     [SerializeField] private float patrolMoveSpeed;
+    [SerializeField] private float patrolStoppingDistance;
     [SerializeField] private int waypointGroupIndex = 0;
     [SerializeField] private AIWaypointGroup[] aiWaypointGroups;
     private List<Transform> patrolWaypoints;
@@ -34,7 +35,6 @@ public class AIStates : MonoBehaviour
     //Components
     private NavMeshAgent agent;
     private AIAnimation anim;
-    float distanceFromTarget;
     
     void Start()
     {
@@ -53,14 +53,6 @@ public class AIStates : MonoBehaviour
     
     void Update()
     {
-        distanceFromTarget = 
-            Vector3.Distance(
-                gameObject.transform.position, 
-                target.position
-                );
-        
-        print(distanceFromTarget);
-        
         switch (currentState)
         {
             case (aiState.idle): break;
@@ -71,19 +63,34 @@ public class AIStates : MonoBehaviour
                 
                 agent.speed = patrolMoveSpeed;
 
+                if (atTarget(patrolStoppingDistance))
+                {
+                    if (currentPatrolPointIndex == 
+                        aiWaypointGroups[waypointGroupIndex]
+                            .Waypoints.Length - 1)
+                    {
+                        currentPatrolPointIndex = 0;
+                    }
+                    else
+                    {
+                        currentPatrolPointIndex++;
+                    }
+                }
+                
                 target = aiWaypointGroups[waypointGroupIndex]
                     .Waypoints[currentPatrolPointIndex];
-                
-                if(atTarget())
-                
+                    
+                    
                 moveToPatrolPoint(patrolMoveSpeed);
                 
                 break;
-
+            
+            
             case (aiState.attack):
                 //attack();
                 break;
-
+            
+            
             case (aiState.chase):
                 
                 target = player;
@@ -91,7 +98,7 @@ public class AIStates : MonoBehaviour
                 agent.speed = chaseSpeed;
                 agent.destination = target.position;
                 
-                if(atTarget()) attackPlayer();
+                if(atTarget(catchDistance)) attackPlayer();
                 
                 break;
         }
@@ -101,7 +108,12 @@ public class AIStates : MonoBehaviour
 
     public void attackPlayer() => currentState = aiState.attack;
     
-    bool atTarget() => distanceFromTarget < catchDistance;
+    float distanceFromTarget() => Vector3.Distance(
+        gameObject.transform.position, 
+        target.position
+        );
+    
+    bool atTarget(float stoppingDistance) => distanceFromTarget() < stoppingDistance;
 
     void setPatrolPointsIfNull()
     {
@@ -127,12 +139,12 @@ public class AIStates : MonoBehaviour
         }
 
         //distance between transform and target transform
-        distanceFromTarget = Vector3.Distance(gameObject.transform.position, target.position);
+        //distanceFromTarget = Vector3.Distance(gameObject.transform.position, target.position);
     }
 
     void moveToPatrolPoint(float moveSpeed)
     {
-        if (atTarget())
+        if (atTarget(patrolStoppingDistance))
         {
             //stop before proceeding to next target
             StartCoroutine(chooseNextPatrolPoint());
