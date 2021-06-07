@@ -379,6 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskSheet: 0
+  previousPhasePurges: []
   animationOne: Fridge1DoorClose
   animationTwo: Fridge1DoorOpen
   isPhone: 0
@@ -396,6 +397,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2897900011509181571, guid: f41eb4009a687624f8d0ca3644475e2e, type: 3}
+--- !u!208 &4275796298528861461
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519995639582783741}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.8670001, y: 1.291, z: 1.1960001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 50.094, y: 1.011, z: -32.852}
+  m_TimeToStationary: 0.5
 --- !u!1001 &1456339994916623865
 PrefabInstance:
   m_ObjectHideFlags: 0

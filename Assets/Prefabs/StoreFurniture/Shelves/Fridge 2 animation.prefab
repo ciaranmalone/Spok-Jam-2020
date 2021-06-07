@@ -19,20 +19,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &8673211039392171715
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8561671329894240942}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -431636190445886787, guid: 63209be9e396adc49a2e250d2fc7ea2d, type: 3}
 --- !u!1 &5755394897866477335
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,6 +66,7 @@ GameObject:
   - component: {fileID: 5755394898331070646}
   - component: {fileID: 1798639642587613898}
   - component: {fileID: 1798639642587613901}
+  - component: {fileID: 7887582619078737371}
   m_Layer: 0
   m_Name: fridge2door
   m_TagString: interactable
@@ -595,9 +582,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskSheet: 0
+  previousPhasePurges: []
   animationOne: Fridge2DoorClose
   animationTwo: Fridge2DoorOpen
   isPhone: 0
+--- !u!208 &7887582619078737371
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5755394898331070640}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 3.0000002, z: 0.163}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -1.25, y: 0, z: 0.125}
+  m_TimeToStationary: 0.5
+--- !u!64 &8673211039392171715
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8561671329894240942}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -431636190445886787, guid: 63209be9e396adc49a2e250d2fc7ea2d, type: 3}
 --- !u!1001 &5572247914770215766
 PrefabInstance:
   m_ObjectHideFlags: 0

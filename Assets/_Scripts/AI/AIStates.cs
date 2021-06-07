@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class AIStates : MonoBehaviour
 {
     [SerializeField] private Transform target;
@@ -18,6 +19,8 @@ public class AIStates : MonoBehaviour
     [Header ("Patrol")]
     [SerializeField] private float patrolMoveSpeed;
     [SerializeField] private float patrolStoppingDistance;
+    [SerializeField] private float patrolWaypointWaitTime = 2f;
+    private WaitForSecondsRealtime patrolWait;
     [SerializeField] private int waypointGroupIndex = 0;
     [SerializeField] private AIWaypointGroup[] aiWaypointGroups;
     private List<Transform> patrolWaypoints;
@@ -38,10 +41,14 @@ public class AIStates : MonoBehaviour
     
     void Start()
     {
+        patrolWait = new WaitForSecondsRealtime(patrolWaypointWaitTime); //Create instance of WaitForSecondsRealtime for use between patrol points
+        
         setPatrolPointsIfNull();
         agent = GetComponent<NavMeshAgent>();
         print(GameObject.FindWithTag("Player").name);
         player = GameObject.FindWithTag("Player").transform;
+        
+        target = player; //ensure target is never null
         
         switch (startingState)
         {
@@ -75,13 +82,17 @@ public class AIStates : MonoBehaviour
                     {
                         currentPatrolPointIndex++;
                     }
+
+                    StartCoroutine(waitAtPatrolPoint());
+                    break;
                 }
                 
                 target = aiWaypointGroups[waypointGroupIndex]
                     .Waypoints[currentPatrolPointIndex];
                     
                     
-                moveToPatrolPoint(patrolMoveSpeed);
+                agent.SetDestination(target.position);
+                agent.speed = patrolMoveSpeed;
                 
                 break;
             
@@ -142,19 +153,16 @@ public class AIStates : MonoBehaviour
         //distanceFromTarget = Vector3.Distance(gameObject.transform.position, target.position);
     }
 
-    void moveToPatrolPoint(float moveSpeed)
+    IEnumerator waitAtPatrolPoint()
     {
-        if (atTarget(patrolStoppingDistance))
-        {
-            //stop before proceeding to next target
-            StartCoroutine(chooseNextPatrolPoint());
-        }
-        else
-        {
-            //move towards target
-            agent.SetDestination(target.position);
-            agent.speed = moveSpeed;
-        }
+        currentState = aiState.waitingBetweenPatrolPoints;
+        
+        yield return patrolWait;
+        
+        target = aiWaypointGroups[waypointGroupIndex]
+            .Waypoints[currentPatrolPointIndex];
+        
+        currentState = aiState.patrol;
     }
 
     void attack()

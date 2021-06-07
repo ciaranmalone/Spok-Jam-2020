@@ -169,6 +169,7 @@
           <e p="derez.shader" t="Include" />
           <e p="SpriteDiffuse.shader" t="Include" />
         </e>
+        <e p="MirrorPlayerMovement.cs" t="Include" />
         <e p="ObjectiveFitness.cs" t="Include" />
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
