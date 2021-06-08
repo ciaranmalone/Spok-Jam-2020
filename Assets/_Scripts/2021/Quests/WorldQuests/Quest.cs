@@ -70,7 +70,14 @@ namespace WorldQuests
         public void QuestCompleteWQ()
         {
             GameManager.gameManager.QuestCompleteGM(quest_id);
-            //TODO run post-event activity here
+            FakeToFromAnimation ftfa = GetComponent<FakeToFromAnimation>();
+            if(ftfa)
+            {
+                if(GameManager.gameManager.loading)
+                {
+                    ftfa.disableSound();
+                }
+            }
             Destroy(gameObject);
         }
 

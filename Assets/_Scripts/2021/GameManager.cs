@@ -31,7 +31,10 @@ public class GameManager : MonoBehaviour
     internal PhaseID phase = PhaseID.Phase1;
     int missionsRemaining;//TODO can be refactored to just use array below
     Dictionary<QuestID, bool> completedQuests;
-    bool loading; //to check if game is loading
+    /// <summary>
+    /// to check if game is loading
+    /// </summary>
+    internal bool loading; 
     
     void Awake()
     {
