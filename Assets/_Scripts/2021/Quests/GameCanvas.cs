@@ -60,6 +60,7 @@ public class GameCanvas : MonoBehaviour
 
     internal void QuestCompleteC(int where)
     {
+        if (where < 0) return;
         uiQuests[where].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
     }
 
@@ -68,6 +69,8 @@ public class GameCanvas : MonoBehaviour
     /// </summary>
     internal void QuestUpdateC(Quest quest, int where, int count, string desc = null)
     {
+        if (where < 0) return;
+
         if (quest.count == 1)
         {
             if (desc == null) return;

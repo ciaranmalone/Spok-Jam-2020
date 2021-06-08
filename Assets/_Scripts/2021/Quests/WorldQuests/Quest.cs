@@ -7,7 +7,7 @@ namespace WorldQuests
     /// <summary>
     /// Quest trigger when an object enters the area
     /// 
-    /// NOTE: THIS IS NOT DONE YET
+    /// NOTE: might refactor it to just contain the programmatic quest itself rather references to few pieces of data
     /// </summary>
     public class Quest : MonoBehaviour
     {

@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     /// Collection of Phases in the Unity Hierarchy
     /// </summary>
     internal WorldQuests.Phase[] phases;
+    internal AudioSource[] speakers;
 
     //Canvas
     GameCanvas canvas;
@@ -60,6 +61,14 @@ public class GameManager : MonoBehaviour
         qs = FindObjectOfType<QuestSystem>();
         phases = FindObjectsOfType<WorldQuests.Phase>();
         canvas = FindObjectOfType<GameCanvas>();
+        ///subcomment for importing speakers
+        ///
+        List<AudioSource> spkr_temp = new List<AudioSource>();
+        foreach(GameObject spkr in GameObject.FindGameObjectsWithTag("speaker"))
+        {
+            spkr_temp.Add(spkr.GetComponent<AudioSource>());
+        }
+        speakers = spkr_temp.ToArray();
 
         //If teleporting, do it now!!!
         if (playerTP && player)
@@ -123,26 +132,44 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Finds the position of the quest in the current phase
     /// </summary>
+    /// <returns>position of the completed quests, or -1 if it doesn't exist</returns>
     internal int getQuestPosition(QuestID quest_id)
     {
         int whereAmI = 0;
         foreach (KeyValuePair<QuestID, bool> q in completedQuests)
         {
-            if (q.Key == quest_id) break;
+            if (q.Key == quest_id) return whereAmI;
             whereAmI++;
         }
-        return whereAmI;
+        return -1;
     }
 
+    /// <summary>
+    /// GameManager-side of completeting quests:
+    ///  - local phase completion tracker gets updated
+    ///  - updates the canvas
+    ///  - plays the sound
+    ///  
+    /// could be possibly refactored to get the quest rather than the questid
+    /// </summary>
+    /// <param name="quest_id"></param>
     internal void QuestCompleteGM(QuestID quest_id)
     {
         completedQuests[quest_id] = true;
-        
         canvas.QuestCompleteC(getQuestPosition(quest_id));
         
         //if it is not loading then u can do some stuff here
         if (!loading)
         {
+            AudioClip clip = qs.getQuest(quest_id).clip;
+            if (clip)
+            {
+                foreach (AudioSource c in speakers)
+                {
+                    c.PlayOneShot(clip);
+                }
+            }
+
             missionsRemaining--;
             if(missionsRemaining==0)
             {

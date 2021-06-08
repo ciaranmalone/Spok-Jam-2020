@@ -76,5 +76,7 @@ namespace ProgrammaticQuests
         internal string description;
         [SerializeField]
         internal QuestObjectName objectName;
+        [SerializeField]
+        internal AudioClip clip;
     }
 }
