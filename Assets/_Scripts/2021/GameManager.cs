@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using ProgrammaticQuests;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     internal WorldQuests.Phase[] phases;
     internal AudioSource[] speakers;
+    internal phoneCallScript[] phones;
 
     //Canvas
     GameCanvas canvas;
@@ -52,6 +54,14 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    internal void spawnNextTaskSheet()
+    {
+        foreach (WorldQuests.Phase ph in phases)
+        {
+            if(ph.phase==phase) ph.gameObject.transform.Find("TaskSheet").gameObject.SetActive(true);
+        }
+    }
+
     /// <summary>
     /// Called when a scene has loaded
     /// </summary>
@@ -64,6 +74,8 @@ public class GameManager : MonoBehaviour
         qs = FindObjectOfType<QuestSystem>();
         phases = FindObjectsOfType<WorldQuests.Phase>();
         canvas = FindObjectOfType<GameCanvas>();
+        phones = FindObjectsOfType<phoneCallScript>();
+        
         ///subcomment for importing speakers
         ///
         List<AudioSource> spkr_temp = new List<AudioSource>();
@@ -72,6 +84,7 @@ public class GameManager : MonoBehaviour
             spkr_temp.Add(spkr.GetComponent<AudioSource>());
         }
         speakers = spkr_temp.ToArray();
+
 
         //If teleporting, do it now!!!
         if (playerTP && player)
@@ -82,14 +95,14 @@ public class GameManager : MonoBehaviour
         }
 
         //complete every quest before current phase
-        for (PhaseID i = PhaseID.Phase1 ; i < phase; phase++)
+        for (PhaseID i = PhaseID.Phase1 ; i < phase; i++)
         {
-            GameObject iterPhase = GetCurrentPhase(phase);
+            GameObject iterPhase = GetCurrentPhase(i);
 
 
             foreach (WorldQuests.Quest quest in iterPhase.transform.GetComponentsInChildren<WorldQuests.Quest>())
             {
-                quest.QuestCompleteWQ();
+                quest.CallPostQuestEvent();
             }
         }
 
@@ -116,20 +129,42 @@ public class GameManager : MonoBehaviour
         //assign current phase if it doesn't exist
         else
         {
-            completedQuests = new Dictionary<QuestID, bool>();
-            GameObject iterPhase = GetCurrentPhase(phase);
-            
-
-            foreach(WorldQuests.Quest quest in iterPhase.GetComponentsInChildren<WorldQuests.Quest>())
-            {
-                completedQuests.Add(quest.quest_id, false);
-            }
-            missionsRemaining = completedQuests.Count;
-            
-            //draw current phase quests
-            DrawQuests();
+            CreatePhase();
         }
+
+
+        SetActivePhase();
         loading = false;
+    }
+
+    internal void CreatePhase(bool _new = false)
+    {
+        if (_new)
+        {
+            phase++;
+            SetActivePhase();
+        }
+        completedQuests = new Dictionary<QuestID, bool>();
+        GameObject iterPhase = GetCurrentPhase(phase);
+
+        foreach (WorldQuests.Quest quest in iterPhase.GetComponentsInChildren<WorldQuests.Quest>())
+        {
+            completedQuests.Add(quest.quest_id, false);
+        }
+        missionsRemaining = completedQuests.Count;
+
+        //draw current phase quests
+        DrawQuests();
+    }
+
+    void SetActivePhase()
+    {
+        //hide every unused phase
+        foreach (WorldQuests.Phase p in phases)
+        {
+            if (p.phase != phase) p.gameObject.SetActive(false);
+            else { p.gameObject.SetActive(true); }
+        }
     }
 
     /// <summary>
@@ -176,7 +211,14 @@ public class GameManager : MonoBehaviour
             missionsRemaining--;
             if(missionsRemaining==0)
             {
-                //TODO phone or wtv, essentially when missions are done
+                foreach(phoneCallScript phone in phones)
+                {
+                    string curr = $"phoneCall{(int)phase}";
+                    if (phone.phase == curr)
+                    {
+                        phone.PhasePhoneCall(curr);
+                    }
+                }
             }
         }
     }

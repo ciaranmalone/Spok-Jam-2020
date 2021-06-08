@@ -34,7 +34,7 @@ namespace WorldQuests
             {
                 if (otherItem.Quest_Object_Name == object_name)
                 {
-                    otherItem.tag = "Untagged";
+                    if (otherItem.deTaggable) otherItem.tag = "Untagged";
                     timesCompleted++;
                     if (totalToComplete > 1)
                     {
@@ -51,9 +51,10 @@ namespace WorldQuests
 
         private void OnTriggerExit(Collider other)
         {
+            QuestItem otherItem = other.GetComponent<QuestItem>();
             if (other.GetComponent<QuestItem>() != null && other.GetComponent<QuestItem>().Quest_Object_Name == object_name)
             {
-                other.tag = "pickUp";
+                if (otherItem.deTaggable) other.tag = "pickUp";
                 timesCompleted--;
                 if (totalToComplete > 1)
                 {
@@ -70,10 +71,15 @@ namespace WorldQuests
         public void QuestCompleteWQ()
         {
             GameManager.gameManager.QuestCompleteGM(quest_id);
+            CallPostQuestEvent();
+        }
+
+        public void CallPostQuestEvent()
+        {
             FakeToFromAnimation ftfa = GetComponent<FakeToFromAnimation>();
-            if(ftfa)
+            if (ftfa)
             {
-                if(GameManager.gameManager.loading)
+                if (GameManager.gameManager.loading)
                 {
                     ftfa.disableSound();
                 }

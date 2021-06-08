@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class interactable : MonoBehaviour
 {
-    [SerializeField] int taskSheet = 0;
+    [SerializeField] bool taskSheet = false;
     //Objects to be destroyed from previous phase by persistence script
     [SerializeField] private string[] previousPhasePurges;
     [SerializeField] private string animationOne;
@@ -43,8 +43,9 @@ public class interactable : MonoBehaviour
             played = !played;
         }
 
-        if (taskSheet != 0) {
-            GameEvents.current.nextTaskSheet(taskSheet);
+        if (taskSheet) {
+            GameManager.gameManager.CreatePhase(true);
+            //GameEvents.current.nextTaskSheet(taskSheet);
             //Destroy(gameObject);
             gameObject.SetActive(false);
 
@@ -63,7 +64,7 @@ public class interactable : MonoBehaviour
             phoneCallScripts = GetComponents(typeof (phoneCallScript));
             
             foreach (phoneCallScript script in phoneCallScripts){
-                if(script.phase == ("phoneCall" + GameEvents.current.getMissionHandler().getCurrentPhase()) & script.Ringing == true) {
+                if(script.phase == ("phoneCall" + (int)GameManager.gameManager.phase) & script.Ringing == true) {
                     script.phoneAnswered = true;
                 }
             }

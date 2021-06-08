@@ -28,6 +28,13 @@ public class GameCanvas : MonoBehaviour
     /// </summary>
     internal void MakeObjectives(Dictionary<QuestID, bool>.KeyCollection quests)
     {
+        if(uiQuests!=null)
+        {
+            foreach(GameObject go in uiQuests)
+            {
+                Destroy(go);
+            }
+        }
         uiQuests = new GameObject[quests.Count];
         int questOffset = 0;
         foreach (QuestID quest in quests)
@@ -57,6 +64,7 @@ public class GameCanvas : MonoBehaviour
             questOffset++;
         }
     }
+
 
     internal void QuestCompleteC(int where)
     {

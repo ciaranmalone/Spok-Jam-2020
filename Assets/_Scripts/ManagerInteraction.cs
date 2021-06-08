@@ -45,7 +45,7 @@ public class ManagerInteraction : MonoBehaviour
 
             GotoNextPoint();
             playedAudio = true;
-            GameEvents.current.spawnNextNote();
+            GameManager.gameManager.spawnNextTaskSheet();
        }
    }
 

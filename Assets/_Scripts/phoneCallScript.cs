@@ -18,18 +18,18 @@ public class phoneCallScript : MonoBehaviour
     {
         AudioSource = GetComponent<AudioSource>();
         subTitleText.text = "";
-        GameEvents.current.onPhaseChange += PhasePhoneCall;
+        //GameEvents.current.onPhaseChange += PhasePhoneCall;
     }
 
     // Update is called once per frame
-    void PhasePhoneCall(string phase)
+    internal void PhasePhoneCall(string phase)
     {
         if(this.phase == phase) {
             StartCoroutine(StartRinging());
         }
     }
     IEnumerator dialBegin() {
-        GameEvents.current.spawnNextNote();
+        GameManager.gameManager.spawnNextTaskSheet();
         for(int i = 1; i < AudioClips.Length; i++)
         {
             AudioSource.clip = AudioClips[i];
