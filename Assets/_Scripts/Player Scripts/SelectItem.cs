@@ -32,7 +32,7 @@ public class SelectItem : MonoBehaviour
     private bool imBeingLookedAtExists = true;
     private bool ObjectLookAtEventRan = false;
 
-    private void Awake()
+    private void Start()
     {
         PickUpIndicator = IndicatorSingletons.pickupIndicatorSingleton;
         InteractIndicator = IndicatorSingletons.interactIndicatorSingleton;

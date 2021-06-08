@@ -14,7 +14,7 @@ public class phoneCallScript : MonoBehaviour
     public bool phoneAnswered = false;
     public bool Ringing = false;
 
-    void Start()
+    void Awake()
     {
         AudioSource = GetComponent<AudioSource>();
         subTitleText.text = "";

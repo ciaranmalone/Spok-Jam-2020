@@ -64,8 +64,8 @@ namespace WorldQuests
         }
 
         /// <summary>
-        /// Function to call to complete a quest, separate from the trigger 
-        /// because if a quest ever needs to be done programmatically then 
+        /// Function to call to complete a quest if the quest is in the current phase, 
+        /// separate from the trigger because if a quest ever needs to be done programmatically then 
         /// this function is nice :)
         /// </summary>
         public void QuestCompleteWQ()

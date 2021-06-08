@@ -204,20 +204,34 @@ public class GameManager : MonoBehaviour
             {
                 foreach (AudioSource c in speakers)
                 {
-                    c.PlayOneShot(clip);
+                    try
+                    {
+                        c.PlayOneShot(clip);
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            print(c.gameObject);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogError(e.Message);
+                        }
+                    }
                 }
             }
 
             missionsRemaining--;
-            if(missionsRemaining==0)
+        }
+        if (missionsRemaining == 0)
+        {
+            foreach (phoneCallScript phone in phones)
             {
-                foreach(phoneCallScript phone in phones)
+                string curr = $"phoneCall{(int)phase}";
+                if (phone.phase == curr)
                 {
-                    string curr = $"phoneCall{(int)phase}";
-                    if (phone.phase == curr)
-                    {
-                        phone.PhasePhoneCall(curr);
-                    }
+                    phone.PhasePhoneCall(curr);
                 }
             }
         }
