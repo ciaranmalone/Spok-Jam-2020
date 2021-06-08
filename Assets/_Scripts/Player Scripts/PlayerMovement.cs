@@ -55,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
     private bool crouchActive = false;
     private bool sprintActive = false;
 
+    //Singleton
+    public static PlayerMovement Instance;
+    private void Awake() => Instance = this;
     void Start()
     {
         crouchIndicator = IndicatorSingletons.crouchIndicatorSingleton;
