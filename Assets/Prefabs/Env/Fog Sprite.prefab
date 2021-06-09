@@ -51,7 +51,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5a65018bca6df5b4b9326ea25a25efdf, type: 2}
+  - {fileID: 2100000, guid: 847604d8313256946b36da65a7a9019b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,3 +99,4 @@ MonoBehaviour:
   playerName: Player
   fadeStartRange: 20
   invisibleRange: 5
+  DEBUG: 0

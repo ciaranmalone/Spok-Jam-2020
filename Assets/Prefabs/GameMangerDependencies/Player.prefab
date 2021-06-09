@@ -750,7 +750,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 241a26f846ffe39909dd92a1623d3c67, type: 2}
+  - {fileID: 2100000, guid: e89becf60bab6754aa06f879c505c42e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -956,6 +956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _quest_object_name: 0
+  deTaggable: 1
 --- !u!1 &8512775933073939274
 GameObject:
   m_ObjectHideFlags: 0
