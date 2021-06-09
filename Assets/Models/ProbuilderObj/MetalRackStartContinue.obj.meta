@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: jimmy_kimmel_live
     second: {fileID: 2100000, guid: de990818d2c8cf541824293769be2641, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shelf_mid_(2)Mat
+    second: {fileID: 2100000, guid: de990818d2c8cf541824293769be2641, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
