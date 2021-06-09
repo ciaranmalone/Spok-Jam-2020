@@ -97,16 +97,7 @@ public class SelectItem : MonoBehaviour
                 }
 
                 if (Input.GetKey(selectObject)) {
-                    selected = selection;
-                    pickedUp = true;
-
-                    //make object the child of the player
-                    selected.parent = gameObject.transform;
-                    selected.localPosition = objectPosition;
-                    selected.localRotation = Quaternion.identity;
-                    //stop its phyiscs so it will stop giggling around
-                    try {  selected.gameObject.GetComponent<Rigidbody>().isKinematic = true; } catch { }
-                    try { selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectPickUpEvent.Invoke(); } catch { }
+                    PickUpObject(selection);
                 }
             }
             /**
@@ -184,5 +175,26 @@ public class SelectItem : MonoBehaviour
         }
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+    }
+
+    internal void PickUpObject(Transform obj)
+    {
+        selection = obj;
+        selected = obj;
+        pickedUp = true;
+
+        //make object the child of the player
+        selected.parent = gameObject.transform;
+        selected.localPosition = objectPosition;
+        selected.localRotation = Quaternion.identity;
+        //stop its phyiscs so it will stop giggling around
+        try { selected.gameObject.GetComponent<Rigidbody>().isKinematic = true; } catch { }
+        try { selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectPickUpEvent.Invoke(); } catch { }
+    }
+
+
+    internal GameObject getHeldObject()
+    {
+        return selected ? selected.gameObject : null;
     }
 }
