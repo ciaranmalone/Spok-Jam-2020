@@ -7,13 +7,23 @@ public class EnemyCollisonTrigger : MonoBehaviour
 {
     [SerializeField] private string[] scenes;
     private int indexChoice;
+    private Animator animator;
 
-    
+    private void Start()
+    {
+        animator = IndicatorSingletons.blackScreenSingleton.GetComponent<Animator>();
+    }
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "Player" )
         {
-            indexChoice = Random.Range (0, scenes.Length);
-            SceneManager.LoadSceneAsync(scenes[indexChoice]);
+            StartCoroutine("loadTheScene");
         }
+    }
+    private IEnumerator loadTheScene()
+    {
+        animator.SetTrigger("FadeOut");
+        yield return new WaitForSeconds(2f);
+        indexChoice = Random.Range(0, scenes.Length);
+        GameManager.gameManager.Teleport(scenes[indexChoice]);
     }
 }

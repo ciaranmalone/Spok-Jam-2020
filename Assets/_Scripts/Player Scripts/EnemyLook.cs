@@ -16,7 +16,10 @@ public class EnemyLook : MonoBehaviour
 
     void Update()
     {
+
         RaycastHit hit;
+        
+        /**
         if (Physics.SphereCast(transform.position, 1, transform.TransformDirection(Vector3.forward), out hit, 100, 1 << LayerMask.NameToLayer("Enemy")) || Physics.SphereCast(transform.position, sphereRadius, transform.TransformDirection(Vector3.forward), out hit, 100, 1 << LayerMask.NameToLayer("Enemy"))) {
            
             currentHitObject = hit.distance;
@@ -25,6 +28,7 @@ public class EnemyLook : MonoBehaviour
         else {
             cam.cullingMask = everyMask;
         }
+        **/
     }
 
     void OnDrawGizmos()

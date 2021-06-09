@@ -6,7 +6,7 @@ using UnityEngine.Video;
 public class playDVD : MonoBehaviour
 {
     private VideoPlayer videoPlayer;
-    [SerializeField] private string objectiveItem ="fitnessDVD";
+    [SerializeField] private ProgrammaticQuests.QuestObjectName objectiveItem = ProgrammaticQuests.QuestObjectName.TOILET_PAPER;
 
     void Start()
     {
@@ -15,7 +15,7 @@ public class playDVD : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<ObjectiveItem>() != null && other.GetComponent<ObjectiveItem>().ItemName == objectiveItem)
+        if(other.GetComponent<WorldQuests.QuestItem>() != null && other.GetComponent<WorldQuests.QuestItem>().Quest_Object_Name == objectiveItem)
         {
             videoPlayer.Play();
         }

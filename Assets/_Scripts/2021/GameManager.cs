@@ -277,7 +277,7 @@ public class GameManager : MonoBehaviour
     ///     - flexibility to change the position
     /// </summary>
     /// <param name="scene"></param>
-    void Teleport(string scene, Dumb3 pos = null)
+    internal void Teleport(string scene, Dumb3 pos = null)
     {
         playerPos = pos==null ? player.transform.position : new Vector3(pos.x, pos.y, pos.z);
         playerRot = player.transform.rotation;
