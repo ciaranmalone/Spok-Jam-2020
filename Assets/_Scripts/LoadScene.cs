@@ -5,8 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    [SerializeField] Animator animator;
+
+    Animator animator;
     [SerializeField] private string sceneName = "Lidl";
+
+    private void Start()
+    {
+        animator = IndicatorSingletons.blackScreenSingleton.GetComponent<Animator>();
+    }
     public void StartTransition()
     {
         StartCoroutine("loadTheScene");

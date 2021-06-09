@@ -58,8 +58,13 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
     - quest_id: 2
       count: 1
-      description: more tp stuff
-      objectName: 1
+      description: Clean Up Spill
+      objectName: 3
+      clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
+    - quest_id: 3
+      count: 1
+      description: Stock DVD Rack
+      objectName: 2
       clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
   - quests:
     - quest_id: 5

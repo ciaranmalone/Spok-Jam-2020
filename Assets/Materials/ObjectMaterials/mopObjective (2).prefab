@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8968764177308775879}
   - component: {fileID: 8968764177308775878}
   - component: {fileID: 8968764177308775896}
-  - component: {fileID: 8968764177308775899}
   - component: {fileID: 1198725241505722456}
+  - component: {fileID: 4440950733043831568}
   m_Layer: 0
   m_Name: mopObjective (2)
   m_TagString: pickUp
@@ -315,19 +315,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.34, y: 3.76, z: 0.1}
   m_Center: {x: 0.0000024121262, y: 0.39, z: 0.025393717}
---- !u!114 &8968764177308775899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8968764177308775901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a542ae33da14cc24dad5756a1349f05b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: mop
 --- !u!54 &1198725241505722456
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -344,6 +331,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &4440950733043831568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8968764177308775901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb61a7977d68d8d459a543d01e9c4da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _quest_object_name: 3
+  deTaggable: 1
 --- !u!1 &8968764178052915863
 GameObject:
   m_ObjectHideFlags: 0

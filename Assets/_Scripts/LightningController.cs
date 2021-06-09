@@ -36,7 +36,6 @@ public class LightningController : MonoBehaviour
             for (float i = 0; i < FogIntensity; i+=.01f)
             {
                 float fogColor = 1-(i + (1 - FogIntensity));
-                print(fogColor);
                 
                 RenderSettings.fogDensity = i;
                 RenderSettings.fogColor =new Color(0, 0, 0, fogColor);
