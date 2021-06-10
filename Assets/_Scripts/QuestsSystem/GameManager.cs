@@ -295,10 +295,11 @@ public class GameManager : MonoBehaviour
         playerCameraRot = player.GetComponentInChildren<Camera>().transform.localRotation;
         playerTP = true;
 
-        heldObjectCache = Instantiate(player.GetComponentInChildren<SelectItem>().getHeldObject());
-        heldObjectCache.SetActive(false);
-        if (heldObjectCache) //if holding an object
+        GameObject temp = player.GetComponentInChildren<SelectItem>().getHeldObject();
+        if (temp)
         {
+            heldObjectCache = Instantiate(temp);
+            heldObjectCache.SetActive(false);
             DontDestroyOnLoad(heldObjectCache);
         }
         SceneManager.LoadScene(scene);
