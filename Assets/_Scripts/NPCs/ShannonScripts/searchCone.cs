@@ -25,6 +25,6 @@ public class searchCone : MonoBehaviour
          */
         target = transform.position - camTransform.position;
         angle = Vector3.Angle(target, camTransform.forward);
-        cam.cullingMask = angle < 45f? enemyMask : everyMask;
+        cam.cullingMask = angle < coneAngle? enemyMask : everyMask;
     }
 }

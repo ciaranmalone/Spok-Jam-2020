@@ -33,7 +33,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5755394897866477320
 Transform:
@@ -72,7 +72,7 @@ GameObject:
   m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5755394898331070641
 Transform:
@@ -687,6 +687,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FridgeStand
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 63209be9e396adc49a2e250d2fc7ea2d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4289031320043266552, guid: 63209be9e396adc49a2e250d2fc7ea2d,
         type: 3}

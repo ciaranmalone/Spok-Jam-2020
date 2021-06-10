@@ -53,7 +53,7 @@ MonoBehaviour:
   - quests:
     - quest_id: 1
       count: 1
-      description: Tp stuff
+      description: Stock Toilet Paper
       objectName: 1
       clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
     - quest_id: 2
