@@ -116,7 +116,12 @@ public class SelectItem : MonoBehaviour
                      * seeing if the the hit object has interactable else do nothing
                      * handle Interaction will play an animation on the selected item (ie. open door)
                      */
-                    try {selected.gameObject.GetComponent<interactable>().handleInteraction(); } catch { }
+                    try
+                    {
+                        selected.gameObject.GetComponent<interactable>().handleInteraction();
+                        selected = null;
+                    }
+                    catch { }
                 }
 
             } 
@@ -172,6 +177,7 @@ public class SelectItem : MonoBehaviour
                 Rigidbody selectedRB = selected.gameObject.AddComponent<Rigidbody>();
                 selectedRB.AddForce(transform.forward * throwForce, ForceMode.VelocityChange);
             }
+            selected = null;
         }
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
