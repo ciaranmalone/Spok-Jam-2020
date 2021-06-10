@@ -128,6 +128,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FridgeShelf
       objectReference: {fileID: 0}
+    - target: {fileID: 3213968635695092959, guid: 11df0b3194c675d42ace4b68cbf487ab,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11df0b3194c675d42ace4b68cbf487ab, type: 3}
 --- !u!4 &7528600460934973463 stripped
