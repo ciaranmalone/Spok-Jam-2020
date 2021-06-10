@@ -25,7 +25,7 @@ namespace ProgrammaticQuests
 
     enum QuestObjectName
     {
-        PLAYER, TOILET_PAPER, DVD, MOP
+        PLAYER, TOILET_PAPER, DVD, MOP, BANANA
     }
 
 

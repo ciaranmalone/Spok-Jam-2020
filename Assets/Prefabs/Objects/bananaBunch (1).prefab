@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8905045991512540334}
   - component: {fileID: 8944057980700222283}
+  - component: {fileID: 8237080283068251846}
   m_Layer: 0
   m_Name: bananaBunch (1)
   m_TagString: pickUp
@@ -127,3 +128,17 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: -0.4, y: 0.2, z: -0.4}
+--- !u!114 &8237080283068251846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133154071414529556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb61a7977d68d8d459a543d01e9c4da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _quest_object_name: 4
+  deTaggable: 1
