@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     private Quaternion playerRot;
     private Quaternion playerCameraRot;
     private bool playerTP;
+    private GameObject heldObjectCache;
+
     //private GameObject heldObject;
 
     //Quest System
@@ -92,6 +94,15 @@ public class GameManager : MonoBehaviour
             player.transform.position = playerPos;
             float xRot = playerCameraRot.eulerAngles.x;
             player.GetComponentInChildren<MouseLook>().Rotate(xRot > 90 ? xRot-360 : xRot, playerRot.eulerAngles.y);
+
+            //check for held
+            if(heldObjectCache)
+            {
+                heldObjectCache.SetActive(true);
+                player.GetComponentInChildren<SelectItem>().PickUpObject(Instantiate(heldObjectCache).transform);
+                Destroy(heldObjectCache);
+            }
+
         }
 
         //complete every quest before current phase
@@ -283,6 +294,13 @@ public class GameManager : MonoBehaviour
         playerRot = player.transform.rotation;
         playerCameraRot = player.GetComponentInChildren<Camera>().transform.localRotation;
         playerTP = true;
+
+        heldObjectCache = Instantiate(player.GetComponentInChildren<SelectItem>().getHeldObject());
+        heldObjectCache.SetActive(false);
+        if (heldObjectCache) //if holding an object
+        {
+            DontDestroyOnLoad(heldObjectCache);
+        }
         SceneManager.LoadScene(scene);
     }
 
