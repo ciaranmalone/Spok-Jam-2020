@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class AfterPhaseKeepPermanent : MonoBehaviour
 {
+
+    bool first = true;
+
     private void OnEnable()
     {
-        transform.parent = null;
+        if(!first) transform.parent = null;
+        first = false;
     }
 }
