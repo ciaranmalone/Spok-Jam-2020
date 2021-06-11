@@ -111,17 +111,18 @@ public class SelectItem : MonoBehaviour
 
                 if(Input.GetKeyDown(selectObject)) {
                     selected = selection;
-                    Debug.Log("how many");
+                    //Debug.Log("how many");
                     /**
                      * seeing if the the hit object has interactable else do nothing
                      * handle Interaction will play an animation on the selected item (ie. open door)
                      */
+                    try { selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectPickUpEvent.Invoke(); } catch { }
                     try
                     {
                         selected.gameObject.GetComponent<interactable>().handleInteraction();
-                        selected = null;
                     }
                     catch { }
+                    selected = null;
                 }
 
             } 
