@@ -20,7 +20,8 @@ namespace ProgrammaticQuests
         P2M2,
         P2M3,
         P2M4,
-        P3M1
+        P3M1,
+        P3M2
     }
 
     enum QuestObjectName

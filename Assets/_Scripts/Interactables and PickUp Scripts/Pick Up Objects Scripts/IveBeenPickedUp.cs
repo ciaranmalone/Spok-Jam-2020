@@ -15,15 +15,18 @@ public class IveBeenPickedUp : MonoBehaviour
         if(SelectItem.pickedUp == true) 
         {
             audioData.Play();
-            print("hello");
 
         } else{
             audioData.Stop();
-
-            foreach (Transform child in transform)
+            int childCount = transform.childCount;
+            for (int i = 0; i < childCount; i++)
             {
-                child.gameObject.AddComponent<Rigidbody>();
+                transform.GetChild(0).gameObject.AddComponent<Rigidbody>();
+                transform.GetChild(0).parent = null;
+                            
             }
+          
+            
         }
     }
 }
