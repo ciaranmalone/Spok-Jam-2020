@@ -18,15 +18,14 @@ public class IveBeenPickedUp : MonoBehaviour
 
         } else{
             audioData.Stop();
-            int childCount = transform.childCount;
-            for (int i = 0; i < childCount; i++)
+
+            while (transform.childCount != 0)
             {
                 transform.GetChild(0).gameObject.AddComponent<Rigidbody>();
-                transform.GetChild(0).parent = null;
-                            
+                transform.GetChild(0).parent = transform.parent;
             }
-          
-            
+            GameManager.gameManager.CreateBonusQuest(GetComponent<WorldQuests.EggQuest>().quest_id);
+            Destroy(gameObject);
         }
     }
 }

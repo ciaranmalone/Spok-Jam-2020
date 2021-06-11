@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,6 +26,9 @@ public class GameManager : MonoBehaviour
     /// Collection of Phases in the Unity Hierarchy
     /// </summary>
     internal WorldQuests.Phase[] phases;
+
+    
+
     internal AudioSource[] speakers;
     internal phoneCallScript[] phones;
 
@@ -35,6 +39,8 @@ public class GameManager : MonoBehaviour
     internal PhaseID phase = PhaseID.Phase1;
     int missionsRemaining;//TODO can be refactored to just use array below
     Dictionary<QuestID, bool> completedQuests;
+    Dictionary<PhaseID, Dictionary<QuestID, bool>> bonusQuests;
+    
     /// <summary>
     /// to check if game is loading
     /// </summary>
@@ -117,6 +123,9 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        //create bonus quest dictionary if doesn't exists
+        if (bonusQuests == null) bonusQuests = new Dictionary<PhaseID, Dictionary<QuestID, bool>>();
+
         //complete specified quests in current phase
         if(completedQuests!=null)
         {
@@ -133,6 +142,28 @@ public class GameManager : MonoBehaviour
                     if(pass)
                     {
                         qst.QuestCompleteWQ();
+                    }
+                }
+            }
+
+            //handle bonus quests
+            WorldQuests.EggQuest[] bonusQuestlist = FindObjectsOfType<WorldQuests.EggQuest>();
+            Dictionary<QuestID, bool> bonus;
+
+            //get current phase's bonus quests
+            bonusQuests.TryGetValue(phase, out bonus);
+            if (bonus != null)
+            {
+                foreach (WorldQuests.EggQuest qst in bonusQuestlist)
+                {
+                    //if the quest exists in current phase
+                    if (bonus.ContainsKey(qst.quest_id))
+                    {
+                        //complete quest if exists
+                        if (bonus[qst.quest_id] == true)
+                        {
+                            QuestCompleteGM(qst.quest_id);
+                        }
                     }
                 }
             }
@@ -178,6 +209,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    internal void CreateBonusQuest(QuestID quest_id)
+    {
+        //get current phase's set of bonus quests
+        Dictionary<QuestID, bool> currPhase;
+        bonusQuests.TryGetValue(phase, out currPhase);
+
+        //if it doesn't exist, create one
+        if(currPhase == null)
+        {
+            bonusQuests.Add(phase, new Dictionary<QuestID, bool>());
+            bonusQuests.TryGetValue(phase, out currPhase);
+        }
+
+        //if it doesn't already exist
+        if (!currPhase.ContainsKey(quest_id))
+        {
+            //add the quest
+            currPhase.Add(quest_id, false);
+
+            //draw the quest
+            canvas.AddQuestC(quest_id);
+
+            //increase missions remaining for current phase
+            missionsRemaining++;
+        }
+    }
+
     /// <summary>
     /// Finds the position of the quest in the current phase
     /// </summary>
@@ -185,11 +243,25 @@ public class GameManager : MonoBehaviour
     internal int getQuestPosition(QuestID quest_id)
     {
         int whereAmI = 0;
+        //main quests
         foreach (KeyValuePair<QuestID, bool> q in completedQuests)
         {
             if (q.Key == quest_id) return whereAmI;
             whereAmI++;
         }
+
+        //bonus quests
+        Dictionary<QuestID, bool> bonus;
+        bonusQuests.TryGetValue(phase, out bonus);
+        if (bonus != null)
+        {
+            foreach (KeyValuePair<QuestID, bool> q in bonus)
+            {
+                if (q.Key == quest_id) return whereAmI;
+                whereAmI++;
+            }
+        }
+        
         return -1;
     }
 
@@ -204,7 +276,15 @@ public class GameManager : MonoBehaviour
     /// <param name="quest_id"></param>
     internal void QuestCompleteGM(QuestID quest_id)
     {
-        completedQuests[quest_id] = true;
+        if(completedQuests.ContainsKey(quest_id)) completedQuests[quest_id] = true;
+        else
+        {
+            Dictionary<QuestID, bool> bonus;
+            bonusQuests.TryGetValue(phase, out bonus);
+            //if (bonus == null) return;
+            bonus[quest_id] = true;
+        }
+        QuestUpdateGM(quest_id, 0, true);
         canvas.QuestCompleteC(getQuestPosition(quest_id));
         
         //if it is not loading then u can do some stuff here
@@ -253,9 +333,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="quest_id">The id of the quest</param>
     /// <param name="howManyCompleted">How much is completed</param>
-    internal void QuestUpdateGM(QuestID quest_id, int howManyCompleted)
+    internal void QuestUpdateGM(QuestID quest_id, int howManyCompleted, bool full = false)
     {
-        canvas.QuestUpdateC(qs.getQuest(quest_id), getQuestPosition(quest_id), howManyCompleted);
+        Quest quest = qs.getQuest(quest_id);
+        if (full) howManyCompleted = quest.count;
+        canvas.QuestUpdateC(quest, getQuestPosition(quest_id), howManyCompleted);
     }
 
 
@@ -316,9 +398,19 @@ public class GameManager : MonoBehaviour
 
     void DrawQuests()
     {
-        canvas.MakeObjectives(completedQuests.Keys);
+        Dictionary<QuestID, bool> bonus;
+        bonusQuests.TryGetValue(phase, out bonus);
+        if (bonus == null) bonus = new Dictionary<QuestID, bool>();
+        QuestID[] quests = new QuestID[completedQuests.Keys.Count + bonus.Keys.Count];
+        completedQuests.Keys.ToArray().CopyTo(quests, 0);
+        bonus.Keys.ToArray().CopyTo(quests, completedQuests.Keys.Count);
+        canvas.MakeObjectives(quests);
     }
+
+
 }
+
+
 
 internal class Dumb3
 {

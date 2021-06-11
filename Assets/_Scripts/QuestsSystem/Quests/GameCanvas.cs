@@ -26,7 +26,7 @@ public class GameCanvas : MonoBehaviour
     /// 
     /// It is asking for the dictionary of current quests, because it will strikethrough ones already completed
     /// </summary>
-    internal void MakeObjectives(Dictionary<QuestID, bool>.KeyCollection quests)
+    internal void MakeObjectives(QuestID[] quests)
     {
         if(uiQuests!=null)
         {
@@ -35,7 +35,7 @@ public class GameCanvas : MonoBehaviour
                 Destroy(go);
             }
         }
-        uiQuests = new GameObject[quests.Count];
+        uiQuests = new GameObject[quests.Length];
         int questOffset = 0;
         foreach (QuestID quest in quests)
         {
@@ -63,6 +63,31 @@ public class GameCanvas : MonoBehaviour
 
             questOffset++;
         }
+    }
+
+    internal void AddQuestC(QuestID quest)
+    {
+        int questOffset = uiQuests.Length;
+        GameObject[] newUIQuests = new GameObject[uiQuests.Length+1];
+        uiQuests.CopyTo(newUIQuests, 0);
+        uiQuests = newUIQuests;
+
+        //creating the UI object
+        Vector3 pivot = questPivot.transform.localPosition;
+        GameObject UIRepresentation = Instantiate(questPrefab, pivot, questPivot.transform.rotation, transform);
+        uiQuests[questOffset] = UIRepresentation;
+
+        ////getting the objective and it's controller
+        //Objective tempObjective = quest.GetComponent<Objective>();
+        //ObjectiveController controller = UIRepresentation.GetComponent<ObjectiveController>();
+
+        ////getting proper visuals in the ui
+        //step 1: get data
+        Quest curr = GameManager.gameManager.qs.getQuest(quest);
+
+        //step 2: assign data
+        UIRepresentation.GetComponent<RectTransform>().localPosition = new Vector3(pivot.x, pivot.y - (questTextOffset * (questOffset)));
+        UIRepresentation.GetComponent<TextMeshProUGUI>().text = curr.count > 1 ? $"{curr.description} (0/{curr.count})" : curr.description;
     }
 
 

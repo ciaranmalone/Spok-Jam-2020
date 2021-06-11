@@ -21,12 +21,13 @@ namespace ProgrammaticQuests
         P2M3,
         P2M4,
         P3M1,
-        P3M2
+        P3M2,
+        OPT1
     }
 
     enum QuestObjectName
     {
-        PLAYER, TOILET_PAPER, DVD, MOP, BANANA
+        PLAYER, TOILET_PAPER, DVD, MOP, BANANA, BLENDER
     }
 
 
@@ -40,6 +41,8 @@ namespace ProgrammaticQuests
     {
         [SerializeField]
         internal Phase[] phases;
+        [SerializeField]
+        internal Quest[] bonusQuests;
 
         /// <summary>
         /// retrieve an existing quest by id, can be null if you suck at inpector drag and dropping :P
@@ -51,6 +54,8 @@ namespace ProgrammaticQuests
             foreach (Phase phase in phases)
                 foreach (Quest quest in phase.quests)
                     if (quest.quest_id == quest_id) return quest;
+            foreach (Quest quest in bonusQuests)
+                if (quest.quest_id == quest_id) return quest;
             return null;
         }
     }
