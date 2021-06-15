@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5f72c183971faf429a022b2773e18f8
+guid: e011ef42b89a0d14ea7075845640f1f3
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: White
-    second: {fileID: 2100000, guid: 53fec68f72521f84d94451550f349626, type: 2}
+      name: Toilet_Roll
+    second: {fileID: 2100000, guid: 1ab0a04d7ecf5994bbcb559f4bccc3d0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
