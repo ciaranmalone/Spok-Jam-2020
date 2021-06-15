@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6836505199926884644}
   - component: {fileID: 6712469062966918785}
+  - component: {fileID: 2716787691276902871}
   m_Layer: 0
   m_Name: bananaBunchSprite
   m_TagString: Untagged
@@ -82,6 +83,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2716787691276902871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506571739062121091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d923d17d7141271dbb501e01d8a594cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3454418576565300764
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +257,7 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 262760524570503898}
-  - screenRelativeHeight: 0.0052491208
+  - screenRelativeHeight: 0.005738694
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 6712469062966918785}

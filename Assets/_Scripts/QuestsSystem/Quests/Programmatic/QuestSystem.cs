@@ -22,6 +22,8 @@ namespace ProgrammaticQuests
         P2M4,
         P3M1,
         P3M2,
+        P4M1,
+        P4M2,
         OPT1
     }
 
