@@ -22,10 +22,10 @@ TagManager:
   - 
   - 
   - Ground
-  - cam
+  - Camera
   - Enemy
   - cantSeeLayer
-  - 
+  - PostProcessing
   - 
   - 
   - 

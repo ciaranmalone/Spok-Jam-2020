@@ -410,8 +410,6 @@ public class GameManager : MonoBehaviour
 
 }
 
-
-
 internal class Dumb3
 {
     internal float x, y, z;
@@ -423,4 +421,11 @@ internal class Dumb3
         this.y = y;
         this.z = z;
     }
+
+    /// <summary>
+    /// Funniest shit I ever seen
+    /// </summary>
+    /// <param name="pos">where we droppin</param>
+    /// <returns>Turned himself into a Dumb3</returns>
+    internal static Dumb3 Vector32Dumb3(Vector3 pos) => new Dumb3(pos.x, pos.y, pos.z);
 }
