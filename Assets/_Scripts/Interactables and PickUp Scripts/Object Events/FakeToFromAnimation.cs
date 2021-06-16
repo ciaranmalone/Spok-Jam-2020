@@ -24,9 +24,9 @@ public class FakeToFromAnimation : MonoBehaviour
         }
         toObject.SetActive(false);
     }
-    private void OnDestroy()
+    internal void Animate()
     {
-        if(fromRequired) fromObject.SetActive(false);
+        if (fromRequired) fromObject.SetActive(false);
         toObject.SetActive(true);
         toObject.transform.parent = null;
         if (playSound)

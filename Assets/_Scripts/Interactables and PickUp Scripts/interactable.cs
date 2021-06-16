@@ -64,7 +64,7 @@ public class interactable : MonoBehaviour
             phoneCallScripts = GetComponents(typeof (phoneCallScript));
             
             foreach (phoneCallScript script in phoneCallScripts){
-                if(script.phase == ("phoneCall" + (int)GameManager.gameManager.phase) & script.Ringing == true) {
+                if(script.phase == ("phoneCall" + ((int)GameManager.gameManager.phase-1)) & script.Ringing == true) {
                     script.phoneAnswered = true;
                 }
             }

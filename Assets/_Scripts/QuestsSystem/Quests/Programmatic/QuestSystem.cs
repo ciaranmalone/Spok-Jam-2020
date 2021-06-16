@@ -7,6 +7,7 @@ namespace ProgrammaticQuests
 {
     internal enum PhaseID
     {
+        Phase0,
         Phase1,
         Phase2,
         Phase3,
@@ -15,6 +16,7 @@ namespace ProgrammaticQuests
 
     internal enum QuestID
     {
+        P0M0, //only for looping
         P1M1,
         P2M1,
         P2M2,
@@ -24,7 +26,7 @@ namespace ProgrammaticQuests
         P3M2,
         P4M1,
         P4M2,
-        OPT1
+        OPT1,
     }
 
     enum QuestObjectName

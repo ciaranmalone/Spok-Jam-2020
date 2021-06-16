@@ -47,38 +47,44 @@ MonoBehaviour:
   - quests:
     - quest_id: 0
       count: 1
-      description: Talk to boss
+      description: Open the garage...
       objectName: 0
       clip: {fileID: 0}
   - quests:
     - quest_id: 1
       count: 1
+      description: Talk to boss
+      objectName: 0
+      clip: {fileID: 0}
+  - quests:
+    - quest_id: 2
+      count: 1
       description: Stock Toilet Paper
       objectName: 1
       clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
-    - quest_id: 2
+    - quest_id: 3
       count: 1
       description: Clean Up Spill
       objectName: 3
       clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
-    - quest_id: 3
+    - quest_id: 4
       count: 1
       description: Stock DVD Rack
       objectName: 2
       clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
   - quests:
-    - quest_id: 5
-      count: 1
-      description: Stock Milk
-      objectName: 0
-      clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
     - quest_id: 6
       count: 1
+      description: Stock Milk
+      objectName: 7
+      clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
+    - quest_id: 7
+      count: 1
       description: Bring Out Bins
-      objectName: 0
+      objectName: 6
       clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
   bonusQuests:
-  - quest_id: 7
+  - quest_id: 10
     count: 3
     description: Clean up the blender
     objectName: 5

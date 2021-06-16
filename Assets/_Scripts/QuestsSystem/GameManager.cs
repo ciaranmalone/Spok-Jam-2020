@@ -40,11 +40,12 @@ public class GameManager : MonoBehaviour
     int missionsRemaining;//TODO can be refactored to just use array below
     Dictionary<QuestID, bool> completedQuests;
     Dictionary<PhaseID, Dictionary<QuestID, bool>> bonusQuests;
+    internal bool looped = false;
     
     /// <summary>
     /// to check if game is loading
     /// </summary>
-    internal bool loading; 
+    internal bool loading;
     
     void Awake()
     {
@@ -112,7 +113,7 @@ public class GameManager : MonoBehaviour
         }
 
         //complete every quest before current phase
-        for (PhaseID i = PhaseID.Phase1 ; i < phase; i++)
+        for (PhaseID i = PhaseID.Phase1 ; i < phase; i++) //EXTREMELY UNSTABLE, PROCEED WITH CAUTION, ask me if you want to know why (p0)
         {
             GameObject iterPhase = GetCurrentPhase(i);
 
@@ -127,7 +128,7 @@ public class GameManager : MonoBehaviour
         if (bonusQuests == null) bonusQuests = new Dictionary<PhaseID, Dictionary<QuestID, bool>>();
 
         //complete specified quests in current phase
-        if(completedQuests!=null)
+        if(completedQuests!=null && completedQuests.Count>0)
         {
             //draw current phase quests
             DrawQuests();
@@ -282,7 +283,8 @@ public class GameManager : MonoBehaviour
             Dictionary<QuestID, bool> bonus;
             bonusQuests.TryGetValue(phase, out bonus);
             //if (bonus == null) return;
-            bonus[quest_id] = true;
+            if (bonus.ContainsKey(quest_id)) bonus[quest_id] = true;
+            else return;
         }
         QuestUpdateGM(quest_id, 0, true);
         canvas.QuestCompleteC(getQuestPosition(quest_id));
@@ -319,7 +321,7 @@ public class GameManager : MonoBehaviour
         {
             foreach (phoneCallScript phone in phones)
             {
-                string curr = $"phoneCall{(int)phase}";
+                string curr = $"phoneCall{(int)phase-1}";
                 if (phone.phase == curr)
                 {
                     phone.PhasePhoneCall(curr);
@@ -361,8 +363,20 @@ public class GameManager : MonoBehaviour
         {
             Teleport(SceneManager.GetActiveScene().name);
         }
-    }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            phase = PhaseID.Phase0;
+            looped = true;
 
+            ///NOT NEEDED UNLESS I REFACTOR ONSCENELOADED TO ACTUALLY WORRY ABOUT THE PHASE 0!!!
+            //GameObject funky = Instantiate(new GameObject(), new Vector3(player.transform.position.x, player.transform.position.y + 399, player.transform.position.z), Quaternion.identity, //bad transform, do p0 instead player.transform);
+            //funky.AddComponent<WorldQuests.Quest>().quest_id = QuestID.P0M0;
+            //funky.AddComponent<BoxCollider>().isTrigger = true;
+
+            SetActivePhase();
+            CreatePhase();
+        }
+    }
 
     /// <summary>
     /// Teleports the player to a different scene, currently:

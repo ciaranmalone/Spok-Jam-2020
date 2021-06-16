@@ -83,6 +83,7 @@ namespace WorldQuests
                 {
                     ftfa.disableSound();
                 }
+                ftfa.Animate();
             }
             Destroy(gameObject);
         }
