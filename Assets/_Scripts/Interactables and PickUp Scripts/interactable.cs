@@ -27,7 +27,6 @@ public class interactable : MonoBehaviour
     }
 
     public void handleInteraction(bool destroy = false){
-        Debug.Log("hello "+ played);
 
         if(GetComponent<AudioSource>() != null & !isPhone) {
             audioData.Play();

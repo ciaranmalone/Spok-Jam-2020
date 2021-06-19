@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/OtherDimensions/FridgeDimension.unity
     guid: f56222945092c9c489af2442a342a248
+  - enabled: 1
+    path: Assets/_Scenes/OtherDimensions/LongFieldsDimension.unity
+    guid: 2bb95759e3f465345abfea1f29a0345b
   m_configObjects: {}
