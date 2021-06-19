@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7828544004660758438
 Transform:
@@ -45,6 +45,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3710905548487106149, guid: 11df0b3194c675d42ace4b68cbf487ab, type: 3}
+--- !u!208 &2020344375361131673
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857695373536803619}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.7500002, y: 3.1250002, z: 1.065}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 62.430004, y: 2.845, z: -42.609}
+  m_TimeToStationary: 0.5
 --- !u!1001 &8066034096287150076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112,6 +128,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: FridgeShelf
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 11df0b3194c675d42ace4b68cbf487ab,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213968635695092959, guid: 11df0b3194c675d42ace4b68cbf487ab,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773568156325895003, guid: 11df0b3194c675d42ace4b68cbf487ab,
+        type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773568156325895003, guid: 11df0b3194c675d42ace4b68cbf487ab,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7d9879cc6e38e204190a47ceb0d596b0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11df0b3194c675d42ace4b68cbf487ab, type: 3}
 --- !u!4 &7528600460934973463 stripped

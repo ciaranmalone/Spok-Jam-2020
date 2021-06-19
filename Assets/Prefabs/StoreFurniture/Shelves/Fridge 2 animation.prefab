@@ -19,20 +19,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &8673211039392171715
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8561671329894240942}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -431636190445886787, guid: 63209be9e396adc49a2e250d2fc7ea2d, type: 3}
 --- !u!1 &5755394897866477335
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,7 +33,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5755394897866477320
 Transform:
@@ -80,12 +66,13 @@ GameObject:
   - component: {fileID: 5755394898331070646}
   - component: {fileID: 1798639642587613898}
   - component: {fileID: 1798639642587613901}
+  - component: {fileID: 7887582619078737371}
   m_Layer: 0
   m_Name: fridge2door
   m_TagString: interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5755394898331070641
 Transform:
@@ -595,9 +582,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskSheet: 0
+  previousPhasePurges: []
   animationOne: Fridge2DoorClose
   animationTwo: Fridge2DoorOpen
   isPhone: 0
+--- !u!208 &7887582619078737371
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5755394898331070640}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 3.0000002, z: 0.163}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -1.25, y: 0, z: 0.125}
+  m_TimeToStationary: 0.5
+--- !u!64 &8673211039392171715
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8561671329894240942}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -431636190445886787, guid: 63209be9e396adc49a2e250d2fc7ea2d, type: 3}
 --- !u!1001 &5572247914770215766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -660,10 +678,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7059489220110834996, guid: 63209be9e396adc49a2e250d2fc7ea2d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ecae5095a239c62618ca5468acac14f7, type: 2}
     - target: {fileID: 919132149155446097, guid: 63209be9e396adc49a2e250d2fc7ea2d,
         type: 3}
       propertyPath: m_Name
       value: FridgeStand
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 63209be9e396adc49a2e250d2fc7ea2d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4289031320043266552, guid: 63209be9e396adc49a2e250d2fc7ea2d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63209be9e396adc49a2e250d2fc7ea2d, type: 3}

@@ -13,15 +13,15 @@ public class SelectItem : MonoBehaviour
     
     [Header("Objects to display")]
     [SerializeField] private GameObject lightPointPickUp;
-    [SerializeField] private GameObject PickUpIndicator;
     [SerializeField] private GameObject lightPointInteract;
-    [SerializeField] private GameObject InteractIndicator;
+
+    private GameObject PickUpIndicator;
+    private GameObject InteractIndicator;
 
     [Header("Input Controls")]
     [SerializeField] private KeyCode selectObject = KeyCode.E;
     [SerializeField] private KeyCode dropObject = KeyCode.Mouse1;
     [SerializeField] private KeyCode throwObject = KeyCode.Mouse0;
-
 
     [SerializeField] private Vector3 objectPosition = new Vector3(0, -1, 2);
 
@@ -32,6 +32,11 @@ public class SelectItem : MonoBehaviour
     private bool imBeingLookedAtExists = true;
     private bool ObjectLookAtEventRan = false;
 
+    private void Start()
+    {
+        PickUpIndicator = IndicatorSingletons.pickupIndicatorSingleton;
+        InteractIndicator = IndicatorSingletons.interactIndicatorSingleton;
+    }
 
     void Update()
     {
@@ -92,16 +97,7 @@ public class SelectItem : MonoBehaviour
                 }
 
                 if (Input.GetKey(selectObject)) {
-                    selected = selection;
-                    pickedUp = true;
-
-                    //make object the child of the player
-                    selected.parent = gameObject.transform;
-                    selected.localPosition = objectPosition;
-                    selected.localRotation = Quaternion.identity;
-                    //stop its phyiscs so it will stop giggling around
-                    try {  selected.gameObject.GetComponent<Rigidbody>().isKinematic = true; } catch { }
-                    try { selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectPickUpEvent.Invoke(); } catch { }
+                    PickUpObject(selection);
                 }
             }
             /**
@@ -115,14 +111,18 @@ public class SelectItem : MonoBehaviour
 
                 if(Input.GetKeyDown(selectObject)) {
                     selected = selection;
-                    Debug.Log("how many");
+                    //Debug.Log("how many");
                     /**
                      * seeing if the the hit object has interactable else do nothing
                      * handle Interaction will play an animation on the selected item (ie. open door)
                      */
-                    try { selected.gameObject.GetComponent<interactable>().handleInteraction(); } catch { }
-                    try { selection.gameObject.GetComponent<objectInteractEvents>().ObjectPickUpEvent.Invoke(); } catch { }
-
+                    try { selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectPickUpEvent.Invoke(); } catch { }
+                    try
+                    {
+                        selected.gameObject.GetComponent<interactable>().handleInteraction();
+                    }
+                    catch { }
+                    selected = null;
                 }
 
             } 
@@ -178,8 +178,30 @@ public class SelectItem : MonoBehaviour
                 Rigidbody selectedRB = selected.gameObject.AddComponent<Rigidbody>();
                 selectedRB.AddForce(transform.forward * throwForce, ForceMode.VelocityChange);
             }
+            selected = null;
         }
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+    }
+
+    internal void PickUpObject(Transform obj)
+    {
+        selection = obj;
+        selected = obj;
+        pickedUp = true;
+
+        //make object the child of the player
+        selected.parent = gameObject.transform;
+        selected.localPosition = objectPosition;
+        selected.localRotation = Quaternion.identity;
+        //stop its phyiscs so it will stop giggling around
+        try { selected.gameObject.GetComponent<Rigidbody>().isKinematic = true; } catch { }
+        try { selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectPickUpEvent.Invoke(); } catch { }
+    }
+
+
+    internal GameObject getHeldObject()
+    {
+        return selected ? selected.gameObject : null;
     }
 }

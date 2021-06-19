@@ -8,6 +8,20 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="_Scripts" t="Include">
+          <e p="2021" t="Include">
+            <e p="GameManager.cs" t="Include" />
+            <e p="Quests" t="Include">
+              <e p="GameCanvas.cs" t="Include" />
+              <e p="Programmatic" t="Include">
+                <e p="QuestSystem.cs" t="Include" />
+              </e>
+              <e p="WorldQuests" t="Include">
+                <e p="Phase.cs" t="Include" />
+                <e p="Quest.cs" t="Include" />
+                <e p="QuestItem.cs" t="Include" />
+              </e>
+            </e>
+          </e>
           <e p="AI" t="Include">
             <e p="AIAnimation.cs" t="Include" />
             <e p="AIStates.cs" t="Include" />
@@ -26,6 +40,7 @@
           <e p="CollisionSound.cs" t="Include" />
           <e p="demonPuddle.cs" t="Include" />
           <e p="disappearContoller.cs" t="Include" />
+          <e p="FakeToFromAnimation.cs" t="Include" />
           <e p="flicker.cs" t="Include" />
           <e p="fogOn.cs" t="Include" />
           <e p="FogSprite.cs" t="Include" />
@@ -35,18 +50,23 @@
           <e p="InfiniteRoom.cs" t="Include" />
           <e p="interactable.cs" t="Include" />
           <e p="LightController.cs" t="Include" />
+          <e p="LightningController.cs" t="Include" />
           <e p="listening.cs" t="Include" />
           <e p="lookAtPlayer.cs" t="Include" />
           <e p="lowRezRender.cs" t="Include" />
           <e p="ManagerInteraction.cs" t="Include" />
           <e p="moveManager.cs" t="Include" />
           <e p="Objectives Scripts" t="Include">
+            <e p="Editor" t="Include">
+              <e p="ObjectiveEventEditor.cs" t="Include" />
+            </e>
             <e p="MissionHandler.cs" t="Include" />
             <e p="MissionScript.cs" t="Include" />
             <e p="Objective.cs" t="Include" />
             <e p="ObjectiveController.cs" t="Include" />
             <e p="ObjectiveCounter.cs" t="Include" />
             <e p="ObjectiveItem.cs" t="Include" />
+            <e p="ObjectivePersistence.cs" t="Include" />
             <e p="TriggerCompleteObjective.cs" t="Include" />
           </e>
           <e p="ObjectLookAtEvents.cs" t="Include" />
@@ -62,8 +82,10 @@
           <e p="phoneCallScript.cs" t="Include" />
           <e p="Pick Up Objects Scripts" t="Include">
             <e p="DetectBeingHit.cs" t="Include" />
+            <e p="IndicatorSingletons.cs" t="Include" />
             <e p="IveBeenPickedUp.cs" t="Include" />
           </e>
+          <e p="playDVD.cs" t="Include" />
           <e p="Player Scripts" t="Include">
             <e p="EnemyLook.cs" t="Include" />
             <e p="MouseLook.cs" t="Include" />
@@ -78,11 +100,14 @@
             <e p="PortalTeleporter.cs" t="Include" />
             <e p="ScreenCutoutShader.shader" t="Include" />
           </e>
+          <e p="PostObjectiveEnabler.cs" t="Include" />
           <e p="ShopGrowPhase.cs" t="Include" />
           <e p="showHiddenGoku.cs" t="Include" />
           <e p="showHiddenObjects.cs" t="Include" />
+          <e p="StopScript.cs" t="Include" />
           <e p="TriggerPhaseOneLook.cs" t="Include" />
         </e>
+        <e p="DontDestroyOnLoad.cs" t="Include" />
         <e p="DoublesidedCutout" t="Include">
           <e p="AlphaTest-DiffuseBack.shader" t="Include" />
           <e p="AlphaTest-DiffuseDoublesided.shader" t="Include" />
@@ -139,10 +164,13 @@
           <e p="License.txt" t="Include" />
           <e p="ReadMe.txt" t="Include" />
         </e>
+        <e p="LoadScene.cs" t="Include" />
         <e p="Materials" t="Include">
           <e p="derez.shader" t="Include" />
+          <e p="SpriteDiffuse.shader" t="Include" />
         </e>
-        <e p="SpriteDiffuse.shader" t="Include" />
+        <e p="MirrorPlayerMovement.cs" t="Include" />
+        <e p="ObjectiveFitness.cs" t="Include" />
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
             <e p="LiberationSans - OFL.txt" t="Include" />
@@ -171,6 +199,7 @@
             <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
+        <e p="ToggleRain.cs" t="Include" />
       </e>
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />

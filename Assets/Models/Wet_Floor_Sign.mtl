@@ -1,0 +1,5 @@
+newmtl Wet_Floor_Sign
+map_Kd Wet_Floor_Sign.png
+Kd 1 1 1
+d 1
+

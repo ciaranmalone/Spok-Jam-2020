@@ -1,0 +1,81 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="shannon_groan1_data" version="1.3.0" audacityversion="2.2.2" sel0="0.0000000000" sel1="3.1908958333" vpos="0" h="0.0000000000" zoom="169.8581560284" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="TITLE" value="groan with echo"/>
+		<tag name="Encoded by" value="Mixcraft 5.1 Build 139"/>
+		<tag name="GENRE" value="Rock"/>
+		<tag name="TRACKNUMBER" value="0/1"/>
+		<tag name="YEAR" value="2010"/>
+	</tags>
+	<wavetrack name="103569__ryansnook__groan1" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="140609">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808fcf.au" len="140609" min="-0.348969" max="0.423248" rms="0.15128"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="103569__ryansnook__groan1" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="140609">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808e89.au" len="140609" min="-0.348999" max="0.423248" rms="0.15128"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="103797__nigelnix__groan-with-echo" channel="0" linked="1" mute="1" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="0.125893" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="136233">
+				<waveblock start="0">
+					<simpleblockfile filename="e080817f.au" len="136233" min="-0.956233" max="0.918752" rms="0.175616"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="103797__nigelnix__groan-with-echo" channel="1" linked="0" mute="1" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="0.125893" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="136233">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808bf5.au" len="136233" min="-1.0" max="0.881685" rms="0.16807"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="257706__vmgraw__groaning" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="48000" gain="1.412538" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="153163">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808a82.au" len="153163" min="-0.080214" max="0.072518" rms="0.006586"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="257706__vmgraw__groaning" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="48000" gain="1.412538" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="153163">
+				<waveblock start="0">
+					<simpleblockfile filename="e08080ab.au" len="153163" min="-0.080214" max="0.072518" rms="0.006586"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="516277__animadierer__bear-groan" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="22050" gain="0.446684" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="70305">
+				<waveblock start="0">
+					<simpleblockfile filename="e08088fc.au" len="70305" min="-0.405732" max="0.370207" rms="0.094606"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>

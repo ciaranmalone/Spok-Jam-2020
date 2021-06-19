@@ -11,6 +11,7 @@ TagManager:
   - tile
   - path
   - grass
+  - speaker
   layers:
   - Default
   - TransparentFX
@@ -21,10 +22,10 @@ TagManager:
   - 
   - 
   - Ground
-  - cam
+  - Camera
   - Enemy
-  - 
-  - 
+  - cantSeeLayer
+  - PostProcessing
   - 
   - 
   - 
