@@ -22,6 +22,8 @@ namespace WorldQuests
                 QuestItem qi = other.GetComponent<QuestItem>();
                 if (qi && qi.Quest_Object_Name == itemToCollideWith)
                 {
+                    FakeToFromAnimation ftfa = GetComponent<FakeToFromAnimation>();
+                    if (ftfa) ftfa.Animate();
                     Destroy(gameObject);
                 }
             }
