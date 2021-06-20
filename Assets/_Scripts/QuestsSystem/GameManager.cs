@@ -421,6 +421,13 @@ public class GameManager : MonoBehaviour
         canvas.MakeObjectives(quests);
     }
 
+    internal bool isQuestComplete(QuestID quest)
+    {
+        bool didI;
+        if(completedQuests.TryGetValue(quest, out didI)) return didI;
+        return false;
+    }
+
 
 }
 
