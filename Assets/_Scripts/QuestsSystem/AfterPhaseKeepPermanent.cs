@@ -11,6 +11,6 @@ public class AfterPhaseKeepPermanent : MonoBehaviour
 
     private void OnEnable()
     {
-        if(GameManager.gameManager.phase >= phase) transform.parent = null;
+        if(GameManager.gameManager  && GameManager.gameManager.phase >= phase) transform.parent = null;
     }
 }
