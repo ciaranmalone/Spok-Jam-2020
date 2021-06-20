@@ -78,7 +78,6 @@ public class SelectItem : MonoBehaviour
                     catch
                     {
                         imBeingLookedAtExists = false;
-                        //Debug.Log("DetectBeingHit not found", selection);
                     }
                 }
 
@@ -92,7 +91,6 @@ public class SelectItem : MonoBehaviour
                     catch
                     {
                         ObjectLookAtEventRan = true;
-                        //Debug.Log("DetectBeingHit not found", selection);
                     }
                 }
 
@@ -111,7 +109,6 @@ public class SelectItem : MonoBehaviour
 
                 if(Input.GetKeyDown(selectObject)) {
                     selected = selection;
-                    //Debug.Log("how many");
                     /**
                      * seeing if the the hit object has interactable else do nothing
                      * handle Interaction will play an animation on the selected item (ie. open door)
@@ -133,55 +130,72 @@ public class SelectItem : MonoBehaviour
         }
 
         /**
-         * User Input checks
+         * User Input checks for drop and throw
          */
 
         //drop object that is picked up                       
-        if(Input.GetKey(dropObject) && pickedUp){
-            try { selected.gameObject.GetComponent<ObjectThrowEvents>().ObjectThrowEvent.Invoke(); } catch { }
+        if(Input.GetKey(dropObject) && pickedUp) {
+            DropObject();
+        }
 
-            pickedUp = false;
-            selected.parent = null;
-            
-            /*
-             * this try and catch is just to make sure the object has a rigidbody, 
-             * else if it doesn't add one for when it drops
-             */
-            try
-            {
-                Rigidbody selectedRB = selected.gameObject.GetComponent<Rigidbody>();
-                selectedRB.isKinematic = false;
-            } 
-            catch
-            {
-                selected.gameObject.AddComponent<Rigidbody>();
-            }
-
-        } 
-        else if(Input.GetKey(throwObject) && pickedUp) {
-            try { selected.gameObject.GetComponent<ObjectThrowEvents>().ObjectThrowEvent.Invoke(); } catch { }
-
-            pickedUp = false;
-            selected.parent = null;
-            /*
-             * this try and catch is just to make sure the object has a rigidbody, 
-             * else if it doesn't add one for when it thrown
-             */
-            try
-            {
-                Rigidbody selectedRB = selected.gameObject.GetComponent<Rigidbody>();
-                selectedRB.isKinematic = false;
-                selectedRB.AddForce(transform.forward * throwForce, ForceMode.VelocityChange);
-            } 
-            catch
-            {
-                Rigidbody selectedRB = selected.gameObject.AddComponent<Rigidbody>();
-                selectedRB.AddForce(transform.forward * throwForce, ForceMode.VelocityChange);
-            }
-            selected = null;
+        //throw object that is picked up              
+        else if (Input.GetKey(throwObject) && pickedUp) {
+            ThrowObject();
         }
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+    }
+
+    private void DropObject()
+    {
+        try { selected.gameObject.GetComponent<ObjectThrowEvents>().ObjectThrowEvent.Invoke(); } catch { }
+
+        pickedUp = false;
+        selected.parent = null;
+
+        /*
+         * this try and catch is just to make sure the object has a rigidbody, 
+         * else if it doesn't add one for when it drops
+         */
+        try
+        {
+            Rigidbody selectedRB = selected.gameObject.GetComponent<Rigidbody>();
+            selectedRB.isKinematic = false;
+        }
+        catch
+        {
+            selected.gameObject.AddComponent<Rigidbody>();
+        }
+
+        selected.gameObject.GetComponent<Collider>().enabled = true;
+        selected = null;
+    }
+
+
+    private void ThrowObject()
+    {
+        try { selected.gameObject.GetComponent<ObjectThrowEvents>().ObjectThrowEvent.Invoke(); } catch { }
+
+        pickedUp = false;
+        selected.parent = null;
+        /*
+         * this try and catch is just to make sure the object has a rigidbody, 
+         * else if it doesn't add one for when it thrown
+         */
+        try
+        {
+            Rigidbody selectedRB = selected.gameObject.GetComponent<Rigidbody>();
+            selectedRB.isKinematic = false;
+            selectedRB.AddForce(transform.forward * throwForce, ForceMode.VelocityChange);
+        }
+        catch
+        {
+            Rigidbody selectedRB = selected.gameObject.AddComponent<Rigidbody>();
+            selectedRB.AddForce(transform.forward * throwForce, ForceMode.VelocityChange);
+        }
+
+        selected.gameObject.GetComponent<Collider>().enabled = true;
+        selected = null;
     }
 
     internal void PickUpObject(Transform obj)
@@ -194,11 +208,12 @@ public class SelectItem : MonoBehaviour
         selected.parent = gameObject.transform;
         selected.localPosition = objectPosition;
         selected.localRotation = Quaternion.identity;
+        selected.gameObject.GetComponent<Collider>().enabled = false;
         //stop its phyiscs so it will stop giggling around
+
         try { selected.gameObject.GetComponent<Rigidbody>().isKinematic = true; } catch { }
         try { selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectPickUpEvent.Invoke(); } catch { }
     }
-
 
     internal GameObject getHeldObject()
     {
