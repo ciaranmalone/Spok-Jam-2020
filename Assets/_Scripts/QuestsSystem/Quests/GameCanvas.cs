@@ -12,6 +12,7 @@ public class GameCanvas : MonoBehaviour
     GameObject questPrefab, questPivot;
     [SerializeField]
     int questTextOffset;
+    int scale;
     GameObject[] uiQuests;
 
 
@@ -26,8 +27,9 @@ public class GameCanvas : MonoBehaviour
     /// 
     /// It is asking for the dictionary of current quests, because it will strikethrough ones already completed
     /// </summary>
-    internal void MakeObjectives(QuestID[] quests)
+    internal void MakeObjectives(QuestID[] quests, int scale)
     {
+        this.scale = scale;
         if(uiQuests!=null)
         {
             foreach(GameObject go in uiQuests)
@@ -53,7 +55,9 @@ public class GameCanvas : MonoBehaviour
             Quest curr = GameManager.gameManager.qs.getQuest(quest);
 
             //step 2: assign data
-            UIRepresentation.GetComponent<RectTransform>().localPosition = new Vector3(pivot.x, pivot.y - (questTextOffset * (questOffset)));
+            RectTransform rt = UIRepresentation.GetComponent<RectTransform>();
+            rt.localPosition = new Vector3(pivot.x, pivot.y - ((questTextOffset / scale) * (questOffset)));
+            rt.localScale = Vector3.one/scale;
             UIRepresentation.GetComponent<TextMeshProUGUI>().text = curr.count > 1 ? $"{curr.description} (0/{curr.count})" : curr.description;
 
             ////setting the mission counter to both TriggerCompleteObjective and ObjectiveController scripts
@@ -86,7 +90,9 @@ public class GameCanvas : MonoBehaviour
         Quest curr = GameManager.gameManager.qs.getQuest(quest);
 
         //step 2: assign data
-        UIRepresentation.GetComponent<RectTransform>().localPosition = new Vector3(pivot.x, pivot.y - (questTextOffset * (questOffset)));
+        RectTransform rt = UIRepresentation.GetComponent<RectTransform>();
+        rt.localPosition = new Vector3(pivot.x, pivot.y - ((questTextOffset/scale) * (questOffset)));
+        rt.localScale = Vector3.one / scale;
         UIRepresentation.GetComponent<TextMeshProUGUI>().text = curr.count > 1 ? $"{curr.description} (0/{curr.count})" : curr.description;
     }
 

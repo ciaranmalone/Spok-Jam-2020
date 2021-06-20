@@ -12,6 +12,7 @@ public class IveBeenPickedUp : MonoBehaviour
 
     void OnTransformParentChanged()
     {
+        if (!audioData) return;
         if(SelectItem.pickedUp == true) 
         {
             audioData.Play();

@@ -130,17 +130,33 @@ public class GameManager : MonoBehaviour
         //complete specified quests in current phase
         if(completedQuests!=null && completedQuests.Count>0)
         {
-            //draw current phase quests
-            DrawQuests();
+            RebuildQuestList();
+        }
+        //assign current phase if it doesn't exist
+        else
+        {
+            CreatePhase();
+        }
 
+
+        SetActivePhase();
+        loading = false;
+    }
+
+    internal void RebuildQuestList(bool visual = false)
+    {
+        //draw current phase quests
+        DrawQuests();
+        if (!visual)
+        {
             WorldQuests.Quest[] questlist = GetCurrentPhase(phase).GetComponentsInChildren<WorldQuests.Quest>();
 
-            foreach(WorldQuests.Quest qst in questlist)
+            foreach (WorldQuests.Quest qst in questlist)
             {
                 bool pass;
-                if(completedQuests.TryGetValue(qst.quest_id, out pass))
+                if (completedQuests.TryGetValue(qst.quest_id, out pass))
                 {
-                    if(pass)
+                    if (pass)
                     {
                         qst.QuestCompleteWQ();
                     }
@@ -169,15 +185,23 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        //assign current phase if it doesn't exist
         else
         {
-            CreatePhase();
+            foreach (KeyValuePair<QuestID, bool> qst in completedQuests)
+            {
+                //if passed
+                if (qst.Value) canvas.QuestCompleteC(getQuestPosition(qst.Key));
+            }
+            Dictionary<QuestID, bool> bonus;
+            if (bonusQuests.TryGetValue(phase, out bonus))
+            {
+                foreach (KeyValuePair<QuestID, bool> qst in bonus)
+                {
+                    //if passed
+                    if (qst.Value) canvas.QuestCompleteC(getQuestPosition(qst.Key));
+                }
+            }
         }
-
-
-        SetActivePhase();
-        loading = false;
     }
 
     internal void CreatePhase(bool _new = false)
@@ -234,6 +258,9 @@ public class GameManager : MonoBehaviour
 
             //increase missions remaining for current phase
             missionsRemaining++;
+
+            //redraw quests to adjust for scale
+            RebuildQuestList(true);
         }
     }
 
@@ -418,7 +445,7 @@ public class GameManager : MonoBehaviour
         QuestID[] quests = new QuestID[completedQuests.Keys.Count + bonus.Keys.Count];
         completedQuests.Keys.ToArray().CopyTo(quests, 0);
         bonus.Keys.ToArray().CopyTo(quests, completedQuests.Keys.Count);
-        canvas.MakeObjectives(quests);
+        canvas.MakeObjectives(quests, quests.Length < 6 ? 1 : quests.Length < 12 ? 2 : 3);
     }
 
     internal bool isQuestComplete(QuestID quest)
@@ -427,8 +454,6 @@ public class GameManager : MonoBehaviour
         if(completedQuests.TryGetValue(quest, out didI)) return didI;
         return false;
     }
-
-
 }
 
 internal class Dumb3
