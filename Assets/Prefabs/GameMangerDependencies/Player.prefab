@@ -908,7 +908,7 @@ MonoBehaviour:
   jumpHeight: 3
   isGrounded: 0
   crouched: 0
-  jump: 32
+  jump: 0
   crouch: 306
   sprint: 304
   sprintOn: {r: 1, g: 0, b: 0, a: 0.6509804}
