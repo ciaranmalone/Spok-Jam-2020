@@ -392,16 +392,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            phase = PhaseID.Phase0;
-            looped = true;
-
-            ///NOT NEEDED UNLESS I REFACTOR ONSCENELOADED TO ACTUALLY WORRY ABOUT THE PHASE 0!!!
-            //GameObject funky = Instantiate(new GameObject(), new Vector3(player.transform.position.x, player.transform.position.y + 399, player.transform.position.z), Quaternion.identity, //bad transform, do p0 instead player.transform);
-            //funky.AddComponent<WorldQuests.Quest>().quest_id = QuestID.P0M0;
-            //funky.AddComponent<BoxCollider>().isTrigger = true;
-
-            SetActivePhase();
-            CreatePhase();
+            StartPhaseLoop();
         }
     }
 
@@ -453,6 +444,20 @@ public class GameManager : MonoBehaviour
         bool didI;
         if(completedQuests.TryGetValue(quest, out didI)) return didI;
         return false;
+    }
+
+    internal void StartPhaseLoop()
+    {
+        phase = PhaseID.Phase0;
+        looped = true;
+
+        ///NOT NEEDED UNLESS I REFACTOR ONSCENELOADED TO ACTUALLY WORRY ABOUT THE PHASE 0!!!
+        //GameObject funky = Instantiate(new GameObject(), new Vector3(player.transform.position.x, player.transform.position.y + 399, player.transform.position.z), Quaternion.identity, //bad transform, do p0 instead player.transform);
+        //funky.AddComponent<WorldQuests.Quest>().quest_id = QuestID.P0M0;
+        //funky.AddComponent<BoxCollider>().isTrigger = true;
+
+        SetActivePhase();
+        CreatePhase();
     }
 }
 
