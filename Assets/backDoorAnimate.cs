@@ -14,7 +14,6 @@ public class backDoorAnimate : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         audioData = GetComponent<AudioSource>();
-        ;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,6 +22,17 @@ public class backDoorAnimate : MonoBehaviour
         {
             anim.Play(animationOne);
             audioData.Play();
+
+            foreach(GameObject child in transform){
+                child.SetActive(true);
+                child.SetActive(true);
+            }
+        }
+        else{
+            foreach(GameObject child in transform){
+                child.SetActive(false);
+                child.SetActive(false);
+            }
         }
     }
 
