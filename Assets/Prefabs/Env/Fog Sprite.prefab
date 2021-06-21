@@ -98,5 +98,5 @@ MonoBehaviour:
   maxAlpha: 0.05
   playerName: Player
   fadeStartRange: 20
-  invisibleRange: 5
+  invisibleRange: 10
   DEBUG: 0

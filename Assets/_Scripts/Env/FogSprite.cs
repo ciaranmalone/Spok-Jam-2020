@@ -24,21 +24,27 @@ public class FogSprite : MonoBehaviour
     {
         transform.LookAt(Player);
         transform.Rotate(0, 180, 0);
-        //transform.rotation = Quaternion.Euler(0, transform.rotation.y, transform.rotation.z);
+
         float distanceToPlayer = Vector3.Distance(transform.position, Player.position);
         
         if(distanceToPlayer < invisibleRange) {
             sprite.color = new Color(1, 1, 1, 0);
         }
-        else if (distanceToPlayer <= fadeStartRange + 10)
+        else if (distanceToPlayer <= fadeStartRange)
         {
-            sprite.color = new Color(1, 1, 1, (distanceToPlayer / (fadeStartRange + 10)) * maxAlpha);
-        if (DEBUG)
-        {
-            print("distanceToPlayer / fadeStartRange + 10: " + distanceToPlayer / fadeStartRange + 10);
-            print("distanceToPlayer: " + distanceToPlayer);
-            print("fadeStartRange + 10: " + (fadeStartRange + 10));
-        }
+            //sprite.color = new Color(1, 1, 1, (distanceToPlayer / (fadeStartRange + 10)) * maxAlpha);
+
+
+            float newAlpha = ((distanceToPlayer - invisibleRange) / (fadeStartRange - invisibleRange)) * maxAlpha;
+            sprite.color = new Color(1, 1, 1, newAlpha);
+
+            if (DEBUG)
+            {
+                print("newAlpha: " + newAlpha);
+                print("everything minus maxAlpha: " + ((distanceToPlayer - invisibleRange) / (fadeStartRange - invisibleRange)));
+                print("distanceToPlayer: " + distanceToPlayer);
+                print("fadeStartRange: " + fadeStartRange);
+            }
         }
         else
         {
