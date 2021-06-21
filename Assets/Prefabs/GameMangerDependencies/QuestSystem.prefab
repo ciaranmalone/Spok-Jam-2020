@@ -83,6 +83,12 @@ MonoBehaviour:
       description: Bring Out Bins
       objectName: 6
       clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
+  - quests:
+    - quest_id: 8
+      count: 1
+      description: Somebody Ring the Dinkster?
+      objectName: 0
+      clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
   bonusQuests:
   - quest_id: 10
     count: 3
