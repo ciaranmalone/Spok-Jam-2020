@@ -11,7 +11,7 @@ namespace WorldQuests
         [SerializeField]
         ProgrammaticQuests.QuestObjectName itemToCollideWith;
         [SerializeField]
-        bool canvas;
+        bool canvas, destroyMe = false;
         [SerializeField]
         internal ProgrammaticQuests.QuestID quest_id;
 
@@ -24,6 +24,15 @@ namespace WorldQuests
                 {
                     FakeToFromAnimation ftfa = GetComponent<FakeToFromAnimation>();
                     if (ftfa) ftfa.Animate();
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                //print("SOMETHING IS SUPPOSED TO HAPPEN HERE???");
+                if(destroyMe)
+                {
+                    GameManager.gameManager.CreateBonusQuest(quest_id);
                     Destroy(gameObject);
                 }
             }

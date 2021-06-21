@@ -9,6 +9,7 @@ public class EggQuestEditor : Editor
 {
 
     SerializedProperty canvas;
+    SerializedProperty destroyMe;
     SerializedProperty itemToCollideWith;
     SerializedProperty quest_id;
 
@@ -17,6 +18,7 @@ public class EggQuestEditor : Editor
         itemToCollideWith = serializedObject.FindProperty("itemToCollideWith");
         canvas = serializedObject.FindProperty("canvas");
         quest_id = serializedObject.FindProperty("quest_id");
+        destroyMe = serializedObject.FindProperty("destroyMe");
     }
 
     public override void OnInspectorGUI()
@@ -28,6 +30,8 @@ public class EggQuestEditor : Editor
         if (canvas.boolValue)
         {
             EditorGUILayout.PropertyField(quest_id, new GUIContent("Quest ID"));
+            EditorGUILayout.PropertyField(destroyMe, new GUIContent("Destroy Me?"));
+
         }
         else
         {

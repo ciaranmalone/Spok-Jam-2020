@@ -47,7 +47,7 @@ MonoBehaviour:
   - quests:
     - quest_id: 0
       count: 1
-      description: Open the garage...
+      description: Do NOT open the garage
       objectName: 0
       clip: {fileID: 0}
   - quests:

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;
 
+    public bool debug = false;
+
     //Player
     private GameObject player;
     private Vector3 playerPos;
@@ -214,9 +216,12 @@ public class GameManager : MonoBehaviour
         completedQuests = new Dictionary<QuestID, bool>();
         GameObject iterPhase = GetCurrentPhase(phase);
 
-        foreach (WorldQuests.Quest quest in iterPhase.GetComponentsInChildren<WorldQuests.Quest>())
+        if (iterPhase)
         {
-            completedQuests.Add(quest.quest_id, false);
+            foreach (WorldQuests.Quest quest in iterPhase.GetComponentsInChildren<WorldQuests.Quest>())
+            {
+                completedQuests.Add(quest.quest_id, false);
+            }
         }
         missionsRemaining = completedQuests.Count;
 
@@ -386,13 +391,20 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (debug)
         {
-            Teleport(SceneManager.GetActiveScene().name);
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            StartPhaseLoop();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                Teleport(SceneManager.GetActiveScene().name);
+            }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                StartPhaseLoop();
+            }
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                CreatePhase(true);
+            }
         }
     }
 
