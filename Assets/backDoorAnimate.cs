@@ -19,34 +19,37 @@ public class backDoorAnimate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(phasesToBreakOn.Any(t => t == GameManager.gameManager.phase))
-        {
-            foreach (Transform child in transform)
+        if (other.gameObject.CompareTag("Player")) {
+            if (phasesToBreakOn.Any(t => t == GameManager.gameManager.phase))
             {
-                child.gameObject.SetActive(true);
-                child.gameObject.SetActive(true);
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.SetActive(true);
+                    child.gameObject.SetActive(true);
+                }
             }
-        }
-        else{
-            anim.Play(animationOne);
-            audioData.Play();
+            else {
+                anim.Play(animationOne);
+                audioData.Play();
 
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(false);
-                child.gameObject.SetActive(false);
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.SetActive(false);
+                    child.gameObject.SetActive(false);
+                }
+
             }
-
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!phasesToBreakOn.Any(t => t == GameManager.gameManager.phase))
+        if (other.gameObject.CompareTag("Player") && !phasesToBreakOn.Any(t => t == GameManager.gameManager.phase))
         {
             anim.Play(animationTwo);
 
         }
+
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(false);
