@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;
 
-    public bool debug = false;
+    public static bool debug = false;
 
     //Player
     private GameObject player;
@@ -48,7 +48,11 @@ public class GameManager : MonoBehaviour
     /// to check if game is loading
     /// </summary>
     internal bool loading;
-    
+    /// <summary>
+    /// for fail safe when trying to go to the main menu
+    /// </summary>
+    bool pressedEscape = false;
+
     void Awake()
     {
         if (gameManager == null)
@@ -388,7 +392,6 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-
     private void Update()
     {
         if (debug)
@@ -405,6 +408,20 @@ public class GameManager : MonoBehaviour
             {
                 CreatePhase(true);
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(pressedEscape)
+            {
+                SceneManager.LoadScene("Splash");
+            }
+
+            pressedEscape = true;
+        }
+        else if(Input.anyKeyDown)
+        {
+            pressedEscape = false;
         }
     }
 
@@ -470,6 +487,16 @@ public class GameManager : MonoBehaviour
 
         SetActivePhase();
         CreatePhase();
+    }
+
+    private void OnDestroy()
+    {
+        //no need to worry about unloading this way?
+        if(this == gameManager)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            gameManager = null;
+        }
     }
 }
 
