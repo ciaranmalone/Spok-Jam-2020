@@ -5,16 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class EnemyCollisonTrigger : MonoBehaviour
 {
-    [SerializeField] private string[] scenes;
+    [SerializeField] private sceneTeleport[] scenes;
     private int indexChoice;
     private Animator animator;
 
     private void Start()
     {
+
         animator = IndicatorSingletons.blackScreenSingleton.GetComponent<Animator>();
     }
     private void OnTriggerEnter(Collider other) {
-        if(other.tag == "Player" )
+        if(other.CompareTag("Player") )
         {
             StartCoroutine("loadTheScene");
         }
@@ -24,6 +25,17 @@ public class EnemyCollisonTrigger : MonoBehaviour
         animator.SetTrigger("FadeOut");
         yield return new WaitForSeconds(2f);
         indexChoice = Random.Range(0, scenes.Length);
-        GameManager.gameManager.Teleport(scenes[indexChoice]);
+        if (scenes[indexChoice].specificLocation)
+            GameManager.gameManager.Teleport(scenes[indexChoice].sceneName, Dumb3.Vector32Dumb3(scenes[indexChoice].playerTeleportLocation)); 
+        else 
+            GameManager.gameManager.Teleport(scenes[indexChoice].sceneName);
     }
+}
+
+[System.Serializable]
+internal class sceneTeleport
+{
+    [SerializeField] internal string sceneName;
+    [SerializeField] internal bool specificLocation = false;
+    [SerializeField] internal Vector3 playerTeleportLocation;
 }

@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/OtherDimensions/LongFieldsDimension.unity
     guid: 2bb95759e3f465345abfea1f29a0345b
+  - enabled: 1
+    path: Assets/_Scenes/OtherDimensions/BlenderDimension.unity
+    guid: f950b1180d0c90148bc14334daaabb64
   m_configObjects: {}

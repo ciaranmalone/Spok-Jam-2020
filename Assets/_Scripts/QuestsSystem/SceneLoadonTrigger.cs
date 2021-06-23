@@ -8,6 +8,9 @@ public class SceneLoadonTrigger : MonoBehaviour
     [SerializeField] Vector3 areaToTeleport =  new Vector3(-65,-21,-70);
     private void OnTriggerEnter(Collider other)
     {
-        GameManager.gameManager.Teleport(sceneName, Dumb3.Vector32Dumb3(areaToTeleport));
+        if (other.CompareTag("Player"))
+        {
+            GameManager.gameManager.Teleport(sceneName, Dumb3.Vector32Dumb3(areaToTeleport));
+        }
     }
 }

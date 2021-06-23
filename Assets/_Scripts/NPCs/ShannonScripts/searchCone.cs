@@ -11,8 +11,6 @@ public class searchCone : MonoBehaviour
     private Camera cam;
     private Transform camTransform;
 
-    private Vector3 target;
-    private float angle;
     private void Start()
     {
         cam = PlayerMovement.Instance.GetComponentInChildren<Camera>();
@@ -23,8 +21,8 @@ public class searchCone : MonoBehaviour
         /**
          * hide enemy if angle between player and enemy is less then than coneAngle
          */
-        target = transform.position - camTransform.position;
-        angle = Vector3.Angle(target, camTransform.forward);
+        Vector3 target = transform.position - camTransform.position;
+        float angle = Vector3.Angle(target, camTransform.forward);
         cam.cullingMask = angle < coneAngle? enemyMask : everyMask;
     }
 }
