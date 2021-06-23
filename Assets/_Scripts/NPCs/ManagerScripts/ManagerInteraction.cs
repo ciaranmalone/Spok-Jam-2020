@@ -8,8 +8,8 @@ public class ManagerInteraction : MonoBehaviour
 {
     //Audio and subtitles
     [Header("Audio and Subtitles")]
-    [SerializeField] private AudioClip[] AudioClips;
-    [SerializeField] private string[] subtitles;
+    [SerializeField] Dialog[] dialog;
+    [SerializeField] Dialog[] InteruptDialog;
     [SerializeField] private TextMeshProUGUI subTitletext;
     private AudioSource AudioSource;
     private bool playedAudio = false;
@@ -39,7 +39,7 @@ public class ManagerInteraction : MonoBehaviour
     private void OnTriggerEnter(Collider other) 
    {
        if(other.tag == "Player" && !playedAudio){
-            StartCoroutine(dialBegin());
+            StartCoroutine(DialogInteraction());
             managerAnim.setState(managerAnimation.state.talking);
             wheelAnim.setState(ManagerWheelAnimation.state.wheelSpin);
 
@@ -49,16 +49,29 @@ public class ManagerInteraction : MonoBehaviour
        }
    }
 
-    IEnumerator dialBegin() {
-        for(int i = 0; i < AudioClips.Length; i++)
+    /// <summary>
+    /// Plays through all the Dialog Clips and text in order then calls Leave Store IEnumerator
+    /// </summary>
+    IEnumerator DialogInteraction() {
+        ProgrammaticQuests.PhaseID currentPhase = GameManager.gameManager.phase;
+
+        for(int i = 0; i < dialog.Length; i++)
         {
-            AudioSource.clip = AudioClips[i];
-            subTitletext.text = subtitles[i];
+            AudioSource.clip = dialog[i].dialogAudio;
+            subTitletext.text = dialog[i].dialogText;
             AudioSource.Play();
-            yield return new WaitForSeconds(AudioSource.clip.length);   
+          
+            yield return new WaitForSeconds(AudioSource.clip.length);
+
+            if (currentPhase != GameManager.gameManager.phase)
+            {
+                AudioSource.clip = InteruptDialog[0].dialogAudio;
+                subTitletext.text = InteruptDialog[0].dialogText;
+                AudioSource.Play();
+                break;
+            }
         }
-        subTitletext.text = "";
-        StartCoroutine(leaveStore());    
+        StartCoroutine(LeaveStore());    
     }
 
     void Update () {
@@ -88,7 +101,7 @@ public class ManagerInteraction : MonoBehaviour
         destPoint = (destPoint + 1);
     }
 
-    IEnumerator leaveStore() {
+    IEnumerator LeaveStore() {
         agent.isStopped = false;
 
         left = true;
@@ -96,7 +109,15 @@ public class ManagerInteraction : MonoBehaviour
         wheelAnim.setState(ManagerWheelAnimation.state.wheelSpin);
         agent.SetDestination(endPoint.position);
 
-        yield return new WaitForSeconds(10f);   
+        yield return new WaitForSeconds(10f);
+        subTitletext.text = "";
         Destroy(gameObject);   
     } 
+}
+
+[System.Serializable]
+internal class Dialog
+{
+    [SerializeField] internal string dialogText;
+    [SerializeField] internal AudioClip dialogAudio;
 }

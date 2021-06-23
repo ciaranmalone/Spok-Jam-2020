@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
 
 public class FogSprite : MonoBehaviour
 {
     [SerializeField] private float maxAlpha = 0.5f;
-    [SerializeField] private string playerName = "Player";
     [SerializeField] private float fadeStartRange = 20f;
     [SerializeField] private float invisibleRange = 5f;
     [SerializeField] private bool DEBUG = false;
@@ -17,7 +15,7 @@ public class FogSprite : MonoBehaviour
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
-        Player = GameObject.Find(playerName).transform;
+        Player = PlayerMovement.Instance.transform;
     }
 
     void Update()
