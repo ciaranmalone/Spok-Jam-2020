@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         loading = true;
 
         //Import current scene objects 
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = PlayerMovement.Instance.gameObject;
         qs = FindObjectOfType<QuestSystem>();
         phases = FindObjectsOfType<WorldQuests.Phase>();
         canvas = FindObjectOfType<GameCanvas>();
