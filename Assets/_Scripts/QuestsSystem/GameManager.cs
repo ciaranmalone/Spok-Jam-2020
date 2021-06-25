@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         loading = true;
-
+        UnityEngine.Random.InitState(42);
         //Import current scene objects 
         player = PlayerMovement.Instance.gameObject;
         qs = FindObjectOfType<QuestSystem>();

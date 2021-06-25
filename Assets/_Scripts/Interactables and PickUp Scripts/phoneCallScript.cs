@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
 public class phoneCallScript : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] AudioClips;
-    [SerializeField] private string[] subtitles;
+    [SerializeField] private Dialog[] dialog;
+    [SerializeField] private Dialog ringNoise;
+    [SerializeField] private Dialog HangUp;
+
     [SerializeField] private TextMeshProUGUI subTitleText;
     private AudioSource AudioSource;
 
@@ -18,22 +21,22 @@ public class phoneCallScript : MonoBehaviour
     {
         AudioSource = GetComponent<AudioSource>();
         subTitleText.text = "";
-        //GameEvents.current.onPhaseChange += PhasePhoneCall;
     }
 
-    // Update is called once per frame
     internal void PhasePhoneCall(string phase)
     {
-        if(this.phase == phase) {
+        if (this.phase == phase)
+        {
             StartCoroutine(StartRinging());
         }
     }
-    IEnumerator dialBegin() {
+
+    IEnumerator DialogInteraction() {
         GameManager.gameManager.spawnNextTaskSheet();
-        for(int i = 1; i < AudioClips.Length; i++)
+        for(int i = 1; i < dialog.Length; i++)
         {
-            AudioSource.clip = AudioClips[i];
-            subTitleText.text = subtitles[i];
+            AudioSource.clip = dialog[i].dialogAudio;
+            subTitleText.text = dialog[i].dialogText;
             AudioSource.Play();
             yield return new WaitForSeconds(AudioSource.clip.length);   
         }
@@ -44,8 +47,8 @@ public class phoneCallScript : MonoBehaviour
     IEnumerator StartRinging() {
         Ringing = true; 
 
-        AudioSource.clip = AudioClips[0];
-        subTitleText.text = subtitles[0];
+        AudioSource.clip = ringNoise.dialogAudio;
+        subTitleText.text = ringNoise.dialogText;
         AudioSource.loop = true;
         AudioSource.Play();
 
@@ -58,6 +61,6 @@ public class phoneCallScript : MonoBehaviour
         AudioSource.loop = false;
         Ringing = false; 
 
-        StartCoroutine(dialBegin());
+        StartCoroutine(DialogInteraction());
     }
 }

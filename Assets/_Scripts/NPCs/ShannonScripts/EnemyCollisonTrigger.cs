@@ -11,10 +11,10 @@ public class EnemyCollisonTrigger : MonoBehaviour
 
     private void Start()
     {
-
         animator = IndicatorSingletons.blackScreenSingleton.GetComponent<Animator>();
     }
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other) 
+    {
         if(other.CompareTag("Player") )
         {
             StartCoroutine("loadTheScene");
