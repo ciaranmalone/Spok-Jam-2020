@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 1816991780}
   m_Layer: 0
   m_Name: BottleStock
-  m_TagString: pickUp
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2331084793629330710
 Transform:
@@ -122,10 +122,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5102730358039149663, guid: e92b79f6eb3768542b384cb1296ea00f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c0205065d52bbf64a98182c27066470d, type: 2}
     - target: {fileID: 919132149155446097, guid: e92b79f6eb3768542b384cb1296ea00f,
         type: 3}
       propertyPath: m_Name
       value: BottleStack
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e92b79f6eb3768542b384cb1296ea00f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8301639047439158617, guid: e92b79f6eb3768542b384cb1296ea00f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e92b79f6eb3768542b384cb1296ea00f, type: 3}
