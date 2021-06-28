@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
     public static GameManager gameManager;
 
     public static bool debug = false;
+    [SerializeField]
+    private bool editor_debug = false;
+    bool isDestroyed = false;
+
+    
 
     //Player
     private GameObject player;
@@ -82,6 +87,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (isDestroyed) return; //not elegant and i feel bad, sorry
         loading = true;
         UnityEngine.Random.InitState(42);
         //Import current scene objects 
@@ -394,7 +400,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (debug)
+        if (debug || editor_debug)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -489,13 +495,24 @@ public class GameManager : MonoBehaviour
         CreatePhase();
     }
 
+    internal void SelfDestruct()
+    {
+        Unsubscribe();
+        Destroy(gameObject);
+    }
+
+    internal void Unsubscribe()
+    {
+        isDestroyed = true;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        gameManager = null;
+    }
     private void OnDestroy()
     {
         //no need to worry about unloading this way?
         if(this == gameManager)
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-            gameManager = null;
+            if (!isDestroyed) Unsubscribe();
         }
     }
 }

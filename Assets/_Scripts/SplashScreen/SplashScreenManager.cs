@@ -8,11 +8,11 @@ public class SplashScreenManager : MonoBehaviour
 {
     [SerializeField]
     string GameScene;
-    void Start()
+    void Awake()
     {
         if(GameManager.gameManager)
         {
-            Destroy(GameManager.gameManager.gameObject);
+            GameManager.gameManager.SelfDestruct();
         }
         FindObjectOfType<Toggle>().isOn = GameManager.debug;
 
