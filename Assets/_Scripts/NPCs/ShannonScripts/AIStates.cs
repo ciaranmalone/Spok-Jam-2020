@@ -7,14 +7,12 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AIStates : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    private Transform target;
     
     [Header("States")] 
     [SerializeField] private aiState startingState;
     [SerializeField] private aiState currentState;
     private enum aiState {patrol, chase, attack, idle, waitingBetweenPatrolPoints};
-    
-    
     
     [Header ("Patrol")]
     [SerializeField] private float patrolMoveSpeed;
@@ -31,7 +29,7 @@ public class AIStates : MonoBehaviour
     [SerializeField] private searchCone coneOfVision;
     
     [Header ("Chase")]
-    [SerializeField] private Transform player;
+    private Transform player;
     [SerializeField] private float chaseSpeed;
     [SerializeField] private float catchDistance;
 
@@ -45,8 +43,8 @@ public class AIStates : MonoBehaviour
         
         setPatrolPointsIfNull();
         agent = GetComponent<NavMeshAgent>();
-        print(GameObject.FindWithTag("Player").name);
-        player = GameObject.FindWithTag("Player").transform;
+        //        print(GameObject.FindWithTag("Player").name);
+        player = PlayerMovement.Instance.transform;
         
         target = player; //ensure target is never null
         
@@ -63,6 +61,7 @@ public class AIStates : MonoBehaviour
         switch (currentState)
         {
             case (aiState.idle): break;
+
             case (aiState.waitingBetweenPatrolPoints): break;
 
             case (aiState.patrol):
