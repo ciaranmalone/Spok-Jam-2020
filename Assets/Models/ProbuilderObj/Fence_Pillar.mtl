@@ -1,0 +1,10 @@
+newmtl brickWall
+map_Kd wall2.tga
+Kd 1 1 1
+d 1
+
+newmtl whiteWall
+map_Kd whitewall.png
+Kd 1 1 1
+d 1
+
