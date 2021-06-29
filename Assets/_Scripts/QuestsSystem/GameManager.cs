@@ -455,6 +455,27 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Teleports featuring vector3, because evan wants override functions
+    /// </summary>
+    /// <param name="scene"></param>
+    internal void Teleport(string scene, Vector3 pos)
+    {
+        playerPos = pos;
+        playerRot = player.transform.rotation;
+        playerCameraRot = player.GetComponentInChildren<Camera>().transform.localRotation;
+        playerTP = true;
+
+        GameObject temp = player.GetComponentInChildren<SelectItem>().getHeldObject();
+        if (temp)
+        {
+            heldObjectCache = Instantiate(temp);
+            heldObjectCache.SetActive(false);
+            DontDestroyOnLoad(heldObjectCache);
+        }
+        SceneManager.LoadScene(scene);
+    }
+
+    /// <summary>
     /// template on how to remove pesistance
     /// </summary>
     void Death()
