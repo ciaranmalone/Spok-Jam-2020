@@ -9,19 +9,26 @@ public class StrangerInteraction : MonoBehaviour
     [Header("Audio and Subtitles")]
     [SerializeField] Dialog[] dialog;
     [SerializeField] Dialog[] InteruptDialog;
+    [SerializeField] Dialog LeavingDialog;
     [SerializeField] private TextMeshProUGUI subTitletext;
+    [SerializeField]internal ProgrammaticQuests.QuestID quest_id;
 
     private AudioSource AudioSource;
-    private NavMeshAgent agent;
+    private Renderer renderer;
+    private bool conversationStarted = false;
 
     private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        renderer = GetComponent<Renderer>();
         AudioSource = GetComponent<AudioSource>();
     }
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine("DialogInteraction");
+        if(other.CompareTag("Player") && !conversationStarted)
+        {
+            conversationStarted = true;
+            StartCoroutine("DialogInteraction");
+        }
     }
 
     IEnumerator DialogInteraction()
@@ -44,5 +51,27 @@ public class StrangerInteraction : MonoBehaviour
                 break;
             }
         }
+        StartCoroutine("Leave");
+    }
+
+    IEnumerator Leave()
+    {
+        AudioSource.clip = LeavingDialog.dialogAudio;
+        subTitletext.text = LeavingDialog.dialogText;
+        AudioSource.Play();
+
+        float opacityMaterial = 1f;
+        while (opacityMaterial > 0)
+        {
+            renderer.material.color = new Color(0,0,0, opacityMaterial);
+            yield return new WaitForSeconds(.05f);
+            opacityMaterial -= .1f;
+        }
+
+        yield return new WaitForSeconds(AudioSource.clip.length);
+        subTitletext.text = "";
+        GameManager.gameManager.CreateBonusQuest(quest_id);
+
+        Destroy(gameObject);
     }
 }

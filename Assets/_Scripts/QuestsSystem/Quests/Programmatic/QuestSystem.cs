@@ -28,6 +28,7 @@ namespace ProgrammaticQuests
         P4M2,
         OPT1,
         OPT2,
+        OPT3,
     }
 
     enum QuestObjectName
