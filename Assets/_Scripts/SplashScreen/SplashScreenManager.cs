@@ -20,18 +20,14 @@ public class SplashScreenManager : MonoBehaviour
         Cursor.visible = true;
     }
 
-    public void StartGame()
-    {
-        SceneManager.LoadScene(GameScene);
-    }
+    public void StartGame() => SceneManager.LoadScene(GameScene);
 
-    public void ToggleDebug()
-    {
-        GameManager.debug = FindObjectOfType<Toggle>().isOn;
-    } 
+    public void ToggleDebug() => GameManager.debug = FindObjectOfType<Toggle>().isOn;
 
-    public void QuitGame()
-    {
-        Application.Quit(0);
+    public void QuitGame() => Application.Quit(0);
+
+    public void hideBackground(){
+        transform.parent.transform.parent.GetComponent<AudioSource>().enabled = true;
+        transform.parent.gameObject.SetActive(false);
     }
 }
