@@ -26,8 +26,12 @@ public class SplashScreenManager : MonoBehaviour
 
     public void QuitGame() => Application.Quit(0);
 
+
+    //for splash screen animator
     public void hideBackground(){
-        transform.parent.transform.parent.GetComponent<AudioSource>().enabled = true;
-        transform.parent.gameObject.SetActive(false);
+        transform.parent.GetComponent<AudioSource>().enabled = true;
+        transform.parent.Find("BG").gameObject.SetActive(false);
     }
+
+
 }
