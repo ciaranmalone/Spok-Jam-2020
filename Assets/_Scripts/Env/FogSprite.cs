@@ -9,21 +9,26 @@ public class FogSprite : MonoBehaviour
     [SerializeField] private float invisibleRange = 5f;
     [SerializeField] private bool DEBUG = false;
     private SpriteRenderer sprite;
-    private Transform Player;
+    private Transform Target;
+
+    [SerializeField] bool targetPlayer = true;
+
+    [SerializeField] string alternateTarget;
     
     // Start is called before the first frame update
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
-        Player = PlayerMovement.Instance.transform;
+        
+        assignTarget();
     }
 
     void Update()
     {
-        transform.LookAt(Player);
+        transform.LookAt(Target);
         transform.Rotate(0, 180, 0);
 
-        float distanceToPlayer = Vector3.Distance(transform.position, Player.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, Target.position);
         
         if(distanceToPlayer < invisibleRange) {
             sprite.color = new Color(1, 1, 1, 0);
@@ -50,5 +55,31 @@ public class FogSprite : MonoBehaviour
         }
 
 
+    }
+
+    private void assignTarget(){
+        if(targetPlayer){
+            try{
+                Target = PlayerMovement.Instance.transform;
+            }
+            catch{
+
+                try{
+                    Target = GameObject.Find(alternateTarget).transform;
+                }
+                catch{
+                    print("No valid target found");
+                    this.enabled = false;
+                }
+            }
+        }else{
+            try{
+                    Target = GameObject.Find(alternateTarget).transform;
+                }
+            catch{
+                print("No valid target found");
+                this.enabled = false;
+            }
+        }
     }
 }
