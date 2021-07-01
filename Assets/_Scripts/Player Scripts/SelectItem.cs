@@ -64,23 +64,6 @@ public class SelectItem : MonoBehaviour
                 PickUpIndicator.SetActive(true);
                 lightPointPickUp.transform.position = hit.point;
 
-                /* 
-                 * seeing if the the hit object has DetectBeingHit else do nothing
-                 * the imBeingLookedAt is used for a cheap jumpscare in the game when the player looks at a crt for too long
-                 * it is only used once in the game so far.
-                 */
-                if (imBeingLookedAtExists)
-                {
-                    try
-                    {
-                        selection.gameObject.GetComponent<DetectBeingHit>().imBeingLookedAt();
-                    }
-                    catch
-                    {
-                        imBeingLookedAtExists = false;
-                    }
-                }
-
                 if (!ObjectLookAtEventRan)
                 {
                     try
@@ -218,5 +201,10 @@ public class SelectItem : MonoBehaviour
     internal GameObject getHeldObject()
     {
         return selected ? selected.gameObject : null;
+    }
+
+    internal GameObject getLookedAtObject()
+    {
+        return selection ? selection.gameObject : null;
     }
 }
