@@ -14,20 +14,24 @@ public class AppearOtherDimension : MonoBehaviour
     [SerializeField] private GameObject Player;
     [SerializeField] private Transform PlayerTeleport;
 
-    private void Start() {
+    private void Start()
+    {
         OtherDimension.SetActive(false);
         GameEvents.current.onPhaseChange += handleAppearDimension;
-        
+
     }
-    private void OnTriggerEnter(Collider other) {
-        if(other.tag == "Player"){
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
             OtherDimension.SetActive(true);
             anim.Play(animation);
         }
     }
     void handleAppearDimension(string phase)
     {
-        if(phase == this.phase) {
+        if (phase == this.phase)
+        {
             OtherDimension.SetActive(true);
             Player.transform.position = PlayerTeleport.position;
 

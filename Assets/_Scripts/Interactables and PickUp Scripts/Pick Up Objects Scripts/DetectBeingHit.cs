@@ -12,22 +12,27 @@ public class DetectBeingHit : MonoBehaviour
     {
         spookyFace.SetActive(false);
     }
-    public void imBeingLookedAt() {
+    public void imBeingLookedAt()
+    {
         watched = true;
         timer += Time.deltaTime;
     }
 
     void FixedUpdate()
     {
-        if(watched == false) {
+        if (watched == false)
+        {
             timer = 0.0f;
         }
 
         watched = false;
 
-        if(timer >= 5) {
+        if (timer >= 5)
+        {
             spookyFace.SetActive(true);
-        }else {
+        }
+        else
+        {
             spookyFace.SetActive(false);
         }
     }

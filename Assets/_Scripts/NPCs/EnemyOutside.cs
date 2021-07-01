@@ -8,7 +8,7 @@ public class EnemyOutside : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Transform target;
-    [SerializeField]private static float timeDelay = 5f;
+    [SerializeField] private static float timeDelay = 5f;
     float delay = timeDelay;
     void Start()
     {
@@ -20,14 +20,14 @@ public class EnemyOutside : MonoBehaviour
     {
         NavMeshPath path = new NavMeshPath();
 
-        if(agent.CalculatePath(target.position, path))
+        if (agent.CalculatePath(target.position, path))
         {
             agent.destination = target.position;
-        } 
+        }
         else
         {
             delay -= Time.deltaTime;
-            if(delay < 0)
+            if (delay < 0)
             {
                 agent.destination = RandomPosition();
                 delay = timeDelay;
@@ -42,7 +42,7 @@ public class EnemyOutside : MonoBehaviour
         NavMeshHit hit;
 
         NavMesh.SamplePosition(randomDirection, out hit, 100, 1);
-            
+
         return hit.position;
     }
 }
