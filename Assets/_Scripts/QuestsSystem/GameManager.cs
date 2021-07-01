@@ -89,7 +89,6 @@ public class GameManager : MonoBehaviour
     {
         if (isDestroyed) return; //not elegant and i feel bad, sorry
         loading = true;
-        UnityEngine.Random.InitState(42);
         //Import current scene objects 
         player = PlayerMovement.Instance.gameObject;
         qs = FindObjectOfType<QuestSystem>();
