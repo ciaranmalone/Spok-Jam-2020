@@ -12,6 +12,7 @@ public class PlayerCatcher : MonoBehaviour
         {
             other.transform.position = teleportPoint;
             other.gameObject.GetComponent<CharacterController>().Move(Vector3.zero);
+            FindObjectOfType<PhoneRandomizer>().RandomizePhone();
         }
     }
 }
