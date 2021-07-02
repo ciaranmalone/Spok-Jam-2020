@@ -24,6 +24,11 @@ namespace WorldQuests
                 {
                     FakeToFromAnimation ftfa = GetComponent<FakeToFromAnimation>();
                     if (ftfa) ftfa.Animate();
+                    else
+                    {
+                        RealAnimation ra = GetComponent<RealAnimation>();
+                        if(ra) ra.Animate();
+                    }
                     Destroy(gameObject);
                 }
             }
