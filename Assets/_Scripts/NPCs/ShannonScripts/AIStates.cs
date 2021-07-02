@@ -8,13 +8,13 @@ using UnityEngine.AI;
 public class AIStates : MonoBehaviour
 {
     private Transform target;
-    
-    [Header("States")] 
+
+    [Header("States")]
     [SerializeField] private aiState startingState;
     [SerializeField] private aiState currentState;
-    private enum aiState {patrol, chase, attack, idle, waitingBetweenPatrolPoints};
-    
-    [Header ("Patrol")]
+    private enum aiState { patrol, chase, attack, idle, waitingBetweenPatrolPoints };
+
+    [Header("Patrol")]
     [SerializeField] private float patrolMoveSpeed;
     [SerializeField] private float patrolStoppingDistance;
     [SerializeField] private float patrolWaypointWaitTime = 2f;
@@ -23,12 +23,13 @@ public class AIStates : MonoBehaviour
     [SerializeField] private AIWaypointGroup[] aiWaypointGroups;
     private List<Transform> patrolWaypoints;
     private int currentPatrolPointIndex;
-    
-    [Header ("Search")]
+
+    [Header("Search")]
+
+    [SerializeField] private LayerMask layerMask;
     [SerializeField] private bool searchForPlayer = false;
-    [SerializeField] private searchCone coneOfVision;
-    
-    [Header ("Chase")]
+
+    [Header("Chase")]
     private Transform player;
     [SerializeField] private float chaseSpeed;
     [SerializeField] private float catchDistance;
@@ -36,18 +37,22 @@ public class AIStates : MonoBehaviour
     //Components
     private NavMeshAgent agent;
     private AIAnimation anim;
-    
+    CharacterController characterController;
+    NavMeshPath path;
+
     void Start()
     {
+        characterController = GetComponent<CharacterController>();
         patrolWait = new WaitForSecondsRealtime(patrolWaypointWaitTime); //Create instance of WaitForSecondsRealtime for use between patrol points
-        
+        path = new NavMeshPath();
+
         setPatrolPointsIfNull();
         agent = GetComponent<NavMeshAgent>();
         //        print(GameObject.FindWithTag("Player").name);
         player = PlayerMovement.Instance.transform;
-        
+
         target = player; //ensure target is never null
-        
+
         switch (startingState)
         {
             case (aiState.chase):
@@ -55,9 +60,11 @@ public class AIStates : MonoBehaviour
                 break;
         }
     }
-    
+
     void Update()
     {
+        castSearchCone();
+
         switch (currentState)
         {
             case (aiState.idle): break;
@@ -66,12 +73,12 @@ public class AIStates : MonoBehaviour
 
             case (aiState.patrol):
                 //if (searchForPlayer) { castSearchCone(); }
-                
+
                 agent.speed = patrolMoveSpeed;
 
                 if (atTarget(patrolStoppingDistance))
                 {
-                    if (currentPatrolPointIndex == 
+                    if (currentPatrolPointIndex ==
                         aiWaypointGroups[waypointGroupIndex]
                             .Waypoints.Length - 1)
                     {
@@ -85,31 +92,33 @@ public class AIStates : MonoBehaviour
                     StartCoroutine(waitAtPatrolPoint());
                     break;
                 }
-                
+
                 target = aiWaypointGroups[waypointGroupIndex]
                     .Waypoints[currentPatrolPointIndex];
-                    
-                    
+
+
                 agent.SetDestination(target.position);
                 agent.speed = patrolMoveSpeed;
-                
+
                 break;
-            
-            
+
+
             case (aiState.attack):
                 //attack();
                 break;
-            
-            
+
+
             case (aiState.chase):
-                
+
                 target = player;
-                
+
                 agent.speed = chaseSpeed;
                 agent.destination = target.position;
-                
-                if(atTarget(catchDistance)) attackPlayer();
-                
+
+                if (atTarget(catchDistance)) attackPlayer();
+
+                if (!agent.CalculatePath(target.position, path)) currentState = aiState.patrol;
+
                 break;
         }
     }
@@ -117,12 +126,12 @@ public class AIStates : MonoBehaviour
     public void chasePlayer() => currentState = aiState.chase;
 
     public void attackPlayer() => currentState = aiState.attack;
-    
+
     float distanceFromTarget() => Vector3.Distance(
-        gameObject.transform.position, 
+        gameObject.transform.position,
         target.position
         );
-    
+
     bool atTarget(float stoppingDistance) => distanceFromTarget() < stoppingDistance;
 
     void setPatrolPointsIfNull()
@@ -139,10 +148,10 @@ public class AIStates : MonoBehaviour
             }
         }
     }
-    
+
     void checkIfAtTarget()
     {
-        if(!target)
+        if (!target)
         {
             currentState = aiState.patrol;
             setNextPatrolPoint();
@@ -155,12 +164,12 @@ public class AIStates : MonoBehaviour
     IEnumerator waitAtPatrolPoint()
     {
         currentState = aiState.waitingBetweenPatrolPoints;
-        
+
         yield return patrolWait;
-        
+
         target = aiWaypointGroups[waypointGroupIndex]
             .Waypoints[currentPatrolPointIndex];
-        
+
         currentState = aiState.patrol;
     }
 
@@ -171,28 +180,39 @@ public class AIStates : MonoBehaviour
 
     void castSearchCone()
     {
-
+        Vector3 p1 = transform.position + new Vector3(0, 2, 0);
+        RaycastHit hit;
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 30;
+        Debug.DrawRay(p1, forward, Color.red);
+        if (Physics.SphereCast(p1, 2, forward, out hit, 30))
+        {
+            if(hit.transform == PlayerMovement.Instance.transform){
+                currentState = aiState.chase;
+                
+            }
+        } 
     }
 
 
-    public void setNextPatrolPoint(){ 
+    public void setNextPatrolPoint()
+    {
         //choose next patrol point based on current path taken
-        
+
     }
 
     IEnumerator chooseNextPatrolPoint()
     {
-    //     //prevent looping
-    //     atTarget = true;
-        currentState = aiState.waitingBetweenPatrolPoints; 
-    
+        //     //prevent looping
+        //     atTarget = true;
+        currentState = aiState.waitingBetweenPatrolPoints;
+
         //anim.setState(AIAnimation.state.look);
 
         //wait until end of look animation
         yield return new WaitForSecondsRealtime(1);
-        
+
         //anim.setState(AIAnimation.state.walk);
-        
+
         setNextPatrolPoint();
 
         //enemy no longer at target

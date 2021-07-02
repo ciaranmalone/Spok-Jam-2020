@@ -10,16 +10,17 @@ public class EnemyOutside : MonoBehaviour
     private Transform target;
     [SerializeField] private static float timeDelay = 5f;
     float delay = timeDelay;
+    NavMeshPath path;
+
     void Start()
     {
+        path = new NavMeshPath();
         target = PlayerMovement.Instance.transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        NavMeshPath path = new NavMeshPath();
-
         if (agent.CalculatePath(target.position, path))
         {
             agent.destination = target.position;
