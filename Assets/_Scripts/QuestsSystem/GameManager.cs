@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     //Game
     internal PhaseID phase = PhaseID.Phase1;
-    int missionsRemaining;//TODO can be refactored to just use array below
+    int missionsRemaining;//Maybe refactoring doesn't need to be done after all, bonus quests are a thing
     Dictionary<QuestID, bool> completedQuests;
     Dictionary<PhaseID, Dictionary<QuestID, bool>> bonusQuests;
     internal int loopCount = 0;

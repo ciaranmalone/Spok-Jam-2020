@@ -18,17 +18,18 @@ public class FakeToFromAnimation : MonoBehaviour
 
     private void Start()
     {
-        if (fromRequired)
-        {
-            fromObject.SetActive(true);
-        }
-        toObject.SetActive(false);
+        if (fromRequired) fromObject.SetActive(true);
+        if (toObject) toObject.SetActive(false);
     }
     internal void Animate()
     {
         if (fromRequired) fromObject.SetActive(false);
-        toObject.SetActive(true);
-        toObject.transform.parent = null;
+        if (toObject)
+        {
+            toObject.SetActive(true);
+            toObject.transform.parent = null;
+        }
+
         if (playSound)
         {
             AudioSource auso = toObject.AddComponent<AudioSource>();
