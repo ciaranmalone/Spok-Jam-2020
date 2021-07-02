@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     int missionsRemaining;//TODO can be refactored to just use array below
     Dictionary<QuestID, bool> completedQuests;
     Dictionary<PhaseID, Dictionary<QuestID, bool>> bonusQuests;
-    internal bool looped = false;
+    internal int loopCount = 0;
     
     /// <summary>
     /// to check if game is loading
@@ -504,7 +504,7 @@ public class GameManager : MonoBehaviour
     internal void StartPhaseLoop()
     {
         phase = PhaseID.Phase0;
-        looped = true;
+        loopCount++;
 
         ///NOT NEEDED UNLESS I REFACTOR ONSCENELOADED TO ACTUALLY WORRY ABOUT THE PHASE 0!!!
         //GameObject funky = Instantiate(new GameObject(), new Vector3(player.transform.position.x, player.transform.position.y + 399, player.transform.position.z), Quaternion.identity, //bad transform, do p0 instead player.transform);
