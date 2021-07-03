@@ -47,6 +47,7 @@ public class AIAnimation : MonoBehaviour
         anim.SetBool("run", false);
         anim.SetBool("stand", false);
         anim.SetBool("roar", false);
+        anim.SetBool("walk", false);
      //   anim.SetBool("chase", false);
     }
     public void setState(state newState)

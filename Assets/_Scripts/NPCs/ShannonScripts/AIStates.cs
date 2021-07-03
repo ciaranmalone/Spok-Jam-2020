@@ -193,15 +193,10 @@ public class AIStates : MonoBehaviour
             float angle = Vector3.Angle(transform.forward * -1, hit.normal);
 
             if (hit.transform == player && angle < coneAngle) 
-                StartChase();
+                currentState = aiState.chase;
+
         }
     }
-
-    internal void StartChase()
-    {
-        currentState = aiState.chase;
-    }
-
 
     public void setNextPatrolPoint()
     {
