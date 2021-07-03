@@ -38,7 +38,8 @@ public class AIStates : MonoBehaviour
     //Components
     private NavMeshAgent agent;
     private AIAnimation anim;
-    NavMeshPath path;
+    private NavMeshPath path;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -181,18 +182,21 @@ public class AIStates : MonoBehaviour
     {
         Vector3 shannonsEyes = transform.position + new Vector3(0, 2, 0);
         RaycastHit hit;
-        
+
         Debug.DrawLine(transform.position, player.position, Color.red);
-    
+
         if (Physics.Linecast(shannonsEyes, player.position, out hit))
         {
-            float angle = Vector3.Angle(transform.forward*-1, hit.normal);
-         
-            if(hit.transform == player && angle < coneAngle){
+            float angle = Vector3.Angle(transform.forward * -1, hit.normal);
 
-                currentState = aiState.chase;
-            }
-        } 
+            if (hit.transform == player && angle < coneAngle) 
+                StartChase();
+        }
+    }
+
+    internal void StartChase()
+    {
+        currentState = aiState.chase;
     }
 
 
