@@ -28,6 +28,7 @@ public class AIStates : MonoBehaviour
 
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private bool searchForPlayer = false;
+    [SerializeField] private float coneAngle = 30f;
 
     [Header("Chase")]
     private Transform player;
@@ -37,12 +38,10 @@ public class AIStates : MonoBehaviour
     //Components
     private NavMeshAgent agent;
     private AIAnimation anim;
-    CharacterController characterController;
     NavMeshPath path;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
         patrolWait = new WaitForSecondsRealtime(patrolWaypointWaitTime); //Create instance of WaitForSecondsRealtime for use between patrol points
         path = new NavMeshPath();
 
@@ -180,15 +179,18 @@ public class AIStates : MonoBehaviour
 
     void castSearchCone()
     {
-        Vector3 p1 = transform.position + new Vector3(0, 2, 0);
+        Vector3 shannonsEyes = transform.position + new Vector3(0, 2, 0);
         RaycastHit hit;
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 30;
-        Debug.DrawRay(p1, forward, Color.red);
-        if (Physics.SphereCast(p1, 2, forward, out hit, 30))
+        
+        Debug.DrawLine(transform.position, player.position, Color.red);
+    
+        if (Physics.Linecast(shannonsEyes, player.position, out hit))
         {
-            if(hit.transform == PlayerMovement.Instance.transform){
+            float angle = Vector3.Angle(transform.forward*-1, hit.normal);
+         
+            if(hit.transform == player && angle < coneAngle){
+
                 currentState = aiState.chase;
-                
             }
         } 
     }
