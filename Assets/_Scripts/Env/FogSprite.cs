@@ -13,7 +13,7 @@ public class FogSprite : MonoBehaviour
 
     [SerializeField] bool targetPlayer = true;
 
-    [SerializeField] string alternateTarget;
+    [SerializeField] Transform alternateTarget;
     
     // Start is called before the first frame update
     void Start()
@@ -65,7 +65,7 @@ public class FogSprite : MonoBehaviour
             catch{
 
                 try{
-                    Target = GameObject.Find(alternateTarget).transform;
+                    Target = alternateTarget;
                 }
                 catch{
                     print("No valid target found");
@@ -74,8 +74,8 @@ public class FogSprite : MonoBehaviour
             }
         }else{
             try{
-                    Target = GameObject.Find(alternateTarget).transform;
-                }
+                Target = alternateTarget;
+            }
             catch{
                 print("No valid target found");
                 this.enabled = false;

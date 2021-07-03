@@ -8,6 +8,14 @@ public class SplashScreenManager : MonoBehaviour
 {
     [SerializeField]
     string GameScene;
+
+    [SerializeField] GameObject cutsceneObject;
+
+    [SerializeField] GameObject background;
+    [SerializeField] GameObject splashScreen;
+
+    [SerializeField] Image cover;
+
     void Awake()
     {
         if(GameManager.gameManager)
@@ -20,6 +28,11 @@ public class SplashScreenManager : MonoBehaviour
         Cursor.visible = true;
     }
 
+    public void StartCutscene(){
+        cutsceneObject.SetActive(true);
+        GetComponent<AudioSource>().enabled = true;
+    }
+
     public void StartGame() => SceneManager.LoadScene(GameScene);
 
     public void ToggleDebug() => GameManager.debug = FindObjectOfType<Toggle>().isOn;
@@ -28,9 +41,11 @@ public class SplashScreenManager : MonoBehaviour
 
 
     //for splash screen animator
-    public void hideBackground(){
-        transform.parent.GetComponent<AudioSource>().enabled = true;
-        transform.parent.Find("BG").gameObject.SetActive(false);
+    public void hideSplashScreen(){
+        splashScreen.SetActive(false);
+        background.SetActive(false);
+        GameObject.Find("Menu Canvas").GetComponent<AudioSource>().enabled = true;
+        this.gameObject.SetActive(false);
     }
 
 
