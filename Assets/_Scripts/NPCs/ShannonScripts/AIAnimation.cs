@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class AIAnimation : MonoBehaviour
 {
-    public enum state { idle, walk, stand, roar, run, look};
+    public enum state { idle, walk, stand, roar, run, look };
     [SerializeField]
     state currentState;
-    [SerializeField]
     Animator anim;
 
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
-
-    // Update is called once per frame
     void Update()
     {
         resetBools();
@@ -46,7 +47,7 @@ public class AIAnimation : MonoBehaviour
         anim.SetBool("run", false);
         anim.SetBool("stand", false);
         anim.SetBool("roar", false);
-        anim.SetBool("chase", false);
+     //   anim.SetBool("chase", false);
     }
     public void setState(state newState)
     {

@@ -43,12 +43,15 @@ public class AIStates : MonoBehaviour
 
     void Start()
     {
+
+        anim = GetComponent<AIAnimation>();
+        anim.setState(AIAnimation.state.walk);
+
         patrolWait = new WaitForSecondsRealtime(patrolWaypointWaitTime); //Create instance of WaitForSecondsRealtime for use between patrol points
         path = new NavMeshPath();
 
         setPatrolPointsIfNull();
         agent = GetComponent<NavMeshAgent>();
-        //        print(GameObject.FindWithTag("Player").name);
         player = PlayerMovement.Instance.transform;
 
         target = player; //ensure target is never null
@@ -111,10 +114,9 @@ public class AIStates : MonoBehaviour
             case (aiState.chase):
 
                 target = player;
-
                 agent.speed = chaseSpeed;
                 agent.destination = target.position;
-
+                anim.setState(AIAnimation.state.run);
                 if (atTarget(catchDistance)) attackPlayer();
 
                 if (!agent.CalculatePath(target.position, path)) currentState = aiState.patrol;
@@ -163,6 +165,7 @@ public class AIStates : MonoBehaviour
 
     IEnumerator waitAtPatrolPoint()
     {
+        anim.setState(AIAnimation.state.walk);
         currentState = aiState.waitingBetweenPatrolPoints;
 
         yield return patrolWait;
