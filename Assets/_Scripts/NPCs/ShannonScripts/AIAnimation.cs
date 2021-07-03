@@ -7,17 +7,23 @@ public class AIAnimation : MonoBehaviour
     public enum state { idle, walk, stand, roar, run, look };
     [SerializeField]
     state currentState;
-    Animator anim;
+    [SerializeField] Animator anim;
 
-    void Start()
+    void resetBools()
     {
-        anim = GetComponent<Animator>();
+        anim.SetBool("idle", false);
+        anim.SetBool("run", false);
+        anim.SetBool("stand", false);
+        anim.SetBool("roar", false);
+        anim.SetBool("walk", false);
+     //   anim.SetBool("chase", false);
     }
-
-    void Update()
+    public void setState(state newState)
     {
         resetBools();
-        switch (currentState)
+        currentState = newState;
+
+         switch (currentState)
         {
             case state.idle:
                 anim.SetBool("idle", true);
@@ -39,19 +45,5 @@ public class AIAnimation : MonoBehaviour
                 anim.SetBool("run", true);
                 break;
         }
-    }
-
-    void resetBools()
-    {
-        anim.SetBool("idle", false);
-        anim.SetBool("run", false);
-        anim.SetBool("stand", false);
-        anim.SetBool("roar", false);
-        anim.SetBool("walk", false);
-     //   anim.SetBool("chase", false);
-    }
-    public void setState(state newState)
-    {
-        currentState = newState;
     }
 }
