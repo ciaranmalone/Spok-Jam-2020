@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        debug = editor_debug ? editor_debug : debug;
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
     }
@@ -399,7 +399,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (debug || editor_debug)
+        if (debug)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
