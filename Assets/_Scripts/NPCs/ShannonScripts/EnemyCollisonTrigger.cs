@@ -8,9 +8,11 @@ public class EnemyCollisonTrigger : MonoBehaviour
     [SerializeField] private sceneTeleport[] scenes;
     private int indexChoice;
     private Animator animator;
+    private AIAudioController audioController;
 
     private void Start()
     {
+        audioController = GetComponent<AIAudioController>();
         animator = IndicatorSingletons.blackScreenSingleton.GetComponent<Animator>();
     }
     private void OnTriggerEnter(Collider other) 
@@ -21,7 +23,8 @@ public class EnemyCollisonTrigger : MonoBehaviour
         }
     }
     private IEnumerator loadTheScene()
-    {
+    {   
+        audioController.Caught();
         animator.SetTrigger("FadeOut");
         yield return new WaitForSeconds(2f);
         indexChoice = Random.Range(0, scenes.Length);

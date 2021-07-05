@@ -39,22 +39,23 @@ public class AIStates : MonoBehaviour
     private NavMeshAgent agent;
     private AIAnimation anim;
     private NavMeshPath path;
-    private AudioSource audioSource;
+    private AIAudioController audioController;
 
     void Start()
     {
-
+        audioController = GetComponent<AIAudioController>();
+        agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<AIAnimation>();
-        anim.setState(AIAnimation.state.walk);
 
+        anim.setState(AIAnimation.state.walk);
+  
         patrolWait = new WaitForSecondsRealtime(patrolWaypointWaitTime); //Create instance of WaitForSecondsRealtime for use between patrol points
         path = new NavMeshPath();
-
         setPatrolPointsIfNull();
-        agent = GetComponent<NavMeshAgent>();
-        player = PlayerMovement.Instance.transform;
 
+        player = PlayerMovement.Instance.transform;
         target = player; //ensure target is never null
+
 
         switch (startingState)
         {
@@ -76,7 +77,7 @@ public class AIStates : MonoBehaviour
 
             case (aiState.patrol):
                 //if (searchForPlayer) { castSearchCone(); }
-
+                audioController.Patrol();
                 agent.speed = patrolMoveSpeed;
 
                 if (atTarget(patrolStoppingDistance))
@@ -112,7 +113,7 @@ public class AIStates : MonoBehaviour
 
 
             case (aiState.chase):
-
+                audioController.Chasing();
                 target = player;
                 agent.speed = chaseSpeed;
                 agent.destination = target.position;
