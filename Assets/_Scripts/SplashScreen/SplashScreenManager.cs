@@ -29,6 +29,7 @@ public class SplashScreenManager : MonoBehaviour
     }
 
     public void StartCutscene(){
+        introCadiAnimationEvents.Instance.canSkip();
         cutsceneObject.SetActive(true);
         GetComponent<AudioSource>().enabled = true;
     }
