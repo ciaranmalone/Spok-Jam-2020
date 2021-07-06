@@ -57,7 +57,7 @@ public class CheatListener : MonoBehaviour
             input.Insert(0, Input.inputString.ToUpper()[0]);
 
 
-            print(new string(input.ToArray()));
+            //print(new string(input.ToArray()));
             if(_debugWindow.Match(new string(input.ToArray())).Success)
             {
                 //make debug appear

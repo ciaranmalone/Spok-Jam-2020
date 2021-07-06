@@ -10,19 +10,52 @@ public class introCadiAnimationEvents : MonoBehaviour
 
     [SerializeField] string nextScene = "Lidl";
 
-    bool skippable = false;
-
     public static introCadiAnimationEvents Instance;
 
-    void Awake() => Instance = this;
+    bool cutsceneEnded = false;
 
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.Space) && skippable)
-            endCutscene();
+    void Awake() => Instance = this;
+    
+    public void StartLoadingNextScene() => StartCoroutine("NextSceneCoroutine");
+
+    public void endCutscene()
+    {
+        cutsceneEnded = true;
     }
 
-    public void canSkip() => skippable = true;
-    
+    public IEnumerator NextSceneCoroutine()
+    {
+        yield return null; //making it smooth
+        
+        AsyncOperation loading = SceneManager.LoadSceneAsync(nextScene);
+        loading.allowSceneActivation = false;
 
-    public void endCutscene()=> SceneManager.LoadSceneAsync("Lidl");
+        bool done = false; // if it's 90% loaded
+        float timer = 0; //scene loads too fast so space things appears too fast >.<
+
+        //wait until it's done
+        while (!loading.isDone)
+        {
+            timer += !done ? Time.deltaTime : 0;
+
+            if(!done && loading.progress >= 0.9f && timer > 5)
+            {
+                //when it's done kindly ask the splash screen manager to display the skip
+                FindObjectOfType<SplashScreenManager>().displaySkip();
+                done = true;
+            }
+            
+            //wait until player yoinks space when it's done
+            if (done && Input.GetKeyDown(KeyCode.Space))
+            {
+                //start fading to black
+                loading.allowSceneActivation = true;
+            }
+
+            if (cutsceneEnded) // || some other thing (not transparent bg?)
+                loading.allowSceneActivation = true;
+
+            yield return null;
+        }
+    }
 }

@@ -419,7 +419,7 @@ public class GameManager : MonoBehaviour
         {
             if(pressedEscape)
             {
-                SceneManager.LoadScene("Splash");
+                SceneManager.LoadScene("Main Menu");
             }
 
             pressedEscape = true;

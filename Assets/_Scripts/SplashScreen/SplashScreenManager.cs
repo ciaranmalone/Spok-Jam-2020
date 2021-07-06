@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class SplashScreenManager : MonoBehaviour
     [SerializeField] GameObject splashScreen;
 
     [SerializeField] Image cover;
-
+    [SerializeField] GameObject skipText;
     void Awake()
     {
         if(GameManager.gameManager)
@@ -23,17 +24,23 @@ public class SplashScreenManager : MonoBehaviour
             GameManager.gameManager.SelfDestruct();
         }
         FindObjectOfType<Toggle>().isOn = GameManager.debug;
-
+        skipText.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
     public void StartCutscene(){
-        introCadiAnimationEvents.Instance.canSkip();
+        introCadiAnimationEvents.Instance.StartLoadingNextScene();
         cutsceneObject.SetActive(true);
         GetComponent<AudioSource>().enabled = true;
     }
 
+    internal void displaySkip()
+    {
+        skipText.SetActive(true);
+    }
+
+    //boooo it's not async go away
     public void StartGame() => SceneManager.LoadScene(GameScene);
 
     public void ToggleDebug() => GameManager.debug = FindObjectOfType<Toggle>().isOn;
