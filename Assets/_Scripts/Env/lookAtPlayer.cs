@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class lookAtPlayer : MonoBehaviour
 {
-    private GameObject Player;
+    [SerializeField] private GameObject Player;
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        Player = Player ? Player : GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()

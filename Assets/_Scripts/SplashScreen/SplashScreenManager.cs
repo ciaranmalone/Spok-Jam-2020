@@ -16,15 +16,26 @@ public class SplashScreenManager : MonoBehaviour
     [SerializeField] GameObject splashScreen;
 
     [SerializeField] Image cover;
+    [SerializeField] GameObject loadingIcon;
     [SerializeField] GameObject skipText;
+
+    WaitForEndOfFrame wait1Frame;
+
     void Awake()
     {
+        wait1Frame = new WaitForEndOfFrame();
+
         if(GameManager.gameManager)
         {
             GameManager.gameManager.SelfDestruct();
         }
         FindObjectOfType<Toggle>().isOn = GameManager.debug;
+        try{
         skipText.SetActive(false);
+        loadingIcon.SetActive(false);
+        }catch{
+            print("SplashScreenManager (Awake) - gameObjects not found");
+        }
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -32,12 +43,16 @@ public class SplashScreenManager : MonoBehaviour
     public void StartCutscene(){
         introCadiAnimationEvents.Instance.StartLoadingNextScene();
         cutsceneObject.SetActive(true);
+
         GetComponent<AudioSource>().enabled = true;
+
+        loadingIcon.SetActive(true);
     }
 
     internal void displaySkip()
     {
         skipText.SetActive(true);
+        loadingIcon.gameObject.SetActive(false);
     }
 
     //boooo it's not async go away
