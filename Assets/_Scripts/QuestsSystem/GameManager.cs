@@ -413,6 +413,10 @@ public class GameManager : MonoBehaviour
             {
                 CreatePhase(true);
             }
+            if (Input.GetKeyDown(KeyCode.K))//K for Kevin
+            {
+                Teleport("TemplateDimension", new Dumb3(-70, -21, -78));
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.Escape))
