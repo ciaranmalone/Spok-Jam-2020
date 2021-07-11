@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using ProgrammaticQuests;
 
 
 public class phoneCallScript : MonoBehaviour
 {
+    [SerializeField] private QuestObjectName keyItemName;
     [SerializeField] private Dialog[] dialog;
     [SerializeField] private Dialog ringNoise;
     [SerializeField] private Dialog HangUp;

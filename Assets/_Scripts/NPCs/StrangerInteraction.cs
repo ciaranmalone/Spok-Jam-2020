@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.AI;
+using ProgrammaticQuests;
+using WorldQuests;
 
 public class StrangerInteraction : MonoBehaviour
 {
     [Header("Audio and Subtitles")]
     [SerializeField] Dialog[] dialog;
-    [SerializeField] Dialog[] InteruptDialog;
+    [SerializeField] Dialog noItemDialog;
     [SerializeField] Dialog LeavingDialog;
     [SerializeField] private TextMeshProUGUI subTitletext;
-    [SerializeField]internal ProgrammaticQuests.QuestID quest_id;
-
+    [SerializeField] internal ProgrammaticQuests.QuestID quest_id;
+    [SerializeField] private QuestObjectName keyObjectName;
     private AudioSource AudioSource;
     private Renderer renderer;
     private bool conversationStarted = false;
@@ -24,10 +26,19 @@ public class StrangerInteraction : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player") && !conversationStarted)
+        QuestItem otherItem = other.GetComponent<QuestItem>();
+        Debug.Log($"HERE: {otherItem}");
+        if (otherItem != null)
         {
-            conversationStarted = true;
-            StartCoroutine("DialogInteraction");
+            if (otherItem.Quest_Object_Name == keyObjectName && !conversationStarted)
+            {
+                conversationStarted = true;
+                StartCoroutine("DialogInteraction");
+            }
+            else if (!conversationStarted)
+            {
+                StartCoroutine("DialogInteractionNoItem");
+            }
         }
     }
 
@@ -43,15 +54,19 @@ public class StrangerInteraction : MonoBehaviour
 
             yield return new WaitForSeconds(AudioSource.clip.length);
 
-            if (currentPhase != GameManager.gameManager.phase)
-            {
-                AudioSource.clip = InteruptDialog[0].dialogAudio;
-                subTitletext.text = InteruptDialog[0].dialogText;
-                AudioSource.Play();
-                break;
-            }
+
         }
         StartCoroutine("Leave");
+    }
+
+    IEnumerator DialogInteractionNoItem()
+    {
+        AudioSource.clip = noItemDialog.dialogAudio;
+        subTitletext.text = noItemDialog.dialogText;
+        AudioSource.Play();
+
+        yield return new WaitForSeconds(AudioSource.clip.length);
+        subTitletext.text = "";
     }
 
     IEnumerator Leave()
@@ -63,7 +78,7 @@ public class StrangerInteraction : MonoBehaviour
         float opacityMaterial = 1f;
         while (opacityMaterial > 0)
         {
-            renderer.material.color = new Color(0,0,0, opacityMaterial);
+            renderer.material.color = new Color(0, 0, 0, opacityMaterial);
             yield return new WaitForSeconds(.05f);
             opacityMaterial -= .1f;
         }
