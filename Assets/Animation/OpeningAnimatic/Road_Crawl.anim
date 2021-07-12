@@ -174,7 +174,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 25.966667
+  - time: 9
     functionName: destroySegment
     data: 
     objectReferenceParameter: {fileID: 0}

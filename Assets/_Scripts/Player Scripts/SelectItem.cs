@@ -10,6 +10,9 @@ public class SelectItem : MonoBehaviour
     [SerializeField] private string InteractableTag = "interactable";
     [SerializeField] private string SeeTriggerTag = "lookAtMe";
     [SerializeField] private float throwForce = 1f;
+
+    [SerializeField] AudioClip[] throwGrunts;
+    private AudioSource theGrunter;
     
     [Header("Objects to display")]
     [SerializeField] private GameObject lightPointPickUp;
@@ -36,6 +39,12 @@ public class SelectItem : MonoBehaviour
     {
         PickUpIndicator = IndicatorSingletons.pickupIndicatorSingleton;
         InteractIndicator = IndicatorSingletons.interactIndicatorSingleton;
+
+        try{
+            theGrunter = GetComponent<AudioSource>();
+        }catch{
+            theGrunter = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -176,6 +185,8 @@ public class SelectItem : MonoBehaviour
             Rigidbody selectedRB = selected.gameObject.AddComponent<Rigidbody>();
             selectedRB.AddForce(transform.forward * throwForce, ForceMode.VelocityChange);
         }
+
+        if(throwGrunts.Length > 0) theGrunter.PlayOneShot(throwGrunts[Random.Range(0, throwGrunts.Length)]);
 
         selected.gameObject.GetComponent<Collider>().enabled = true;
         selected = null;
