@@ -417,6 +417,11 @@ public class GameManager : MonoBehaviour
             {
                 Teleport("TemplateDimension", new Dumb3(-70, -21, -78));
             }
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                loopCount++;
+                Debug.Log($"Loop Amount {loopCount}");
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.Escape))
