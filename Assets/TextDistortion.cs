@@ -14,13 +14,13 @@ public class TextDistortion : MonoBehaviour
             StartCoroutine("WeDoALittleTextDistortion", GameManager.gameManager.loopCount);
 
         if (distortText)
-            StartCoroutine("textDistort");
+            StartDistortText();
     }
 
     internal void StartDistortText()
     {
         distortText = true;
-        StartCoroutine("WeDoALittleTextDistortion");
+        StartCoroutine("textDistort");
     }
 
     internal void StopDistortText()
@@ -244,8 +244,8 @@ public class TextDistortion : MonoBehaviour
             yield return new WaitForSeconds(.05f);
         }
 
-        subTitletext.alignment = TextAlignmentOptions.MidlineLeft;
-        subTitletext.characterSpacing = 0;
-        subTitletext.fontStyle = FontStyles.Normal;
+            subTitletext.alignment = TextAlignmentOptions.MidlineLeft;
+            subTitletext.characterSpacing = 0;
+            subTitletext.fontStyle = FontStyles.Normal;
     }
 }

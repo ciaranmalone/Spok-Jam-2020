@@ -17,12 +17,14 @@ public class StrangerInteraction : MonoBehaviour
     [SerializeField] private QuestObjectName keyObjectName;
     private AudioSource AudioSource;
     private Renderer renderer;
+    private TextDistortion textDistortion;
     private bool conversationStarted = false;
 
     private void Start()
     {
         renderer = GetComponent<Renderer>();
         AudioSource = GetComponent<AudioSource>();
+        textDistortion = GetComponent<TextDistortion>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -44,6 +46,7 @@ public class StrangerInteraction : MonoBehaviour
 
     IEnumerator DialogInteraction(SusToken.Token token)
     {
+        textDistortion.StartDistortText();
         ProgrammaticQuests.PhaseID currentPhase = GameManager.gameManager.phase;
 
         for (int i = 0; i < dialog.Length; i++)
@@ -54,9 +57,9 @@ public class StrangerInteraction : MonoBehaviour
 
             yield return new WaitForSeconds(AudioSource.clip.length);
 
-
         }
         StartCoroutine("Leave", token);
+        textDistortion.StopDistortText();
     }
 
     IEnumerator DialogInteractionNoItem()

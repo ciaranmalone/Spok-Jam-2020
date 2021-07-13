@@ -7,7 +7,8 @@ namespace SusToken
 
     public enum Token
     {
-        MONKE
+        MONKE,
+        BEE
     }
 
 
