@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
     /// for fail safe when trying to go to the main menu
     /// </summary>
     bool pressedEscape = false;
+    internal int[] keyPadCode;
 
     void Awake()
     {
@@ -70,6 +71,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
             return;
+        }
+        keyPadCode = new int[4];
+        for(int i =0; i<keyPadCode.Length;i++)
+        {
+            keyPadCode[i] = UnityEngine.Random.Range(0, 10);
         }
         debug = editor_debug ? editor_debug : debug;
         susTokens = new bool[Enum.GetValues(typeof(SusToken.Token)).Length];
@@ -444,6 +450,12 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.M))
             {
                 Teleport("LoopHallway", new Vector3(-65, -21, -70));
+            }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                string txt = "";
+                for (int i = 0; i < keyPadCode.Length; i++) txt += keyPadCode[i];
+                print(txt);
             }
         }
 

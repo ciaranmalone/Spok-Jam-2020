@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/_Scenes/Lidl.unity
     guid: e51b1bce5cb6f83488dd7f7ff6184a73
   - enabled: 1
-    path: Assets/_Scenes/OtherDimensions/funTime.unity
+    path: Assets/_Scenes/OtherDimensions/LoopHallway.unity
     guid: c8393256619422740afa3623c7502f88
   - enabled: 1
     path: Assets/_Scenes/OtherDimensions/FridgeDimension.unity

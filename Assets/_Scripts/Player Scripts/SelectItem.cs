@@ -35,6 +35,8 @@ public class SelectItem : MonoBehaviour
     private bool imBeingLookedAtExists = true;
     private bool ObjectLookAtEventRan = false;
 
+    private KeyPad kp;
+
     private void Start()
     {
         PickUpIndicator = IndicatorSingletons.pickupIndicatorSingleton;
@@ -45,6 +47,8 @@ public class SelectItem : MonoBehaviour
         }catch{
             theGrunter = gameObject.AddComponent<AudioSource>();
         }
+
+        kp = FindObjectOfType<KeyPad>();
     }
 
     void Update()
@@ -111,6 +115,7 @@ public class SelectItem : MonoBehaviour
                         selected.gameObject.GetComponent<interactable>().handleInteraction();
                     }
                     catch { }
+                    if(kp) kp.Interact(selection.gameObject);
                     selected = null;
                 }
 
