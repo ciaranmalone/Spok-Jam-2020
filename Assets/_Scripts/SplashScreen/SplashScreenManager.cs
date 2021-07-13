@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SplashScreenManager : MonoBehaviour
 {
@@ -29,7 +30,9 @@ public class SplashScreenManager : MonoBehaviour
         {
             GameManager.gameManager.SelfDestruct();
         }
+
         FindObjectOfType<Toggle>().isOn = GameManager.debug;
+
         try{
         skipText.SetActive(false);
         loadingIcon.SetActive(false);
@@ -53,6 +56,11 @@ public class SplashScreenManager : MonoBehaviour
     {
         skipText.SetActive(true);
         loadingIcon.gameObject.SetActive(false);
+    }
+
+    public void swapMenu(GameObject nextMenu){
+        nextMenu.SetActive(true);
+        EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
     }
 
     //boooo it's not async go away
