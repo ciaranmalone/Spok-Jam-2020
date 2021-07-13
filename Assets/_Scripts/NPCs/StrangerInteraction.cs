@@ -33,7 +33,7 @@ public class StrangerInteraction : MonoBehaviour
             if (otherItem.Quest_Object_Name == keyObjectName && !conversationStarted)
             {
                 conversationStarted = true;
-                StartCoroutine("DialogInteraction");
+                StartCoroutine("DialogInteraction", other.GetComponent<SusToken.SusToken>().token);
             }
             else if (!conversationStarted)
             {
@@ -42,7 +42,7 @@ public class StrangerInteraction : MonoBehaviour
         }
     }
 
-    IEnumerator DialogInteraction()
+    IEnumerator DialogInteraction(SusToken.Token token)
     {
         ProgrammaticQuests.PhaseID currentPhase = GameManager.gameManager.phase;
 
@@ -56,7 +56,7 @@ public class StrangerInteraction : MonoBehaviour
 
 
         }
-        StartCoroutine("Leave");
+        StartCoroutine("Leave", token);
     }
 
     IEnumerator DialogInteractionNoItem()
@@ -69,7 +69,7 @@ public class StrangerInteraction : MonoBehaviour
         subTitletext.text = "";
     }
 
-    IEnumerator Leave()
+    IEnumerator Leave(SusToken.Token token)
     {
         AudioSource.clip = LeavingDialog.dialogAudio;
         subTitletext.text = LeavingDialog.dialogText;
@@ -85,7 +85,7 @@ public class StrangerInteraction : MonoBehaviour
 
         yield return new WaitForSeconds(AudioSource.clip.length);
         subTitletext.text = "";
-        GameManager.gameManager.CreateBonusQuest(quest_id);
+        GameManager.gameManager.TokenComplete(token);
 
         Destroy(gameObject);
     }

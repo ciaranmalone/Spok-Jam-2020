@@ -34,10 +34,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     internal WorldQuests.Phase[] phases;
 
-    
 
     internal AudioSource[] speakers;
     internal phoneCallScript[] phones;
+
 
     //Canvas
     GameCanvas canvas;
@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour
     Dictionary<QuestID, bool> completedQuests;
     Dictionary<PhaseID, Dictionary<QuestID, bool>> bonusQuests;
     internal int loopCount = 0;
+    internal bool[] susTokens;
+    SusTokenSpeen[] speenTokens; //will definitely refactor this, it's here just for proof of concept
     
     /// <summary>
     /// to check if game is loading
@@ -70,6 +72,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         debug = editor_debug ? editor_debug : debug;
+        susTokens = new bool[Enum.GetValues(typeof(SusToken.Token)).Length];
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
     }
@@ -95,7 +98,8 @@ public class GameManager : MonoBehaviour
         phases = FindObjectsOfType<WorldQuests.Phase>();
         canvas = FindObjectOfType<GameCanvas>();
         phones = FindObjectsOfType<phoneCallScript>();
-        
+        speenTokens = FindObjectsOfType<SusTokenSpeen>();
+
         ///subcomment for importing speakers
         ///
         List<AudioSource> spkr_temp = new List<AudioSource>();
@@ -151,6 +155,7 @@ public class GameManager : MonoBehaviour
 
 
         SetActivePhase();
+        HandleTokenRoom();
         loading = false;
     }
 
@@ -371,6 +376,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    internal void TokenComplete(SusToken.Token token)
+    {
+        susTokens[(int)token] = true;
+        HandleTokenRoom();
+    }
+
+    void HandleTokenRoom()
+    {
+        foreach (SusTokenSpeen token in speenTokens)
+        {
+            token.gameObject.SetActive(susTokens[(int)token.token]);
+        }
+    }
+
     /// <summary>
     /// Update the counter or the name of a quest, GameManager side
     /// </summary>
@@ -421,6 +440,10 @@ public class GameManager : MonoBehaviour
             {
                 loopCount++;
                 Debug.Log($"Loop Amount {loopCount}");
+            }
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                Teleport("LoopHallway", new Vector3(-65, -21, -70));
             }
         }
 
