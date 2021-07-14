@@ -11,8 +11,15 @@ public class DetectBeingHit : MonoBehaviour
 
     void Start()
     {
-        spookyFace.SetActive(false);
-        si = PlayerMovement.Instance.GetComponentInChildren<SelectItem>();
+        if (spookyFace)
+        {
+            spookyFace.SetActive(false);
+            si = PlayerMovement.Instance.GetComponentInChildren<SelectItem>();
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
     void Update()
