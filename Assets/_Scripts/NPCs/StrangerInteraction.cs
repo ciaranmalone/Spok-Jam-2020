@@ -90,6 +90,12 @@ public class StrangerInteraction : MonoBehaviour
         subTitletext.text = "";
         GameManager.gameManager.TokenComplete(token);
 
+        foreach (CRTLoopScript item in GameObject.FindObjectsOfType<CRTLoopScript>())
+        {
+            item.CheckTokensCCTV();
+        }
+
+        GameObject.FindObjectOfType<EnemyCollisonTrigger>().CheckTokensShannon();
         Destroy(gameObject);
     }
 }

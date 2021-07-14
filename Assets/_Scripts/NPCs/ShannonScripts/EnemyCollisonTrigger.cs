@@ -13,16 +13,7 @@ public class EnemyCollisonTrigger : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log($"Scenes Before: {scenes.Count}");
-
-        //adds scene to canTravel List if the Token has not been collected
-        foreach (var scene in scenes)
-        {
-            if (!GameManager.gameManager.susTokens[(int)scene.token])
-                canTravel.Add(scene);
-        }
-
-        Debug.Log($"Scenes after: {canTravel.Count}");
+        CheckTokensShannon();
 
         audioController = GetComponent<AIAudioController>();
         animator = IndicatorSingletons.blackScreenSingleton.GetComponent<Animator>();
@@ -44,6 +35,16 @@ public class EnemyCollisonTrigger : MonoBehaviour
             GameManager.gameManager.Teleport(canTravel[indexChoice].sceneName, Dumb3.Vector32Dumb3(canTravel[indexChoice].playerTeleportLocation));
         else
             GameManager.gameManager.Teleport(canTravel[indexChoice].sceneName);
+    }
+
+    internal void CheckTokensShannon()
+    {
+        //adds scene to canTravel List if the Token has not been collected
+        foreach (sceneTeleport scene in scenes)
+        {
+            if (!GameManager.gameManager.susTokens[(int)scene.token])
+                canTravel.Add(scene);
+        }
     }
 }
 
