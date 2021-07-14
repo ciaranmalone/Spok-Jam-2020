@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     //Canvas
     GameCanvas canvas;
+    public GameObject gameCanvasGameObject() => canvas.gameObject;
 
     //Game
     internal PhaseID phase = PhaseID.Phase1;
@@ -580,6 +581,7 @@ public class GameManager : MonoBehaviour
         }
     }
 }
+
 
 internal class Dumb3
 {
