@@ -13,7 +13,7 @@ public class SelectItem : MonoBehaviour
 
     [SerializeField] AudioClip[] throwGrunts;
     private AudioSource theGrunter;
-    
+
     [Header("Objects to display")]
     [SerializeField] private GameObject lightPointPickUp;
     [SerializeField] private GameObject lightPointInteract;
@@ -31,7 +31,8 @@ public class SelectItem : MonoBehaviour
     public static bool pickedUp = false;
 
     private Transform selection;
-    private Transform selected;
+    private Transform interactTransform;
+    private Transform pickedUpTransform;
     private bool imBeingLookedAtExists = true;
     private bool ObjectLookAtEventRan = false;
 
@@ -42,9 +43,12 @@ public class SelectItem : MonoBehaviour
         PickUpIndicator = IndicatorSingletons.pickupIndicatorSingleton;
         InteractIndicator = IndicatorSingletons.interactIndicatorSingleton;
 
-        try{
+        try
+        {
             theGrunter = GetComponent<AudioSource>();
-        }catch{
+        }
+        catch
+        {
             theGrunter = gameObject.AddComponent<AudioSource>();
         }
 
@@ -59,9 +63,9 @@ public class SelectItem : MonoBehaviour
         lightPointInteract.SetActive(false);
         InteractIndicator.SetActive(false);
 
-        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 50f, ~IgnoreMe))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 50f, ~IgnoreMe))
         {
-            if(selection != hit.transform)
+            if (selection != hit.transform)
             {
                 selection = hit.transform;
                 imBeingLookedAtExists = true;
@@ -71,7 +75,8 @@ public class SelectItem : MonoBehaviour
              * checks if the item the raycast hit is in reach and if its tag is pickupable 
              * ie. can the player pick it up?
              */
-            if (selection.CompareTag(PickUpTag) && !pickedUp && hit.distance < 5f) {
+            if (selection.CompareTag(PickUpTag) && !pickedUp && hit.distance < 5f)
+            {
 
                 lightPointPickUp.SetActive(true);
                 PickUpIndicator.SetActive(true);
@@ -90,21 +95,24 @@ public class SelectItem : MonoBehaviour
                     }
                 }
 
-                if (Input.GetKey(selectObject)) {
+                if (Input.GetKey(selectObject))
+                {
                     PickUpObject(selection);
                 }
             }
             /**
              * checks if the item the raycast hit is in reach and if its tag is interactable
              */
-            else if (selection.CompareTag(InteractableTag) && !pickedUp && hit.distance < 5f) {
+            else if (selection.CompareTag(InteractableTag) && hit.distance < 5f)
+            {
                 lightPointInteract.SetActive(true);
                 InteractIndicator.SetActive(true);
 
                 lightPointInteract.transform.position = hit.point;
 
-                if(Input.GetKeyDown(selectObject)) {
-                    selected = selection;
+                if (Input.GetKeyDown(selectObject))
+                {
+                    interactTransform = selection;
                     /**
                      * seeing if the the hit object has interactable else do nothing
                      * handle Interaction will play an animation on the selected item (ie. open door)
@@ -112,15 +120,16 @@ public class SelectItem : MonoBehaviour
                     try { selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectPickUpEvent.Invoke(); } catch { }
                     try
                     {
-                        selected.gameObject.GetComponent<interactable>().handleInteraction();
+                        interactTransform.gameObject.GetComponent<interactable>().handleInteraction();
                     }
                     catch { }
-                    if(kp) kp.Interact(selection.gameObject);
-                    selected = null;
+                    if (kp) kp.Interact(selection.gameObject);
+                    interactTransform = null;
                 }
 
-            } 
-            else if (selection.CompareTag(SeeTriggerTag)) {
+            }
+            else if (selection.CompareTag(SeeTriggerTag))
+            {
 
                 try { selection.gameObject.GetComponent<TriggerPhaseOneLook>().triggerPhase(); } catch { }
             }
@@ -131,12 +140,14 @@ public class SelectItem : MonoBehaviour
          */
 
         //drop object that is picked up                       
-        if(Input.GetKey(dropObject) && pickedUp) {
+        if (Input.GetKey(dropObject) && pickedUp)
+        {
             DropObject();
         }
 
         //throw object that is picked up              
-        else if (Input.GetKey(throwObject) && pickedUp) {
+        else if (Input.GetKey(throwObject) && pickedUp)
+        {
             ThrowObject();
         }
 
@@ -145,10 +156,10 @@ public class SelectItem : MonoBehaviour
 
     private void DropObject()
     {
-        try { selected.gameObject.GetComponent<ObjectThrowEvents>().ObjectThrowEvent.Invoke(); } catch { }
+        try { pickedUpTransform.gameObject.GetComponent<ObjectThrowEvents>().ObjectThrowEvent.Invoke(); } catch { }
 
         pickedUp = false;
-        selected.parent = null;
+        pickedUpTransform.parent = null;
 
         /*
          * this try and catch is just to make sure the object has a rigidbody, 
@@ -156,71 +167,72 @@ public class SelectItem : MonoBehaviour
          */
         try
         {
-            Rigidbody selectedRB = selected.gameObject.GetComponent<Rigidbody>();
+            Rigidbody selectedRB = pickedUpTransform.gameObject.GetComponent<Rigidbody>();
             selectedRB.isKinematic = false;
         }
         catch
         {
-            selected.gameObject.AddComponent<Rigidbody>();
+            pickedUpTransform.gameObject.AddComponent<Rigidbody>();
         }
 
-        selected.gameObject.GetComponent<Collider>().enabled = true;
-        selected = null;
+        pickedUpTransform.gameObject.GetComponent<Collider>().enabled = true;
+        pickedUpTransform = null;
     }
 
 
     private void ThrowObject()
     {
-        try { selected.gameObject.GetComponent<ObjectThrowEvents>().ObjectThrowEvent.Invoke(); } catch { }
+        try { pickedUpTransform.gameObject.GetComponent<ObjectThrowEvents>().ObjectThrowEvent.Invoke(); } catch { }
 
         pickedUp = false;
-        selected.parent = null;
+        pickedUpTransform.parent = null;
         /*
          * this try and catch is just to make sure the object has a rigidbody, 
          * else if it doesn't add one for when it thrown
          */
         try
         {
-            Rigidbody selectedRB = selected.gameObject.GetComponent<Rigidbody>();
+            Rigidbody selectedRB = pickedUpTransform.gameObject.GetComponent<Rigidbody>();
             selectedRB.isKinematic = false;
             selectedRB.AddForce(transform.forward * throwForce, ForceMode.VelocityChange);
         }
         catch
         {
-            Rigidbody selectedRB = selected.gameObject.AddComponent<Rigidbody>();
+            Rigidbody selectedRB = pickedUpTransform.gameObject.AddComponent<Rigidbody>();
             selectedRB.AddForce(transform.forward * throwForce, ForceMode.VelocityChange);
         }
 
-        if(throwGrunts.Length > 0) theGrunter.PlayOneShot(throwGrunts[Random.Range(0, throwGrunts.Length)]);
+        if (throwGrunts.Length > 0) theGrunter.PlayOneShot(throwGrunts[Random.Range(0, throwGrunts.Length)]);
 
-        selected.gameObject.GetComponent<Collider>().enabled = true;
-        selected = null;
+        pickedUpTransform.gameObject.GetComponent<Collider>().enabled = true;
+        pickedUpTransform = null;
     }
 
     internal void PickUpObject(Transform obj)
     {
         selection = obj;
-        selected = obj;
+        pickedUpTransform = obj;
         pickedUp = true;
-
+    
         //make object the child of the player
-        selected.parent = gameObject.transform;
-        selected.localPosition = objectPosition;
-        selected.localRotation = Quaternion.identity;
-        selected.gameObject.GetComponent<Collider>().enabled = false;
-        //stop its phyiscs so it will stop giggling around
+        pickedUpTransform.parent = gameObject.transform;
+        pickedUpTransform.localPosition = objectPosition;
+        pickedUpTransform.localRotation = Quaternion.identity;
+        pickedUpTransform.gameObject.GetComponent<Collider>().enabled = false;
 
-        try { selected.gameObject.GetComponent<Rigidbody>().isKinematic = true; } catch { }
+        //stop its phyiscs so it will stop giggling around
+        try { pickedUpTransform.gameObject.GetComponent<Rigidbody>().isKinematic = true; } catch { }
         try { selection.gameObject.GetComponent<ObjectPickUpEvents>().ObjectPickUpEvent.Invoke(); } catch { }
     }
 
     internal GameObject getHeldObject()
     {
-        return selected ? selected.gameObject : null;
+        return pickedUpTransform ? pickedUpTransform.gameObject : null;
     }
 
     internal GameObject getLookedAtObject()
     {
         return selection ? selection.gameObject : null;
     }
+
 }
