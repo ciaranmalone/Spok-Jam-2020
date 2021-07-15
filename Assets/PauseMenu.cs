@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class PauseMenu : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)){
             if(!pauseCanvas.activeInHierarchy){
                 Time.timeScale = 0;
-                //GameManager.gameManager.gameCanvasGameObject.SetActive(false);
+                GameManager.gameManager.gameCanvasGameObject.SetActive(false);
                 pauseCanvas.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -31,10 +32,15 @@ public class PauseMenu : MonoBehaviour
 
     public void resume(){
         Time.timeScale = 1;
-        //GameManager.gameManager.gameCanvasGameObject.SetActive(true);
+        GameManager.gameManager.gameCanvasGameObject.SetActive(true);
         pauseCanvas.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void quitToMainMenu(){
+        Time.timeScale = 1;
+        SceneManager.LoadSceneAsync("Main Menu");
     }
 
     public void swapMenu(GameObject nextMenu){

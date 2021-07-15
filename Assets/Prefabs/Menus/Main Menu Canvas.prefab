@@ -6980,7 +6980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 969ca544e2853c9458fc140bbe094765, type: 2}
-  paramName: musicVolume
+  paramName: ambientVolume
 --- !u!1 &3882623720058677262
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     //Canvas
     GameCanvas canvas;
-    public GameObject gameCanvasGameObject() => canvas.gameObject;
+    public GameObject gameCanvasGameObject => canvas.gameObject;
 
     //Game
     internal PhaseID phase = PhaseID.Phase1;
@@ -460,19 +460,21 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(pressedEscape)
-            {
-                SceneManager.LoadScene("Main Menu");
-            }
+        //Apparently this was splash screen test code, so no longer needed
 
-            pressedEscape = true;
-        }
-        else if(Input.anyKeyDown)
-        {
-            pressedEscape = false;
-        }
+        // if(Input.GetKeyDown(KeyCode.Escape))
+        // {
+        //     if(pressedEscape)
+        //     {
+        //         SceneManager.LoadScene("Main Menu");
+        //     }
+
+        //     pressedEscape = true;
+        // }
+        // else if(Input.anyKeyDown)
+        // {
+        //     pressedEscape = false;
+        // }
     }
 
     /// <summary>
