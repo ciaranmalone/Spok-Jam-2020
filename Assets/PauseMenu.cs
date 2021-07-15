@@ -16,7 +16,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P)){
+        if(Input.GetKeyDown(KeyCode.Escape)){
             if(!pauseCanvas.activeInHierarchy){
                 Time.timeScale = 0;
                 //GameManager.gameManager.gameCanvasGameObject.SetActive(false);
@@ -34,7 +34,7 @@ public class PauseMenu : MonoBehaviour
         //GameManager.gameManager.gameCanvasGameObject.SetActive(true);
         pauseCanvas.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = true;
+        Cursor.visible = false;
     }
 
     public void swapMenu(GameObject nextMenu){

@@ -75,7 +75,7 @@ public class SplashScreenManager : MonoBehaviour
     public void hideSplashScreen(){
         splashScreen.SetActive(false);
         background.SetActive(false);
-        GameObject.Find("Menu Canvas").GetComponent<AudioSource>().enabled = true;
+        GameObject.Find("Main Menu Canvas").GetComponent<AudioSource>().enabled = true;
         this.gameObject.SetActive(false);
     }
 
