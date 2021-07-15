@@ -8,7 +8,6 @@ public class AIAudioController : MonoBehaviour
     [SerializeField] private AudioClip patrol, spotted, chasing, caught;
     void Start()
     {
-        Debug.Log("<color=cyan>(___)___):::::::D~~~</color>");
         audioSourcePlayOnce = gameObject.AddComponent<AudioSource>();
         audioSourceLoop = gameObject.AddComponent<AudioSource>();
 

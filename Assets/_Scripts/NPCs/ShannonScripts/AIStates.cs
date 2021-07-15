@@ -40,9 +40,14 @@ public class AIStates : MonoBehaviour
     private AIAnimation anim;
     private NavMeshPath path;
     private AIAudioController audioController;
+    private bool looped = false;
+    private int loopAmount = 0;
 
     void Start()
     {
+        loopAmount = GameManager.gameManager.loopCount;
+        if( loopAmount> 0) looped = true;
+
         audioController = GetComponent<AIAudioController>();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<AIAnimation>();
@@ -67,7 +72,8 @@ public class AIStates : MonoBehaviour
 
     void Update()
     {
-        castSearchCone();
+        if(looped) 
+            castSearchCone();
 
         switch (currentState)
         {

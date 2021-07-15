@@ -10,17 +10,18 @@ public class EnemyCollisonTrigger : MonoBehaviour
     private int indexChoice;
     private Animator animator;
     private AIAudioController audioController;
+    private bool looped = false;
 
     private void Start()
     {
         CheckTokensShannon();
-
+        if( GameManager.gameManager.loopCount> 0) looped = true;
         audioController = GetComponent<AIAudioController>();
         animator = IndicatorSingletons.blackScreenSingleton.GetComponent<Animator>();
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && looped == true)
         {
             StartCoroutine("loadTheScene");
         }

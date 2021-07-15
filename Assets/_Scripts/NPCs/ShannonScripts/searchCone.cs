@@ -13,6 +13,7 @@ public class searchCone : MonoBehaviour
 
     private void Start()
     {
+        if(GameManager.gameManager.loopCount < 1) coneAngle = 180;
         cam = PlayerMovement.Instance.GetComponentInChildren<Camera>();
         camTransform = cam.transform;
     }
