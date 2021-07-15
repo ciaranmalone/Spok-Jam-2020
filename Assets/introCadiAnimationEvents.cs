@@ -10,6 +10,8 @@ public class introCadiAnimationEvents : MonoBehaviour
 
     [SerializeField] string nextScene = "Lidl";
 
+    [SerializeField] SplashScreenManager masterSplashScreenManager;
+
     public static introCadiAnimationEvents Instance;
 
     bool cutsceneEnded = false;
@@ -41,7 +43,7 @@ public class introCadiAnimationEvents : MonoBehaviour
             if(!done && loading.progress >= 0.9f && timer > 5)
             {
                 //when it's done kindly ask the splash screen manager to display the skip
-                FindObjectOfType<SplashScreenManager>().displaySkip();
+                masterSplashScreenManager.displaySkip();
                 done = true;
             }
             
