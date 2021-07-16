@@ -54,6 +54,7 @@ public class backDoorAnimate : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && !phasesToBreakOn.Any(t => t == GameManager.gameManager.phase))
         {
             anim.Play(animationTwo);
+            audioData.Play();
         }
 
         foreach (Transform child in transform)
