@@ -553,11 +553,12 @@ public class GameManager : MonoBehaviour
         phase = PhaseID.Phase0;
         loopCount++;
 
+        bonusQuests = new Dictionary<PhaseID, Dictionary<QuestID, bool>>();
+
         ///NOT NEEDED UNLESS I REFACTOR ONSCENELOADED TO ACTUALLY WORRY ABOUT THE PHASE 0!!!
         //GameObject funky = Instantiate(new GameObject(), new Vector3(player.transform.position.x, player.transform.position.y + 399, player.transform.position.z), Quaternion.identity, //bad transform, do p0 instead player.transform);
         //funky.AddComponent<WorldQuests.Quest>().quest_id = QuestID.P0M0;
         //funky.AddComponent<BoxCollider>().isTrigger = true;
-
         SetActivePhase();
         CreatePhase();
     }
