@@ -46,14 +46,14 @@ public class AIStates : MonoBehaviour
     void Start()
     {
         loopAmount = GameManager.gameManager.loopCount;
-        if( loopAmount> 0) looped = true;
+        if (loopAmount > 0) looped = true;
 
         audioController = GetComponent<AIAudioController>();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<AIAnimation>();
 
         anim.setState(AIAnimation.state.walk);
-  
+
         patrolWait = new WaitForSecondsRealtime(patrolWaypointWaitTime); //Create instance of WaitForSecondsRealtime for use between patrol points
         path = new NavMeshPath();
         setPatrolPointsIfNull();
@@ -72,7 +72,7 @@ public class AIStates : MonoBehaviour
 
     void Update()
     {
-        if(looped) 
+        if (looped)
             castSearchCone();
 
         switch (currentState)
@@ -106,10 +106,10 @@ public class AIStates : MonoBehaviour
                 target = aiWaypointGroups[waypointGroupIndex]
                     .Waypoints[currentPatrolPointIndex];
 
+                if(!agent.CalculatePath(target.position, path))
+                    agent.SetDestination(target.position);
 
-                agent.SetDestination(target.position);
                 agent.speed = patrolMoveSpeed;
-
                 break;
 
 
@@ -121,12 +121,13 @@ public class AIStates : MonoBehaviour
             case (aiState.chase):
                 audioController.Chasing();
                 target = player;
+
+                if (!agent.CalculatePath(target.position, path)) currentState = aiState.patrol;
+
                 agent.speed = chaseSpeed;
                 agent.destination = target.position;
                 anim.setState(AIAnimation.state.run);
                 if (atTarget(catchDistance)) attackPlayer();
-
-                if (!agent.CalculatePath(target.position, path)) currentState = aiState.patrol;
 
                 break;
         }
@@ -199,7 +200,7 @@ public class AIStates : MonoBehaviour
         {
             float angle = Vector3.Angle(transform.forward * -1, hit.normal);
 
-            if (hit.transform == player && angle < coneAngle) 
+            if (hit.transform == player && angle < coneAngle)
                 currentState = aiState.chase;
 
         }
