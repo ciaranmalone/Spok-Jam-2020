@@ -86,12 +86,22 @@ MonoBehaviour:
   - quests:
     - quest_id: 8
       count: 1
-      description: Somebody Ring the Dinkster?
+      description: Set of munade tasks...
       objectName: 0
       clip: {fileID: 8300000, guid: 6835d346c5aa2b35f94f80a2b991f826, type: 3}
   bonusQuests:
   - quest_id: 10
     count: 3
     description: Clean up the blender
+    objectName: 5
+    clip: {fileID: 8300000, guid: 9d700d5883988518bafeb57b8450b64f, type: 3}
+  - quest_id: 11
+    count: 1
+    description: I should Fix those lights
+    objectName: 0
+    clip: {fileID: 0}
+  - quest_id: 12
+    count: 1
+    description: WTF just happened
     objectName: 5
     clip: {fileID: 8300000, guid: 9d700d5883988518bafeb57b8450b64f, type: 3}

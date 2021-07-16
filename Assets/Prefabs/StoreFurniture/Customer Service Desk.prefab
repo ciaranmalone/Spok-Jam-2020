@@ -269,7 +269,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: d5e07d011bf013c4dbed47fdbd326362, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3294,7 +3294,8 @@ AudioSource:
   m_GameObject: {fileID: 2030014629}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3676951937027020054, guid: 969ca544e2853c9458fc140bbe094765,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -3480,12 +3481,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e5aaf9d164f1267a9ab1b404ef516d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClips:
-  - {fileID: 8300000, guid: c14397c429c3e594686282bfecdfdce9, type: 3}
-  - {fileID: 8300000, guid: fd3e19b1396f393a1bae739145745e8e, type: 3}
-  subtitles:
-  - '*Ring* *Ring*'
-  - Hel-lo? hello?
+  dialog:
+  - dialogText: "EYYY KIDDO sorry to call again, how goes that shopping list? Don\u2019t
+      answer that."
+    dialogAudio: {fileID: 8300000, guid: c854a778b3ee0fc4784ab5f1c2db8da5, type: 3}
+  - dialogText: "Don\u2019t answer that."
+    dialogAudio: {fileID: 8300000, guid: c854a778b3ee0fc4784ab5f1c2db8da5, type: 3}
+  - dialogText: "Anyway I just remembered there\u2019s a 2nd list I forgot to mention"
+    dialogAudio: {fileID: 8300000, guid: c854a778b3ee0fc4784ab5f1c2db8da5, type: 3}
+  - dialogText: "aaaaand yeah that\u2019ll need to be done too."
+    dialogAudio: {fileID: 8300000, guid: c854a778b3ee0fc4784ab5f1c2db8da5, type: 3}
+  - dialogText: You can blame Davey for that one, he was supposed to do his half
+    dialogAudio: {fileID: 8300000, guid: c854a778b3ee0fc4784ab5f1c2db8da5, type: 3}
+  - dialogText: "but he uhhhh quit or somethin. It\u2019s in at the far back corner
+      of the warehouse"
+    dialogAudio: {fileID: 8300000, guid: c854a778b3ee0fc4784ab5f1c2db8da5, type: 3}
+  - dialogText: 'in the back of the store, dingus said he left the sheet near the
+      storage shelves. '
+    dialogAudio: {fileID: 8300000, guid: c854a778b3ee0fc4784ab5f1c2db8da5, type: 3}
+  - dialogText: "The door to get into the warehouse is 4281. Oh byu the wa- .\u201D"
+    dialogAudio: {fileID: 8300000, guid: c854a778b3ee0fc4784ab5f1c2db8da5, type: 3}
+  ringNoise:
+    dialogText: Ring Ring
+    dialogAudio: {fileID: 8300000, guid: 6d7d049aa00ece04b9510a70c5e76056, type: 3}
+  HangUp:
+    dialogText: 
+    dialogAudio: {fileID: 0}
   subTitleText: {fileID: 0}
   phase: phoneCall1
   phoneAnswered: 0
@@ -3502,12 +3523,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e5aaf9d164f1267a9ab1b404ef516d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioClips:
-  - {fileID: 8300000, guid: c14397c429c3e594686282bfecdfdce9, type: 3}
-  - {fileID: 8300000, guid: fd3e19b1396f393a1bae739145745e8e, type: 3}
-  subtitles:
-  - '*Ring* *Ring*'
-  - Hel-lo? hello?
+  dialog: []
+  ringNoise:
+    dialogText: Ring Ring
+    dialogAudio: {fileID: 8300000, guid: 6d7d049aa00ece04b9510a70c5e76056, type: 3}
+  HangUp:
+    dialogText: 
+    dialogAudio: {fileID: 0}
   subTitleText: {fileID: 0}
   phase: phoneCall2
   phoneAnswered: 0
@@ -4523,9 +4545,17 @@ MonoBehaviour:
   assetGuid: 
   m_Mesh: {fileID: 0}
   m_IsSelectable: 1
-  m_SelectedFaces: 
-  m_SelectedEdges: []
-  m_SelectedVertices: 
+  m_SelectedFaces: 00000000
+  m_SelectedEdges:
+  - a: 0
+    b: 0
+  - a: 0
+    b: 0
+  - a: 0
+    b: 0
+  - a: 0
+    b: 0
+  m_SelectedVertices: 00000000000000000000000000000000
 --- !u!23 &5592202083365063623
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5671,7 +5701,7 @@ GameObject:
   - component: {fileID: 7243935820958148484}
   - component: {fileID: 7243935820958148485}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: customer_service_desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
