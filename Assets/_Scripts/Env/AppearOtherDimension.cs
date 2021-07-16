@@ -22,7 +22,7 @@ public class AppearOtherDimension : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             OtherDimension.SetActive(true);
             anim.Play(animation);

@@ -441,7 +441,7 @@ public class GameManager : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.K))//K for Kevin
             {
-                Teleport("TemplateDimension", new Dumb3(-70, -21, -78));
+                Teleport("FridgeDimension");
             }
             if (Input.GetKeyDown(KeyCode.L))
             {

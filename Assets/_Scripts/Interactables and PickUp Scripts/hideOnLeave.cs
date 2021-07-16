@@ -8,10 +8,17 @@ public class hideOnLeave : MonoBehaviour
     [SerializeField] private Animator anim;
     void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Player"){
-            this.transform.parent.gameObject.SetActive(false);
-            anim.Play(animation);
-
+        if (other.CompareTag("Player"))
+        {
+            StartCoroutine("DisappearDimension");
         }
+    }
+
+    IEnumerator DisappearDimension()
+    {
+        anim.Play(animation);
+        yield return new WaitForSeconds(1);
+        this.transform.parent.gameObject.SetActive(false);
+
     }
 }
