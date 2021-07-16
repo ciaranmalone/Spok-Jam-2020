@@ -11,6 +11,8 @@ public class backDoorAnimate : MonoBehaviour
     [SerializeField] private string animationTwo;
     [SerializeField] private ProgrammaticQuests.PhaseID[] phasesToBreakOn;
 
+    private bool particles = true;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -19,16 +21,21 @@ public class backDoorAnimate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) {
+        if (other.gameObject.CompareTag("Player"))
+        {
             if (phasesToBreakOn.Any(t => t == GameManager.gameManager.phase))
             {
-                foreach (Transform child in transform)
+                if (particles)
                 {
-                    child.gameObject.SetActive(true);
-                    child.gameObject.SetActive(true);
+                    foreach (Transform child in transform)
+                    {
+                        child.gameObject.SetActive(true);
+                        child.gameObject.SetActive(true);
+                    }
                 }
             }
-            else {
+            else
+            {
                 anim.Play(animationOne);
                 audioData.Play();
 
@@ -47,7 +54,6 @@ public class backDoorAnimate : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && !phasesToBreakOn.Any(t => t == GameManager.gameManager.phase))
         {
             anim.Play(animationTwo);
-
         }
 
         foreach (Transform child in transform)
@@ -55,5 +61,14 @@ public class backDoorAnimate : MonoBehaviour
             child.gameObject.SetActive(false);
             child.gameObject.SetActive(false);
         }
+    }
+
+    public void DisableParticles()
+    {
+        particles = false;
+    }
+    public void EnableParticles()
+    {
+        particles = true;
     }
 }

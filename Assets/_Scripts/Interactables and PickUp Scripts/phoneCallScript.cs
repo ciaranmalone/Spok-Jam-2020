@@ -1,13 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using ProgrammaticQuests;
 
 
 public class phoneCallScript : MonoBehaviour
 {
-    [SerializeField] private QuestObjectName keyItemName;
     [SerializeField] private Dialog[] dialog;
     [SerializeField] private Dialog ringNoise;
     [SerializeField] private Dialog HangUp;
@@ -35,7 +33,7 @@ public class phoneCallScript : MonoBehaviour
 
     IEnumerator DialogInteraction() {
         GameManager.gameManager.spawnNextTaskSheet();
-        for(int i = 1; i < dialog.Length; i++)
+        for(int i = 0; i < dialog.Length; i++)
         {
             AudioSource.clip = dialog[i].dialogAudio;
             subTitleText.text = dialog[i].dialogText;

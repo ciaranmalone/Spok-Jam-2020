@@ -12,6 +12,7 @@ TagManager:
   - path
   - grass
   - speaker
+  - Lights
   layers:
   - Default
   - TransparentFX

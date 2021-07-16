@@ -21,7 +21,7 @@ public class FakeToFromAnimation : MonoBehaviour
         if (fromRequired) fromObject.SetActive(true);
         if (toObject) toObject.SetActive(false);
     }
-    internal void Animate()
+    public void Animate()
     {
         if (fromRequired) fromObject.SetActive(false);
         if (toObject)
